@@ -1,0 +1,133 @@
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+
+/* for bootstrap/angular to work nicely */
+/*.nav, nav a, .pagination, .carousel, .panel-title a { cursor: pointer; }
+*/
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: Helvetica, Arial, 'Sans Serif';
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+	background: #0079BF;
+}
+
+#header {
+	background: #026aa7;
+	color: #fff;
+	height: 40px;
+	padding: 5px;
+}
+
+#header .header-brand {
+	color: #fff;
+	opacity: 0.5;
+	text-decoration: none;
+	line-height: 30px;
+	display: block;
+	text-align: center;
+	font-size: 1.25em;
+}
+
+#header .header-brand:hover {
+	opacity: 0.75;
+}
+
+.board {
+	width: 1000%;
+}
+
+.board-main-content {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.board-header {
+	height: 46px;
+	padding: 8px;
+	overflow: hidden;
+	color: #fff;
+}
+
+.board-header h2 {
+	margin: 0px;
+	line-height: 30px;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+.shelf {
+	width: 270px;
+	background: #e2e4e6;
+	border-radius: 3px;
+	margin: 0px 5px;
+	float: left;
+	max-height: 100%;
+}
+
+.shelf h3.shelf-title {
+	margin: 0px;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #4d4d4d;
+	padding: 8px 10px 8px 10px;
+}
+
+.shelf ul.shelf-items {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px 5px 0px 5px;
+}
+
+.shelf .shelf-add-item {
+	height: 35px;
+	padding: 8px 10px;
+	display: block;
+	color: #8c8c8c;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.shelf .shelf-add-item:hover {
+	background-color: #cdd2d4;
+	color: #8c8c8c;
+}
+
+.shelf .item {
+	border-radius: 3px;
+	background-color: #fff;
+	margin-bottom: 6px;
+	padding: 8px 5px 8px 5px;
+	text-align: center;
+}
+
+.item .item-cover {
+	width: 100%;
+}
+
+.item .item-title {
+	margin: 0px 5px;
+	text-align: left;
+}
+
+.item .item-author {
+	margin: 5px 5px;
+	text-align: right;
+	font-style: italic;
+}
+
+.item .btn-success {
+	margin: 5px auto 0px auto;
+	width: 100%;
+}
+
+
+
