@@ -41,13 +41,8 @@ body {
 	opacity: 0.75;
 }
 
-.board {
-	width: 1000%;
-}
-
 .board-main-content {
-	padding-left: 0px;
-	padding-right: 0px;
+
 }
 
 .board-header {
@@ -60,8 +55,17 @@ body {
 .board-header h2 {
 	margin: 0px;
 	line-height: 30px;
-	font-size: 1.3em;
+	font-size: 1.2em;
 	font-weight: bold;
+	margin-left: 10px;
+}
+
+.board-canvas {
+	width: 1970px;
+}
+
+.board-canvas .board {
+
 }
 
 .shelf {
@@ -73,9 +77,13 @@ body {
 	max-height: 100%;
 }
 
+.shelf:first-child {
+	margin-left: 10px;
+}
+
 .shelf h3.shelf-title {
 	margin: 0px;
-	font-size: 1.1em;
+	font-size: 1em;
 	font-weight: bold;
 	color: #4d4d4d;
 	padding: 8px 10px 8px 10px;
@@ -116,12 +124,15 @@ body {
 .item .item-title {
 	margin: 0px 5px;
 	text-align: left;
+	font-weight: bold;
 }
 
 .item .item-author {
 	margin: 5px 5px;
 	text-align: right;
 	font-style: italic;
+	font-size: 0.9em;
+	color: #666;
 }
 
 .item .btn-success {
