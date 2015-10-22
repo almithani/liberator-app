@@ -1,5 +1,5 @@
-var shelves = {
-	1: {
+var shelves = [
+	{
 		title: "Adventure",
 		items: [
 			{
@@ -39,7 +39,7 @@ var shelves = {
 			}
 		]
 	},//first shelf
-	2: {
+	{
 		title: "Mind Games",
 		items: [
 			{
@@ -64,7 +64,7 @@ var shelves = {
 			}
 		]
 	},//second shelf
-	3: {
+	{
 		title: "He Got What Was Coming to Him",
 		items: [
 			{
@@ -94,7 +94,7 @@ var shelves = {
 			},
 		]
 	},//third shelf
-	4: {
+	{
 		title: "Old School Comedy",
 		items: [
 			{
@@ -109,7 +109,7 @@ var shelves = {
 			},
 		]
 	},//fourth shelf
-	5: {
+	{
 		title: "These Book Will Force You To Think",
 		items: [
 			{
@@ -124,7 +124,7 @@ var shelves = {
 			},
 		]
 	},//fifth shelf
-	6: {
+	{
 		title: "My Feels!",
 		items: [
 			{
@@ -139,7 +139,7 @@ var shelves = {
 			},
 		]
 	},//sixth shelf
-	7: {
+	{
 		title: "New-ish",
 		items: [
 			{
@@ -154,4 +154,4 @@ var shelves = {
 			},
 		]
 	},//seventh shelf
-}//end shelves
+]//end shelves
