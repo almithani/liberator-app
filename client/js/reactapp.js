@@ -10,7 +10,7 @@ var Item = React.createClass({
 				<h4 className="item-title">{this.props.item.title}</h4>
 				<h5 className="item-author">{this.props.item.author}</h5>
 				<img className="item-cover" src={this.props.item.img} alt="" />
-				<a href="#" onClick={this.setAsActiveItem}>read</a>
+				<a onClick={this.setAsActiveItem}>read</a>
 			</li>
 		);
 	}
@@ -82,6 +82,10 @@ var Board = React.createClass({
 
 				<Shelves 
 					shelves={this.props.shelves} 
+					activeItem={this.state.activeItem} 
+					setActiveItem={this.setActiveItem} />
+
+				<Lightbox 
 					activeItem={this.state.activeItem} 
 					setActiveItem={this.setActiveItem} />
 			</div>
