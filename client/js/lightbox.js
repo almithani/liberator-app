@@ -55,6 +55,11 @@ window.Lightbox = React.createClass({
         textDecoration: 'none'
     },
 
+    componentDidUpdate: function() {
+		var Book = ePub("data/melville_moby-dick.epub");
+		Book.renderTo("epubReader");  	
+    },
+
     render: function(){
 
         if ( this.props.activeItem != null ){
@@ -64,6 +69,9 @@ window.Lightbox = React.createClass({
                     <div style={this.contentStyles}>
                         <a style={this.closeTagStyles} onClick={this.closeLightbox}>x</a>
                         {this.props.activeItem.title}
+                        <div onclick="Book.prevPage();">‹</div>
+                        <div id="epubReader"></div>
+                        <div onclick="Book.nextPage();">›</div>
                     </div>
             	</div>
             );
