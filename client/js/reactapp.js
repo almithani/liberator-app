@@ -9,8 +9,8 @@ var Item = React.createClass({
 			<li className="item">
 				<h4 className="item-title">{this.props.item.title}</h4>
 				<h5 className="item-author">{this.props.item.author}</h5>
-				<img className="item-cover" src={this.props.item.img} alt="" />
-				<a onClick={this.setAsActiveItem}>read</a>
+				<img className="item-cover" src={this.props.item.img} alt="" onClick={this.setAsActiveItem} />
+				<a className="item-btn-read" onClick={this.setAsActiveItem}>read</a>
 			</li>
 		);
 	}

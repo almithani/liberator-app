@@ -78,8 +78,11 @@ window.BookLightbox = React.createClass({
     },	
 
 	componentDidUpdate: function() {
-		this.Book = ePub("data/melville_moby-dick.epub");
-		this.Book.renderTo("epubReader");  
+		//this.Book = ePub("data/melville_moby-dick.epub");
+		if( this.props.activeItem != null ) {
+			this.Book = ePub(this.props.activeItem.epub);
+			this.Book.renderTo("epubReader");  
+		}
     },
 
 	render: function() {
