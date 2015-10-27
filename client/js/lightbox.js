@@ -1,23 +1,10 @@
 window.Lightbox = React.createClass({
 
-    getInitialState: function(){
-        return { display: true };
-    },
-
-    openLightbox: function(){
-        //this.setState({display: true});
-    },
-
-    closeLightbox: function(){
-        //this.setState({display: false});
-        this.props.setActiveItem(null);
-    },
-
     contentStyles: {
         position: 'fixed',
-        top: '25%',
-        left: '30%',
-        right: '30%',
+        top: '20%',
+        left: '20%',
+        right: '20%',
         backgroundColor: '#fff',
         color: '#7F7F7F',
         padding: '20px',
@@ -55,28 +42,56 @@ window.Lightbox = React.createClass({
         textDecoration: 'none'
     },
 
-    componentDidUpdate: function() {
-		var Book = ePub("data/melville_moby-dick.epub");
-		Book.renderTo("epubReader");  	
+    render: function(){
+        return (
+            <div>
+                <div style={this.overlayStyles} onClick={this.props.closeLightbox} />
+                <div style={this.contentStyles}>
+                    <a style={this.closeTagStyles} onClick={this.props.closeLightbox}>x</a>
+                    {this.props.children}
+                </div>
+        	</div>
+        );
+    }  
+});
+
+
+window.BookLightbox = React.createClass({
+
+	Book: {},	//private var	
+
+    prevPage: function() {
+    	this.Book.prevPage();
     },
 
-    render: function(){
+    nextPage: function() {
+    	this.Book.nextPage();
+    },
 
+    closeLightbox: function() {
+    	this.props.setActiveItem(null);
+    },	
+
+	componentDidUpdate: function() {
+		this.Book = ePub("data/melville_moby-dick.epub");
+		this.Book.renderTo("epubReader");  
+    },
+
+	render: function() {
         if ( this.props.activeItem != null ){
             return (
-                <div>
-                    <div style={this.overlayStyles} onClick={this.closeLightbox} />
-                    <div style={this.contentStyles}>
-                        <a style={this.closeTagStyles} onClick={this.closeLightbox}>x</a>
-                        {this.props.activeItem.title}
-                        <div onclick="Book.prevPage();">‹</div>
-                        <div id="epubReader"></div>
-                        <div onclick="Book.nextPage();">›</div>
-                    </div>
-            	</div>
+                <Lightbox closeLightbox={this.closeLightbox}>
+						{this.props.activeItem.title}
+						<div className="bookContainer">
+							<div onClick={this.prevPage}>&lt;</div>
+							<div id="epubReader"></div>
+							<div onClick={this.nextPage}>&gt;</div>
+						</div>
+            	</Lightbox>
             );
         } else {
             return (<div></div>);
         }
-    }  
+	}
+
 });

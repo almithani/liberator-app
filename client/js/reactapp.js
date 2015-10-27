@@ -85,7 +85,7 @@ var Board = React.createClass({
 					activeItem={this.state.activeItem} 
 					setActiveItem={this.setActiveItem} />
 
-				<Lightbox 
+				<BookLightbox 
 					activeItem={this.state.activeItem} 
 					setActiveItem={this.setActiveItem} />
 			</div>
