@@ -1,8 +1,13 @@
 window.Lightbox = React.createClass({
+	/*
+		This is a barebones lightbox.  Uses props.children (aka DOM children) as content.
+		Use property closeLightbox to bind to the close event.
+	*/
 
     contentStyles: {
         position: 'fixed',
-        top: '20%',
+        top: '10%',
+        bottom: '10%',
         left: '20%',
         right: '20%',
         backgroundColor: '#fff',
@@ -81,12 +86,17 @@ window.BookLightbox = React.createClass({
         if ( this.props.activeItem != null ){
             return (
                 <Lightbox closeLightbox={this.closeLightbox}>
-						{this.props.activeItem.title}
-						<div className="bookContainer">
-							<div onClick={this.prevPage}>&lt;</div>
+                	<div className="book">
+						<h4 className="book-title">
+							{this.props.activeItem.title} 
+							<span className="book-author"> - {this.props.activeItem.author}</span>
+						</h4>
+						<div className="reader">
+							<div className="btn-page prev" onClick={this.prevPage}>&lt;</div>
 							<div id="epubReader"></div>
-							<div onClick={this.nextPage}>&gt;</div>
+							<div className="btn-page next" onClick={this.nextPage}>&gt;</div>
 						</div>
+					</div>
             	</Lightbox>
             );
         } else {
