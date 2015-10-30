@@ -60,18 +60,45 @@ window.Lightbox = React.createClass({
 
 window.BookLightbox = React.createClass({
 
-	Book: {},
+	Book: null,
    
 	epubOptions: {
 		restore: true
 	},	//private var	
 
+	getInitialState: function(){
+		return { 
+			totalPages: 0,
+			currentPage: 0
+		};
+	},
+
 	prevPage: function() {
 		this.Book.prevPage();
+		this.setPageNum(this.calculatePageNum());
 	},
 
 	nextPage: function() {
 		this.Book.nextPage();
+		this.setPageNum(this.calculatePageNum());
+	},
+
+	setTotalPages: function(totPages) {
+		console.log('hi')
+		this.setState({
+			totalPages: totPages 
+		});
+	},
+
+	calculatePageNum: function() {
+        var curLoc = this.Book.getCurrentLocationCfi();
+    	return this.Book.pagination.pageFromCfi(curLoc);
+	},
+
+	setPageNum: function(pageNum) {
+		this.setState({
+			currentPage: pageNum 
+		});
 	},
 
 	closeLightbox: function() {
@@ -79,12 +106,37 @@ window.BookLightbox = React.createClass({
 	},	
 
 	componentDidUpdate: function() {
-		//this.Book = ePub("data/melville_moby-dick.epub");
-		if( this.props.activeItem != null ) {
+
+		var book = this.Book;
+		if( this.props.activeItem != null && _.isEmpty(book) ) {
 			var opts = _.clone(this.epubOptions);
-			this.Book = ePub( this.props.activeItem.epub, opts );
-			this.Book.renderTo("epubReader");  
+			book = ePub( this.props.activeItem.epub, opts );
+			
+			this.Book = book;
+			book.renderTo("epubReader"); 
+		} else if(this.props.activeItem == null) {
+			book = null;
+			this.state.totalPages = 0; //don't want to trigger a render
+			this.state.currentPage = 0; //don't want to trigger a render
 		}
+
+		//page numbers if we have a book
+		/*if( !_.isEmpty(book) && this.props.activeItem != null ) {
+
+			book.ready.all.then(function(){
+                book.generatePagination();
+            });
+
+			var curNumPages = this.state.totalPages;
+			var setPages = this.setTotalPages;
+			this.state.currentPage = 1; //don't want to trigger a render
+
+            book.pageListReady.then(function(pageList){
+            	if(curNumPages != pageList.length) {
+            		setPages(pageList.length);
+            	}
+            });			
+		}*/
 	},
 
 	render: function() {
@@ -100,6 +152,10 @@ window.BookLightbox = React.createClass({
 							<div className="btn-page prev" onClick={this.prevPage}>&lt;</div>
 							<div id="epubReader"></div>
 							<div className="btn-page next" onClick={this.nextPage}>&gt;</div>
+							<div className="reader-nav">
+								<div className="pageNum curPage">{this.state.currentPage}</div> /
+								<div className="pageNum totPage">{this.state.totalPages}</div> 
+							</div>
 						</div>
 					</div>
 				</Lightbox>

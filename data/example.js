@@ -11,7 +11,7 @@ var shelves = [
 			{
 				title: "Shogun",
 				author: "James Clavell",
-				img: "img/covers/Shogun.jpg",
+				img: "img/covers/shogun.jpg",
 				epub: "data/books/clavell_shogun.epub",
 			},
 			{

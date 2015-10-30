@@ -177,7 +177,7 @@ body {
 
 .book .reader {
 	width: 100%;
-	height: 100%;
+	height: 95%;
 	position: relative;
 }
 
@@ -211,7 +211,24 @@ body {
 .book .reader #epubReader {
 	padding: 10px 10%;
 	width: 100%;
-	height: 100%;
+	height: 95%;
+}
+
+.book .reader .reader-nav {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	text-align: center;
+	display: none;
+}
+
+.book .reader .reader-nav .pageNum {
+	display: inline-block;
+}
+
+.book .reader .reader-nav .pageNum.curPage {
+	text-align: right;
 }
 
 
