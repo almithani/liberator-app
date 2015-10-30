@@ -75,12 +75,12 @@ window.BookLightbox = React.createClass({
 
 	prevPage: function() {
 		this.Book.prevPage();
-		this.setPageNum(this.calculatePageNum());
+		//this.setPageNum(this.calculatePageNum());
 	},
 
 	nextPage: function() {
 		this.Book.nextPage();
-		this.setPageNum(this.calculatePageNum());
+		//this.setPageNum(this.calculatePageNum());
 	},
 
 	setTotalPages: function(totPages) {
@@ -108,7 +108,7 @@ window.BookLightbox = React.createClass({
 	componentDidUpdate: function() {
 
 		var book = this.Book;
-		if( this.props.activeItem != null && _.isEmpty(book) ) {
+		if( this.props.activeItem != null ) {// && _.isEmpty(book) ) {
 			var opts = _.clone(this.epubOptions);
 			book = ePub( this.props.activeItem.epub, opts );
 			
@@ -116,8 +116,8 @@ window.BookLightbox = React.createClass({
 			book.renderTo("epubReader"); 
 		} else if(this.props.activeItem == null) {
 			book = null;
-			this.state.totalPages = 0; //don't want to trigger a render
-			this.state.currentPage = 0; //don't want to trigger a render
+			//this.state.totalPages = 0; //don't want to trigger a render
+			//this.state.currentPage = 0; //don't want to trigger a render
 		}
 
 		//page numbers if we have a book
