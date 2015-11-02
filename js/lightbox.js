@@ -4,52 +4,12 @@ window.Lightbox = React.createClass({
 		Use property closeLightbox to bind to the close event.
 	*/
 
-	contentStyles: {
-		position: 'fixed',
-		top: '10%',
-		bottom: '10%',
-		left: '20%',
-		right: '20%',
-		backgroundColor: '#fff',
-		borderRadius: '3px',
-		zIndex:'101',
-		padding: '10px'
-	},
-
-	overlayStyles: {
-		background: 'black',
-		opacity: '.5',
-		position: 'fixed',
-		top: '0px',
-		bottom: '0px',
-		left: '0px',
-		right: '0px',
-		zIndex: '100'
-	},
-
-	closeTagStyles: {
-		float: 'right',
-		marginTop: '-15px',
-		marginRight: '-20px',
-		cursor: 'pointer',
-		color: '#fff',
-		border: '1px solid #000',
-		borderRadius: '6px',
-		background: '#FF4751',
-		fontSize: '1.5em',
-		lineHeight: '0.5em',
-		fontWeight: 'bold',
-		display: 'inline-block',
-		padding: '3px 5px 5px 5px',
-		textDecoration: 'none'
-	},
-
 	render: function(){
 		return (
 			<div>
-				<div style={this.overlayStyles} onClick={this.props.closeLightbox} />
-				<div style={this.contentStyles}>
-					<a style={this.closeTagStyles} onClick={this.props.closeLightbox}>x</a>
+				<div className='lightbox-overlay' onClick={this.props.closeLightbox} />
+				<div className='lightbox-content'>
+					<a className='lightbox-btn-close' onClick={this.props.closeLightbox}>x</a>
 					{this.props.children}
 				</div>
 			</div>
@@ -90,7 +50,7 @@ window.BookLightbox = React.createClass({
 
 		if( !_.isEmpty(this.props.startingCfi) ) {
 			this.Book.goto(this.props.startingCfi);
-			curPage = this.calculatePageNum();
+			curPage = this.Book.pagination.pageFromCfi(this.props.startingCfi);
 		}
 
 		this.setState({

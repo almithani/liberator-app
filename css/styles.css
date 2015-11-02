@@ -236,3 +236,45 @@ body {
 }
 
 
+/*
+lightbox styles
+*/
+
+.lightbox-overlay {
+	background: #000;
+	opacity: 0.5;
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 100;
+}
+
+.lightbox-content {
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-color: #fff;
+	z-index: 101;
+	padding: 10px;
+}
+
+.lightbox-btn-close {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+	color: #fff;
+	border: 1px solid #000;
+	border-radius: 6px;
+	background: #FF4751;
+	font-size: 1.5em;
+	line-height: 0.5em;
+	font-weight: bold;
+	display: inline-block;
+	padding: 3px 5px 5px 5px;
+	text-decoration: none;
+}
