@@ -96,6 +96,7 @@ var Board = React.createClass({
 	},
 
 	render: function() {
+
 		return (
 			<div className="board-main-content">
 				<div className="board-header">

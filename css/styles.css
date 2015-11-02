@@ -21,6 +21,10 @@ body {
 	padding-top: 40px;
 }
 
+.noScroll {
+	overflow: hidden;
+}
+
 #header {
 	background: #026aa7;
 	color: #fff;

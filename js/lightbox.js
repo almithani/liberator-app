@@ -45,6 +45,12 @@ window.BookLightbox = React.createClass({
 		this.setPageNum(this.calculatePageNum());
 	},
 
+	scrollHandler: function(event) {
+		console.log('scroll');
+		event.preventDefault();
+		//event.stopPropagation();
+	},
+
 	initializePages: function(totPages) {
 		var curPage = 1;
 
@@ -95,7 +101,7 @@ window.BookLightbox = React.createClass({
 	render: function() {
 		return (
 			<Lightbox closeLightbox={this.closeLightbox}>
-				<div className="book">
+				<div className="book" onScroll={this.scrollHandler} onWheel={this.scrollHandler}>
 					<h4 className="book-title">
 						{this.props.item.title} 
 						<span className="book-author"> - {this.props.item.author}</span>
