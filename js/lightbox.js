@@ -71,7 +71,7 @@ window.BookLightbox = React.createClass({
 	getInitialState: function(){
 		return { 
 			totalPages: '...',
-			currentPage: this.props.startingPage,
+			currentPage: '...',
 		};
 	},
 
@@ -86,10 +86,18 @@ window.BookLightbox = React.createClass({
 	},
 
 	initializePages: function(totPages) {
+		var curPage = 1;
+
+		if( !_.isEmpty(this.props.startingCfi) ) {
+			this.Book.goto(this.props.startingCfi);
+			curPage = this.calculatePageNum();
+		}
+
 		this.setState({
-			totalPages: totPages 
-		});		
-		this.Book.goto(String(this.state.currentPage));
+			totalPages: totPages,
+			currentPage: curPage,
+		});	
+		
 	},
 
 	calculatePageNum: function() {
@@ -104,7 +112,7 @@ window.BookLightbox = React.createClass({
 	},
 
 	closeLightbox: function() {
-		this.props.setPage(this.state.currentPage);
+		this.props.setCfi(this.Book.getCurrentLocationCfi());
 		this.props.setActiveItem(null);
 	},
 

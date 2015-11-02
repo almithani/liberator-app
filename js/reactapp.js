@@ -2,13 +2,13 @@
 var Item = React.createClass({
 	getInitialState: function(){
 		return { 
-			currentPage: 1,
+			currentCfi: null,	//cfi is ebook internal index/url/page
 		};
 	},
 
-	setPage: function(newPage) {
+	setCfi: function(newCfi) {
 		this.setState({
-			currentPage: newPage 
+			currentCfi: newCfi 
 		});		
 	},
 
@@ -21,8 +21,8 @@ var Item = React.createClass({
 		if( this.props.activeItem==this.props.item ) {
 			lightbox = 	<BookLightbox 
 							item={this.props.item}
-							startingPage={this.state.currentPage}
-							setPage={this.setPage}
+							startingCfi={this.state.currentCfi}
+							setCfi={this.setCfi}
 							setActiveItem={this.props.setActiveItem} />;
 		}
 
