@@ -1,5 +1,17 @@
 
 var Item = React.createClass({
+	getInitialState: function(){
+		return { 
+			currentPage: 1,
+		};
+	},
+
+	setPage: function(newPage) {
+		this.setState({
+			currentPage: newPage 
+		});		
+	},
+
 	setAsActiveItem: function() {
 		this.props.setActiveItem(this.props.item);
 	},
@@ -9,7 +21,8 @@ var Item = React.createClass({
 		if( this.props.activeItem==this.props.item ) {
 			lightbox = 	<BookLightbox 
 							item={this.props.item}
-							activeItem={this.props.activeItem} 
+							startingPage={this.state.currentPage}
+							setPage={this.setPage}
 							setActiveItem={this.props.setActiveItem} />;
 		}
 
@@ -72,7 +85,7 @@ var Shelves = React.createClass({
 var Board = React.createClass({
 	getInitialState: function(){
 		return { 
-			activeItem: null
+			activeItem: null,
 		};
 	},
 

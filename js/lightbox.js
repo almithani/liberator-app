@@ -70,8 +70,8 @@ window.BookLightbox = React.createClass({
 
 	getInitialState: function(){
 		return { 
-			totalPages: 0,
-			currentPage: 1
+			totalPages: '...',
+			currentPage: this.props.startingPage,
 		};
 	},
 
@@ -85,10 +85,11 @@ window.BookLightbox = React.createClass({
 		this.setPageNum(this.calculatePageNum());
 	},
 
-	setTotalPages: function(totPages) {
+	initializePages: function(totPages) {
 		this.setState({
 			totalPages: totPages 
 		});		
+		this.Book.goto(String(this.state.currentPage));
 	},
 
 	calculatePageNum: function() {
@@ -103,12 +104,13 @@ window.BookLightbox = React.createClass({
 	},
 
 	closeLightbox: function() {
+		this.props.setPage(this.state.currentPage);
 		this.props.setActiveItem(null);
 	},
 
 	componentDidMount: function() {
 		var opts = _.clone(this.epubOptions);
-		var book = ePub( this.props.activeItem.epub, opts );
+		var book = ePub( this.props.item.epub, opts );
 		this.Book = book;
 		book.renderTo("epubReader"); 
 
@@ -116,7 +118,7 @@ window.BookLightbox = React.createClass({
 			book.generatePagination();
 		});
 
-		var setPages = this.setTotalPages;
+		var setPages = this.initializePages;
 		book.pageListReady.then(function(pageList){
 			setPages(pageList.length);
 		});	
@@ -127,8 +129,8 @@ window.BookLightbox = React.createClass({
 			<Lightbox closeLightbox={this.closeLightbox}>
 				<div className="book">
 					<h4 className="book-title">
-						{this.props.activeItem.title} 
-						<span className="book-author"> - {this.props.activeItem.author}</span>
+						{this.props.item.title} 
+						<span className="book-author"> - {this.props.item.author}</span>
 					</h4>
 					<div className="reader">
 						<div className="btn-page prev" onClick={this.prevPage}>&lt;</div>
