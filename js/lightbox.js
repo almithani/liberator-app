@@ -57,37 +57,38 @@ window.Lightbox = React.createClass({
 	}  
 });
 
-
+/*
+	created once per book
+*/
 window.BookLightbox = React.createClass({
-
-	Book: null,
    
+   	/* 'private', immutable properties for external ebook lib */
+   	Book: null,
 	epubOptions: {
 		restore: true
-	},	//private var	
+	},
 
 	getInitialState: function(){
 		return { 
 			totalPages: 0,
-			currentPage: 0
+			currentPage: 1
 		};
 	},
 
 	prevPage: function() {
 		this.Book.prevPage();
-		//this.setPageNum(this.calculatePageNum());
+		this.setPageNum(this.calculatePageNum());
 	},
 
 	nextPage: function() {
 		this.Book.nextPage();
-		//this.setPageNum(this.calculatePageNum());
+		this.setPageNum(this.calculatePageNum());
 	},
 
 	setTotalPages: function(totPages) {
-		console.log('hi')
 		this.setState({
 			totalPages: totPages 
-		});
+		});		
 	},
 
 	calculatePageNum: function() {
@@ -103,66 +104,44 @@ window.BookLightbox = React.createClass({
 
 	closeLightbox: function() {
 		this.props.setActiveItem(null);
-	},	
+	},
 
-	componentDidUpdate: function() {
+	componentDidMount: function() {
+		var opts = _.clone(this.epubOptions);
+		var book = ePub( this.props.activeItem.epub, opts );
+		this.Book = book;
+		book.renderTo("epubReader"); 
 
-		var book = this.Book;
-		if( this.props.activeItem != null ) {// && _.isEmpty(book) ) {
-			var opts = _.clone(this.epubOptions);
-			book = ePub( this.props.activeItem.epub, opts );
-			
-			this.Book = book;
-			book.renderTo("epubReader"); 
-		} else if(this.props.activeItem == null) {
-			book = null;
-			//this.state.totalPages = 0; //don't want to trigger a render
-			//this.state.currentPage = 0; //don't want to trigger a render
-		}
+		book.ready.all.then(function(){
+			book.generatePagination();
+		});
 
-		//page numbers if we have a book
-		/*if( !_.isEmpty(book) && this.props.activeItem != null ) {
-
-			book.ready.all.then(function(){
-                book.generatePagination();
-            });
-
-			var curNumPages = this.state.totalPages;
-			var setPages = this.setTotalPages;
-			this.state.currentPage = 1; //don't want to trigger a render
-
-            book.pageListReady.then(function(pageList){
-            	if(curNumPages != pageList.length) {
-            		setPages(pageList.length);
-            	}
-            });			
-		}*/
+		var setPages = this.setTotalPages;
+		book.pageListReady.then(function(pageList){
+			setPages(pageList.length);
+		});	
 	},
 
 	render: function() {
-		if ( this.props.activeItem != null ){
-			return (
-				<Lightbox closeLightbox={this.closeLightbox}>
-					<div className="book">
-						<h4 className="book-title">
-							{this.props.activeItem.title} 
-							<span className="book-author"> - {this.props.activeItem.author}</span>
-						</h4>
-						<div className="reader">
-							<div className="btn-page prev" onClick={this.prevPage}>&lt;</div>
-							<div id="epubReader"></div>
-							<div className="btn-page next" onClick={this.nextPage}>&gt;</div>
-							<div className="reader-nav">
-								<div className="pageNum curPage">{this.state.currentPage}</div> /
-								<div className="pageNum totPage">{this.state.totalPages}</div> 
-							</div>
+		return (
+			<Lightbox closeLightbox={this.closeLightbox}>
+				<div className="book">
+					<h4 className="book-title">
+						{this.props.activeItem.title} 
+						<span className="book-author"> - {this.props.activeItem.author}</span>
+					</h4>
+					<div className="reader">
+						<div className="btn-page prev" onClick={this.prevPage}>&lt;</div>
+						<div id="epubReader"></div>
+						<div className="btn-page next" onClick={this.nextPage}>&gt;</div>
+						<div className="reader-nav">
+							page <div className="pageNum curPage">{this.state.currentPage}</div>
+							&nbsp;of <div className="pageNum totPage">{this.state.totalPages}</div> 
 						</div>
 					</div>
-				</Lightbox>
-			);
-		} else {
-			return (<div></div>);
-		}
+				</div>
+			</Lightbox>
+		);
 	}
 
 });

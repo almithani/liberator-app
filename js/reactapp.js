@@ -5,12 +5,21 @@ var Item = React.createClass({
 	},
 
 	render: function() {
+		var lightbox = '';
+		if( this.props.activeItem==this.props.item ) {
+			lightbox = 	<BookLightbox 
+							item={this.props.item}
+							activeItem={this.props.activeItem} 
+							setActiveItem={this.props.setActiveItem} />;
+		}
+
 		return (
 			<li className="item">
 				<h4 className="item-title">{this.props.item.title}</h4>
 				<h5 className="item-author">{this.props.item.author}</h5>
 				<img className="item-cover" src={this.props.item.img} alt="" onClick={this.setAsActiveItem} />
 				<a className="item-btn-read" onClick={this.setAsActiveItem}>read</a>
+				{lightbox}
 			</li>
 		);
 	}
@@ -82,10 +91,6 @@ var Board = React.createClass({
 
 				<Shelves 
 					shelves={this.props.shelves} 
-					activeItem={this.state.activeItem} 
-					setActiveItem={this.setActiveItem} />
-
-				<BookLightbox 
 					activeItem={this.state.activeItem} 
 					setActiveItem={this.setActiveItem} />
 			</div>
