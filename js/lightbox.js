@@ -32,6 +32,7 @@ window.BookLightbox = React.createClass({
 		return { 
 			totalPages: '...',
 			currentPage: '...',
+			loaded: false,
 		};
 	},
 
@@ -46,9 +47,8 @@ window.BookLightbox = React.createClass({
 	},
 
 	scrollHandler: function(event) {
-		console.log('scroll');
 		event.preventDefault();
-		//event.stopPropagation();
+		console.log(event);
 	},
 
 	initializePages: function(totPages) {
@@ -62,13 +62,18 @@ window.BookLightbox = React.createClass({
 		this.setState({
 			totalPages: totPages,
 			currentPage: curPage,
+			loaded: true
 		});	
 		
 	},
 
 	calculatePageNum: function() {
         var curLoc = this.Book.getCurrentLocationCfi();
-    	return this.Book.pagination.pageFromCfi(curLoc);
+        var page = this.Book.pagination.pageFromCfi(curLoc);
+
+        console.log(curLoc);
+        console.log(page);
+    	return page;
 	},
 
 	setPageNum: function(pageNum) {
@@ -99,6 +104,13 @@ window.BookLightbox = React.createClass({
 	},
 
 	render: function() {
+
+		var loadingGif = <img className='loading' src='/img/loading.gif' alt='loading...' />;
+
+		if( this.state.loaded ) {
+			loadingGif = '';
+		}
+
 		return (
 			<Lightbox closeLightbox={this.closeLightbox}>
 				<div className="book" onScroll={this.scrollHandler} onWheel={this.scrollHandler}>
@@ -108,6 +120,7 @@ window.BookLightbox = React.createClass({
 					</h4>
 					<div className="reader">
 						<div className="btn-page prev" onClick={this.prevPage}>&lt;</div>
+						{loadingGif}
 						<div id="epubReader"></div>
 						<div className="btn-page next" onClick={this.nextPage}>&gt;</div>
 						<div className="reader-nav">

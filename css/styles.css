@@ -21,8 +21,8 @@ body {
 	padding-top: 40px;
 }
 
-.noScroll {
-	overflow: hidden;
+.noDisplay {
+	display:none;
 }
 
 #header {
@@ -191,22 +191,35 @@ body {
 }
 
 .book .reader .btn-page {
-	height: 95%;
-	width: 10%;
+	width: 7%;
 	position: absolute;
 	top: 0px;
 	text-align: center;
 	font-size: 2em;
 	color: #fff;
-	text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-	padding-top: 30%;
 	cursor: pointer;
-	opacity: 0.5;
+	margin-top: 25%;
+
+	border: solid 1px #a5c956;
+	border-radius: 3px;
+	color: #444;
+	padding: 10px;
+	padding-top: 5px;
+
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cdeb8e+0,a5c956+100;Green+3D+%232 */
+	background: #cdeb8e; /* Old browsers */
+	background: -moz-linear-gradient(top, #cdeb8e 0%, #a5c956 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cdeb8e), color-stop(100%,#a5c956)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #cdeb8e 0%,#a5c956 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); /* IE6-9 */
+	copy
 }
 
 .book .reader .btn-page:hover {
-	background: #eee;
-	opacity: 1;
+	text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
 }
 
 .book .reader .btn-page.prev {
@@ -221,6 +234,12 @@ body {
 	padding: 10px 10%;
 	width: 100%;
 	height: 95%;
+}
+
+.book .reader .loading {
+	margin-top: 15%;
+	position: absolute;
+	margin-left: -64px;
 }
 
 .book .reader .reader-nav {
