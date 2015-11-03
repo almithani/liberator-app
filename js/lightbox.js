@@ -48,7 +48,6 @@ window.BookLightbox = React.createClass({
 
 	scrollHandler: function(event) {
 		event.preventDefault();
-		console.log(event);
 	},
 
 	initializePages: function(totPages) {
@@ -62,17 +61,21 @@ window.BookLightbox = React.createClass({
 		this.setState({
 			totalPages: totPages,
 			currentPage: curPage,
-			loaded: true
 		});	
-		
+	},
+
+	setLoaded: function() {
+		if( !this.state.loaded ) {
+			this.setState({
+				loaded: true
+			});				
+		}
 	},
 
 	calculatePageNum: function() {
         var curLoc = this.Book.getCurrentLocationCfi();
         var page = this.Book.pagination.pageFromCfi(curLoc);
 
-        console.log(curLoc);
-        console.log(page);
     	return page;
 	},
 
@@ -91,10 +94,12 @@ window.BookLightbox = React.createClass({
 		var opts = _.clone(this.epubOptions);
 		var book = ePub( this.props.item.epub, opts );
 		this.Book = book;
-		book.renderTo("epubReader"); 
+		book.renderTo("epubReader");
 
+		var setLoadedFn = this.setLoaded;
 		book.ready.all.then(function(){
-			book.generatePagination();
+			setLoadedFn();
+			book.generatePagination();			
 		});
 
 		var setPages = this.initializePages;

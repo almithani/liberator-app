@@ -18,10 +18,7 @@ html {
 
 body {
 	background: #0079BF;
-	padding-top: 40px;
-}
-
-#content {
+	padding-top: 40px;	/*this is for the 40px fixed header*/
 }
 
 .noDisplay {
@@ -51,6 +48,11 @@ body {
 
 #header .header-brand:hover {
 	opacity: 0.75;
+}
+
+#content {
+	width: 100%;
+	overflow: scroll;
 }
 
 .board-main-content {
@@ -180,6 +182,7 @@ body {
 .book .book-title {
 	color: #000;
 	font-size: 1.25em;
+	padding-right: 30px;
 }
 
 .book .book-title .book-author {
@@ -194,7 +197,6 @@ body {
 }
 
 .book .reader .btn-page {
-	width: 7%;
 	position: absolute;
 	top: 0px;
 	text-align: center;
@@ -261,6 +263,27 @@ body {
 	text-align: right;
 }
 
+/* iPhone 5 Portrait */
+@media (max-width: 600px) {
+
+  	.book .reader #epubReader {
+  		height: 90%;
+  	}
+
+  	.book .reader .btn-page {
+  		bottom: 0px;
+  		top: auto;
+  		margin-top: 0px;
+  		margin-bottom: 5px;
+  		width: auto;
+  	}
+
+  	.book .reader .reader-nav {
+  		bottom: 4%;
+  	}
+
+}
+
 
 /*
 lightbox styles
@@ -272,15 +295,20 @@ lightbox styles
 	position: fixed;
 	top: 0px;
 	bottom: 0px;
+	width: 100%;
+	height: 100%;
 	left: 0px;
 	right: 0px;
 	z-index: 100;
+	display: none;
 }
 
 .lightbox-content {
 	position: fixed;
 	top: 0px;
 	bottom: 0px;
+	width: 100%;
+	height: 100%;
 	left: 0px;
 	right: 0px;
 	background-color: #fff;
