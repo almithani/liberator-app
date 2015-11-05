@@ -28,7 +28,7 @@ var shelves = [
 				author: "Alfred Lansing",
 				img: "img/covers/endurance.jpg",
 				epub: "data/books/lansing_endurance.epub",
-				quote: "True story of how explorer Shackleton led his south-poke expedition team back to safety after disaster.  He uses pure force of will!"
+				quote: "True story of how explorer Shackleton led his south-pole expedition team back to safety after disaster.  He uses pure force of will!"
 			},
 			{
 				title: "Call of the Wild",
@@ -53,6 +53,32 @@ var shelves = [
 			}
 		]
 	},//first shelf
+	{
+		title: "These Book Will Force You To Think",
+		items: [
+			{
+				title: "How to Live on 24 Hours a Day",
+				author: "Arnold Bennet",
+				img: "img/covers/howtolive.jpeg",
+				epub: "data/books/bennet_how-to-live.epub",
+				quote: "We all have 24 hours a day - how do you use yours?  Bennet shows us how to use our time effectively."
+			},			
+			{
+				title: "Siddhartha",
+				author: "Hermann Hesse",
+				img: "img/covers/sidd.jpg",
+				epub: "data/books/hesse_siddhartha.epub",
+				quote: "Siddhartha seeks enlightenment.  He learns from ascetics, socialites, peasants and the river."
+			},
+			{
+				title: "Flowers for Algernon",
+				author: "Daniel Keyes",
+				img: "img/covers/flowers.jpg",
+				epub: "data/books/keys_flowers-for-algernon.epub",
+				quote: "Dimwitted Charlie Gordon takes part in a study which turns him into a genius.  It's not as simple as it sounds - this story is sad as heck."
+			},
+		]
+	},
 	{
 		title: "Mind Games",
 		items: [
@@ -138,26 +164,7 @@ var shelves = [
 				quote: "A hilarious farce, adapted dozens of times for stage and screen."
 			},
 		]
-	},//fourth shelf
-	{
-		title: "These Book Will Force You To Think",
-		items: [
-			{
-				title: "Siddhartha",
-				author: "Hermann Hesse",
-				img: "img/covers/sidd.jpg",
-				epub: "data/books/hesse_siddhartha.epub",
-				quote: "Siddhartha seeks enlightenment.  He learns from ascetics, socialites, peasants and the river."
-			},
-			{
-				title: "Flowers for Algernon",
-				author: "Daniel Keyes",
-				img: "img/covers/flowers.jpg",
-				epub: "data/books/keys_flowers-for-algernon.epub",
-				quote: "Dimwitted Charlie Gordon takes part in a study which turns him into a genius.  It's not as simple as it sounds - this story is sad as heck."
-			},
-		]
-	},//fifth shelf
+	},
 	{
 		title: "My Feels!",
 		items: [
