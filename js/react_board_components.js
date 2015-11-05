@@ -91,34 +91,6 @@ window.Shelves = React.createClass({
 
 window.Board = React.createClass({
 
-	getInitialState: function(){
-		return { 
-			activeItem: null,
-		};
-	},
-
-	setActiveItem: function(item) {
-		this.setState({
-			activeItem: item 
-		});
-	},
-
-	setActiveItemById: function(id) {
-		//find item
-		var setItem = this.setActiveItem;
-		_.each( this.props.shelves, function(shelf) {
-			var item = _.find( shelf.items, function(item){
-				return item.id == id;
-			});
-
-			if( !_.isEmpty(item) ) {
-				setItem(item);		
-				return false;		
-			}
-
-		});
-	},
-
 	render: function() {
 
 		var bgStyle = { backgroundImage: "url(/img/avatar.jpg)" }
@@ -132,8 +104,8 @@ window.Board = React.createClass({
 
 				<Shelves 
 					shelves={this.props.shelves} 
-					activeItem={this.state.activeItem} 
-					setActiveItem={this.setActiveItem} />
+					activeItem={this.props.activeItem} 
+					setActiveItem={this.props.setActiveItem} />
 			</div>
 		);
 	}
