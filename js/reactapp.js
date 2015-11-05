@@ -1,9 +1,5 @@
 
 var Item = React.createClass({
-	avatarStyle: {
-		backgroundSize: 'cover',
-		backgroundPosition: 'center top'
-	},
 
 	getInitialState: function(){
 		return { 
@@ -31,8 +27,7 @@ var Item = React.createClass({
 							setActiveItem={this.props.setActiveItem} />;
 		}
 
-		var bgStyle = _.clone(this.avatarStyle);
-		bgStyle['backgroundImage'] = 'url(/img/avatar.jpg)';
+		var bgStyle = { backgroundImage: "url(/img/avatar.jpg)" }
 
 		return (
 			<li className="item">
@@ -95,6 +90,7 @@ var Shelves = React.createClass({
 });
 
 var Board = React.createClass({
+
 	getInitialState: function(){
 		return { 
 			activeItem: null,
@@ -109,9 +105,12 @@ var Board = React.createClass({
 
 	render: function() {
 
+		var bgStyle = { backgroundImage: "url(/img/avatar.jpg)" }
+
 		return (
 			<div className="board-main-content">
 				<div className="board-header">
+					<div className="user-image-frame" style={bgStyle}></div>
 					<h2 className="board-name">{this.props.name}</h2>
 				</div>
 

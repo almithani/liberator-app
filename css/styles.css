@@ -30,6 +30,8 @@ body {
 	width: 64px;
 	height: 64px;
 	overflow: hidden;
+	background-size: cover;
+	background-position: center top;
 }
 
 #header {
@@ -72,6 +74,13 @@ body {
 	padding: 8px;
 	overflow: hidden;
 	color: #fff;
+}
+
+.board-header .user-image-frame {
+	height: 40px;
+	width: 40px;
+	margin: -5px 10px 0px 10px;
+	float: left;
 }
 
 .board-header h2 {
