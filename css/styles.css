@@ -25,6 +25,13 @@ body {
 	display:none;
 }
 
+.user-image-frame {
+	border-radius: 32px;
+	width: 64px;
+	height: 64px;
+	overflow: hidden;
+}
+
 #header {
 	background: #026aa7;
 	color: #fff;
@@ -34,6 +41,7 @@ body {
 	top: 0px;
 	left: 0px;
 	width: 100%;
+	z-index: 2;
 }
 
 #header .header-brand {
@@ -148,6 +156,23 @@ body {
 	font-style: italic;
 	font-size: 0.9em;
 	color: #666;
+}
+
+.item .item-user-quote {
+	position: relative;
+	min-height: 64px;
+}
+
+.item .user-quote {
+	font-style: italic;
+	font-size: 0.8em;
+	margin-right: 70px;
+}
+
+.item .user-image-frame {
+	position: absolute;
+	top: 0px;
+	right: 0px;
 }
 
 .item .item-btn-read {

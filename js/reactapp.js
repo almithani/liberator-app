@@ -1,5 +1,10 @@
 
 var Item = React.createClass({
+	avatarStyle: {
+		backgroundSize: 'cover',
+		backgroundPosition: 'center top'
+	},
+
 	getInitialState: function(){
 		return { 
 			currentCfi: null,	//cfi is ebook internal index/url/page
@@ -26,11 +31,18 @@ var Item = React.createClass({
 							setActiveItem={this.props.setActiveItem} />;
 		}
 
+		var bgStyle = _.clone(this.avatarStyle);
+		bgStyle['backgroundImage'] = 'url(/img/avatar.jpg)';
+
 		return (
 			<li className="item">
 				<h4 className="item-title">{this.props.item.title}</h4>
 				<h5 className="item-author">{this.props.item.author}</h5>
 				<img className="item-cover" src={this.props.item.img} alt="" onClick={this.setAsActiveItem} />
+				<div className="item-user-quote">
+					<div className="user-quote">"{this.props.item.quote}"</div>
+					<div className="user-image-frame" style={bgStyle}></div>
+				</div>
 				<a className="item-btn-read" onClick={this.setAsActiveItem}>read</a>
 				{lightbox}
 			</li>
