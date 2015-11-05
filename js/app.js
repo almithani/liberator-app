@@ -8,7 +8,7 @@
 */
 
 /*
-	Page react component is reponsible for page-level state incl. routing
+	Page react component is reponsible for page-level state incl. url 
 */
 var Page = React.createClass({
 	getInitialState: function(){
@@ -18,14 +18,19 @@ var Page = React.createClass({
 	},
 
 	setActiveItem: function(item) {
-		this.setState({
-			activeItem: item 
-		});
+		if( _.isEmpty(item) ) {
+			this.setState({
+				activeItem: null 
+			});
+			window.location.hash = '';
+		} else {
+			window.location.hash = 'book/'+item.id;
+		}
 	},
 
 	setActiveItemById: function(id) {
 		//find item
-		var setItem = this.setActiveItem;
+		var setItem = this.renderItem;
 		_.each( this.props.shelves, function(shelf) {
 			var item = _.find( shelf.items, function(item){
 				return item.id == id;
@@ -37,6 +42,12 @@ var Page = React.createClass({
 			}
 		});
 	},	
+
+	renderItem: function(item) {
+		this.setState({
+			activeItem: item 
+		});
+	},
 
 	render: function() {
 		return(
@@ -56,18 +67,23 @@ var boardname = "Al's Books";
 /*  home route */
 router.add('', function() {
 	pageObject = ReactDOM.render(
-	    <Page boardname={boardname} shelves={shelves} router={router} />,
+	    <Page boardname={boardname} shelves={shelves} />,
 	    document.getElementById('content')
 	);
+	pageObject.setActiveItem(null);
 });
 
 /* book reader route */
 router.add('book/{id}', function(params){
 	pageObject = ReactDOM.render(
-	    <Page boardname={boardname} shelves={shelves} router={router} />,
+	    <Page boardname={boardname} shelves={shelves} />,
 	    document.getElementById('content')
 	);	
 	pageObject.setActiveItemById(params.id);
 });
+
+window.onhashchange = function() {
+	router.run();
+}
 
 router.run();
