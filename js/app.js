@@ -7,20 +7,23 @@
 	Expects lightrouter.js lib (see js/lib/lightrouter.js)
 */
 
-var router = new LightRouter();
+var router = new LightRouter({type: 'hash'});
+var boardObject = null;
+var boardname = "Al's Books";
 
 router.add('', function() {
-	//expects "shelves" to be defined
-	var boardname = "Al's Books";
-
-	ReactDOM.render(
+	boardObject = ReactDOM.render(
 	    <Board name={boardname} shelves={shelves} />,
 	    document.getElementById('content')
 	);
 });
 
-router.add('book/{id}', function(id){
-	console.log('at book ');
+router.add('book/{id}', function(params){
+	boardObject = ReactDOM.render(
+	    <Board name={boardname} shelves={shelves} />,
+	    document.getElementById('content')
+	);	
+	boardObject.setActiveItemById(params.id);
 });
 
 router.run();
