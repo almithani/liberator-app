@@ -61,7 +61,7 @@ var shelves = [
 				author: "Arnold Bennet",
 				img: "img/covers/howtolive.jpeg",
 				epub: "data/books/bennet_how-to-live.epub",
-				quote: "We all have 24 hours a day - how do you use yours?  Bennet shows us how to use our time effectively."
+				quote: "We all have 24 hours a day - how do you use yours? 30-minute read: get inspired to get shit done!"
 			},			
 			{
 				title: "Siddhartha",
