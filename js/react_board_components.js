@@ -1,5 +1,5 @@
 
-var Item = React.createClass({
+window.Item = React.createClass({
 
 	getInitialState: function(){
 		return { 
@@ -45,7 +45,7 @@ var Item = React.createClass({
 	}
 });
 
-var Shelf = React.createClass({
+window.Shelf = React.createClass({
 	render: function() {
 		var itemRows = [];
 		this.props.items.forEach(function(item) {
@@ -67,7 +67,7 @@ var Shelf = React.createClass({
 	}
 });
 
-var Shelves = React.createClass({
+window.Shelves = React.createClass({
 	render: function() {
 		var shelves = [];
 		this.props.shelves.forEach(function(shelf) {
@@ -89,7 +89,7 @@ var Shelves = React.createClass({
 	}
 });
 
-var Board = React.createClass({
+window.Board = React.createClass({
 
 	getInitialState: function(){
 		return { 
@@ -122,13 +122,3 @@ var Board = React.createClass({
 		);
 	}
 });
-
-
-
-//expects "shelves" to be defined
-var boardname = "Al's Books";
-
-ReactDOM.render(
-    <Board name={boardname} shelves={shelves} />,
-    document.getElementById('content')
-);
