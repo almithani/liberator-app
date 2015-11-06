@@ -45,8 +45,6 @@ window.Item = React.createClass({
 				<h5 className="item-author">{this.props.item.author}</h5>
 				<img className="item-cover" src={this.props.item.img} alt="" onClick={this.setAsActiveItem} />
 				{quote}
-				<a className="btn-read" target="_blank" href={this.props.item.readLink}>read online now</a>
-				<a className="btn-download" target="_blank" href={this.props.item.downloadLink}>download</a>
 				{lightbox}
 			</li>
 		);
@@ -67,9 +65,11 @@ window.Shelf = React.createClass({
 		return (
 			<div className="shelf">
 				<h3 className="shelf-title">{this.props.title}</h3>
-				<ul className="shelf-items">
-					{itemRows}
-				</ul>
+				<div className="shelf-scroll-pane">
+					<ul className="shelf-items">
+						{itemRows}
+					</ul>
+				</div>
 			</div>
 		);
 	}

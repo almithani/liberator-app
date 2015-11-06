@@ -94,6 +94,7 @@ body {
 	left: 0px;
 	width: 100%;
 	z-index: 2;
+	white-space: nowrap;
 }
 
 #header .header-brand {
@@ -112,7 +113,8 @@ body {
 
 #content {
 	width: 100%;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 .board-main-content {
@@ -139,10 +141,11 @@ body {
 	font-size: 1.2em;
 	font-weight: bold;
 	margin-left: 10px;
+	white-space: nowrap;
 }
 
 .board-canvas {
-	width: 1970px;
+	padding: 0px 5px;
 }
 
 .board-canvas .board {
@@ -150,16 +153,13 @@ body {
 }
 
 .shelf {
-	width: 270px;
+	max-width: 100%;
 	background: #e2e4e6;
 	border-radius: 3px;
-	margin: 0px 5px;
-	float: left;
-	max-height: 100%;
-}
-
-.shelf:first-child {
-	margin-left: 10px;
+	vertical-align: top;
+	overflow: hidden;
+	margin-bottom: 10px;
+	display: inline-block;
 }
 
 .shelf h3.shelf-title {
@@ -170,10 +170,17 @@ body {
 	padding: 8px 10px 8px 10px;
 }
 
+.shelf .shelf-scroll-pane {
+	overflow-y: hidden;
+	overflow-x: scroll;
+	margin: 0px 5px 5px 5px;
+}
+
 .shelf ul.shelf-items {
 	list-style-type: none;
 	padding: 0px;
-	margin: 0px 5px 0px 5px;
+	display: inline-block;
+	white-space: nowrap;
 }
 
 .shelf .shelf-add-item {
@@ -193,9 +200,14 @@ body {
 .shelf .item {
 	border-radius: 3px;
 	background-color: #fff;
-	margin-bottom: 6px;
+	margin-right: 6px;
 	padding: 8px 5px 8px 5px;
 	text-align: center;
+	width: 250px;
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	white-space: normal;
 }
 
 .item .item-cover {
