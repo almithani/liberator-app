@@ -17,6 +17,31 @@ window.Lightbox = React.createClass({
 	}  
 });
 
+window.BookSummaryLightbox = React.createClass({
+
+	closeLightbox: function() {
+		this.props.setActiveItem(null);
+	},	
+
+	render: function() {
+		return (
+			<div className="lightbox-summary">
+				<Lightbox closeLightbox={this.closeLightbox}>
+					<div className="book" onScroll={this.scrollHandler} onWheel={this.scrollHandler}>
+						<h4 className="book-title">
+							{this.props.item.title} 
+							<span className="book-author"> - {this.props.item.author}</span>
+						</h4>
+
+						<a className="btn-read" target="_blank">read online now</a>
+						<a className="btn-download" target="_blank">download from project gutenberg</a>
+					</div>
+				</Lightbox>
+			</div>
+		);
+	}
+});
+
 /*
 	created once per book
 */

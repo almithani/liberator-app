@@ -14,16 +14,19 @@ window.Item = React.createClass({
 	},
 
 	setAsActiveItem: function() {
-		this.props.setActiveItem(this.props.item);
+		//this.props.setActiveItem(this.props.item);
 	},
 
 	render: function() {
 		var lightbox = '';
 		if( this.props.activeItem==this.props.item ) {
-			lightbox = 	<BookLightbox 
+			/*lightbox = 	<BookLightbox 
 							item={this.props.item}
 							startingCfi={this.state.currentCfi}
 							setCfi={this.setCfi}
+							setActiveItem={this.props.setActiveItem} />;*/
+			lightbox = <BookSummaryLightbox
+							item={this.props.item} 
 							setActiveItem={this.props.setActiveItem} />;
 		}
 
@@ -38,7 +41,8 @@ window.Item = React.createClass({
 					<div className="user-quote">"{this.props.item.quote}"</div>
 					<div className="user-image-frame" style={bgStyle}></div>
 				</div>
-				<a className="item-btn-read" onClick={this.setAsActiveItem}>read</a>
+				<a className="btn-read" target="_blank" href={this.props.item.readLink}>read online now</a>
+				<a className="btn-download" target="_blank" href={this.props.item.downloadLink}>download</a>
 				{lightbox}
 			</li>
 		);
@@ -93,17 +97,17 @@ window.Board = React.createClass({
 
 	render: function() {
 
-		var bgStyle = { backgroundImage: "url(/img/avatar.jpg)" }
+		var bgStyle = { backgroundImage: "url("+this.props.board.avatar+")" }
 
 		return (
 			<div className="board-main-content">
 				<div className="board-header">
 					<div className="user-image-frame" style={bgStyle}></div>
-					<h2 className="board-name">{this.props.name}</h2>
+					<h2 className="board-name">{this.props.board.name}</h2>
 				</div>
 
 				<Shelves 
-					shelves={this.props.shelves} 
+					shelves={this.props.board.shelves} 
 					activeItem={this.props.activeItem} 
 					setActiveItem={this.props.setActiveItem} />
 			</div>
