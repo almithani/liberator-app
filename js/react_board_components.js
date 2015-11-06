@@ -31,16 +31,20 @@ window.Item = React.createClass({
 		}
 
 		var bgStyle = { backgroundImage: "url(/img/avatar.jpg)" }
+		var quote = '';
+		if( this.props.item.quote ) {
+			quote = <div className="item-user-quote">
+						<div className="user-quote">"{this.props.item.quote}"</div>
+						<div className="user-image-frame" style={bgStyle}></div>
+					</div>;
+		}
 
 		return (
 			<li className="item">
 				<h4 className="item-title">{this.props.item.title}</h4>
 				<h5 className="item-author">{this.props.item.author}</h5>
 				<img className="item-cover" src={this.props.item.img} alt="" onClick={this.setAsActiveItem} />
-				<div className="item-user-quote">
-					<div className="user-quote">"{this.props.item.quote}"</div>
-					<div className="user-image-frame" style={bgStyle}></div>
-				</div>
+				{quote}
 				<a className="btn-read" target="_blank" href={this.props.item.readLink}>read online now</a>
 				<a className="btn-download" target="_blank" href={this.props.item.downloadLink}>download</a>
 				{lightbox}
