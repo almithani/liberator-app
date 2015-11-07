@@ -14,47 +14,32 @@ window.Item = React.createClass({
 	},
 
 	setAsActiveItem: function() {
-		//this.props.setActiveItem(this.props.item);
+		this.props.setActiveItem(this.props.item);
 	},
 
 	render: function() {
 		var lightbox = '';
 		if( this.props.activeItem==this.props.item ) {
-			/*lightbox = 	<BookLightbox 
-							item={this.props.item}
-							startingCfi={this.state.currentCfi}
-							setCfi={this.setCfi}
-							setActiveItem={this.props.setActiveItem} />;*/
 			lightbox = <BookSummaryLightbox
 							item={this.props.item} 
 							setActiveItem={this.props.setActiveItem} />;
 		}
 
-		var bgStyle = { backgroundImage: "url(/img/avatar.jpg)" }
-		var quote = '';
-		if( this.props.item.quote ) {
-			quote = <tr>
-						<td className="item-user-quote">
-							"{this.props.item.quote}"
-							<div className="user-image-frame" style={bgStyle}></div>
-						</td>
-					</tr>;
-		}
-
 		return (
-			<table className="item">
-				<tbody>
-					<tr>
-						<td className="item-cover"><img src={this.props.item.img} alt="" onClick={this.setAsActiveItem} /></td>
-					</tr>
-					<tr>
-						<td className="item-info">
-							<div className="item-title">{this.props.item.title}</div>
-							<div className="item-author">{this.props.item.author}</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+				<table className="item">
+					<tbody>
+						<tr>
+							<td className="item-cover"><img src={this.props.item.img} alt="" onClick={this.setAsActiveItem} /></td>
+						</tr>
+						<tr>
+							<td className="item-info">
+								<div className="item-title">{this.props.item.title}</div>
+								<div className="item-author">{this.props.item.author}</div>
+								{lightbox}
+							</td>
+						</tr>
+					</tbody>
+				</table>
 		);
 	}
 });

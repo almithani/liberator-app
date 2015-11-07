@@ -27,6 +27,10 @@ h2 {
 	font-weight: bold;
 }
 
+p {
+	margin-bottom: 1em;
+}
+
 /*
 	re-usable component styles
 */
@@ -296,18 +300,6 @@ table.item td {
 	cursor: pointer;
 }
 
-.item .item-user-quote {
-	position: relative;
-	max-width: 250px;
-	font-style: italic;
-	font-size: 0.8em;
-}
-
-.item .user-image-frame {
-	float: right;
-	display: none;
-}
-
 .book {
 	height: 100%;
 }
@@ -321,6 +313,46 @@ table.item td {
 .book .book-title .book-author {
 	font-size: 0.9em;
 	color: #666;
+}
+
+.book .book-more-info {
+	margin-top: 10px;
+	text-align: left;
+	font-size: 0.9em;
+}
+
+.book .book-cover {
+	height: 225px;
+	width: 150px;
+	margin: 0px 10px 10px 0px;
+	overflow: hidden;
+	position: relative;
+	float: left;
+}
+
+.book .book-cover img {
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+
+.book .book-quotes {
+	padding-top: 10px;
+	font-size: 0.85em;
+	clear: both;
+	min-height: 50px;
+}
+
+.quote {
+	position: relative;
+	padding-right: 50px;
+}
+
+.quote .user-image-frame {
+	position: absolute;
+	top: 0px;
+	right: 0px;
 }
 
 .book .reader {
@@ -472,7 +504,7 @@ lightbox styles
 
 .lightbox-summary .lightbox-content {
 	width: 500px;
-	height: 400px;
+	height: 420px;
 	margin: auto;
 	border-radius: 3px;
 }
