@@ -4,6 +4,10 @@ var board = {
 	shelves: [
 		{
 			title: "Classic Adventures",
+			user: {
+				name: "Al Mithani",
+				avatar: "img/avatar.jpg"
+			},
 			items: [
 				{
 					id: 1,
@@ -54,6 +58,10 @@ var board = {
 		},
 		{
 			title: "I'm on a Boat",
+			user: {
+				name: "Al Mithani",
+				avatar: "img/avatar.jpg"
+			},
 			items: [
 				{
 					id: 6,
@@ -95,6 +103,10 @@ var board = {
 		},
 		{
 			title: "Mature Themes",
+			user: {
+				name: "Al Mithani",
+				avatar: "img/avatar.jpg"
+			},
 			items: [
 				{
 					id: 10,
@@ -127,6 +139,10 @@ var board = {
 		},
 		{
 			title: "Old School Comedy",
+			user: {
+				name: "Al Mithani",
+				avatar: "img/avatar.jpg"
+			},
 			items: [
 				{
 					id: 13,
@@ -150,6 +166,10 @@ var board = {
 		},
 		{
 			title: "Light-Hearted Adventure",
+			user: {
+				name: "Al Mithani",
+				avatar: "img/avatar.jpg"
+			},
 			items: [
 				{
 					id: 15,
@@ -209,6 +229,10 @@ var board = {
 		},
 		{
 			title: "These Books Will Make You Think",
+			user: {
+				name: "Al Mithani",
+				avatar: "img/avatar.jpg"
+			},
 			items: [
 				{
 					id: 21,
@@ -250,6 +274,10 @@ var board = {
 		},
 		{
 			title: "TO READ",
+			user: {
+				name: "Al Mithani",
+				avatar: "img/avatar.jpg"
+			},
 			items: [
 				{
 					id: 25,

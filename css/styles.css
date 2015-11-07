@@ -17,8 +17,14 @@ html {
 }
 
 body {
-	background: #0079BF;
+	background: #FFF;
 	padding-top: 40px;	/*this is for the 40px fixed header*/
+}
+
+h2 {
+	margin: 0px;
+	font-size: 1.5em;
+	font-weight: bold;
 }
 
 /*
@@ -30,9 +36,9 @@ body {
 }
 
 .user-image-frame {
-	border-radius: 32px;
-	width: 64px;
-	height: 64px;
+	border-radius: 20px;
+	width: 40px;
+	height: 40px;
 	overflow: hidden;
 	background-size: cover;
 	background-position: center top;
@@ -85,8 +91,8 @@ body {
 */
 
 #header {
-	background: #026aa7;
-	color: #fff;
+	background: #777 url('/img/light-aluminum.png') repeat-x;
+	color: #666;
 	height: 40px;
 	padding: 5px;
 	position: fixed;
@@ -125,7 +131,7 @@ body {
 	height: 46px;
 	padding: 8px;
 	overflow: hidden;
-	color: #fff;
+	color: #4d4d4d;
 }
 
 .board-header .user-image-frame {
@@ -154,20 +160,66 @@ body {
 
 .shelf {
 	max-width: 100%;
-	background: #e2e4e6;
-	border-radius: 3px;
+	background: #fff;
 	vertical-align: top;
 	overflow: hidden;
-	margin-bottom: 10px;
+	display: inline-block;
+	position: relative;
+}
+
+.shelf:first-child {
+	margin-top: 20px;
+}
+
+.shelf:after {
+	content: '\A';
+	white-space: pre;
+}
+
+.shelf .shelf-info {
+	height: 48px;
+	margin-bottom: 15px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.shelf .shelf-info .shelf-title,
+.shelf .shelf-info .user-image-frame,
+.shelf .shelf-info .shelf-username {
 	display: inline-block;
 }
 
-.shelf h3.shelf-title {
-	margin: 0px;
-	font-size: 1em;
-	font-weight: bold;
+.shelf .shelf-info .shelf-title {
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size: 1.5em;
+	font-weight: normal;
 	color: #4d4d4d;
 	padding: 8px 10px 8px 10px;
+}
+
+.shelf .shelf-info .user-image-frame {
+	margin: 4px 10px 0px 0px;
+	float: right;
+}
+
+.shelf .shelf-info .shelf-username {
+	color: #666;
+	font-size: 0.75em;
+	font-style: italic;
+	font-weight: normal;
+	float: right;
+	line-height: 48px;
+	padding: 0px 10px;
+}
+
+.shelf .shelf-visual-bottom {
+	height: 15px;
+	position: absolute;
+	top: 361px; /* shelf info height + cover height */
+	left: 0;
+	width: 100%;
+	background: #2e1f00 url('/img/wood-pattern.png') repeat-x;
+	background-size: 5%;
 }
 
 .shelf .shelf-scroll-pane {
@@ -176,8 +228,8 @@ body {
 	margin: 0px 5px 5px 5px;
 }
 
-.shelf ul.shelf-items {
-	list-style-type: none;
+.shelf .shelf-items {
+	/*list-style-type: none;*/
 	padding: 0px;
 	display: inline-block;
 	white-space: nowrap;
@@ -197,53 +249,63 @@ body {
 	color: #8c8c8c;
 }
 
-.shelf .item {
-	border-radius: 3px;
-	background-color: #fff;
+.item {
 	margin-right: 6px;
-	padding: 8px 5px 8px 5px;
+	padding: 0px 5px 8px 5px;
 	text-align: center;
-	width: 250px;
 	display: inline-block;
 	vertical-align: top;
 	position: relative;
 	white-space: normal;
 }
 
-.item .item-cover {
-	width: 100%;
-	/*cursor: pointer;*/
+table.item td {
+	width: 200px;
+	max-width: 200px;
+	overflow: hidden;
+}
+
+.item .item-info {
+	padding-top: 20px;
 }
 
 .item .item-title {
-	margin: 0px 5px;
-	text-align: left;
+	margin: 0px;
 	font-weight: bold;
+	vertical-align: bottom;
 }
 
 .item .item-author {
-	margin: 5px 5px;
+	margin: 5px 0px;
 	text-align: right;
 	font-style: italic;
 	font-size: 0.9em;
 	color: #666;
+	vertical-align: bottom;
+	height: 1.2em;
+}
+
+.item .item-cover {
+	height: 300px;
+	vertical-align: bottom;
+}
+
+.item .item-cover img {
+	max-height: 300px;
+	max-width: 200px;
+	cursor: pointer;
 }
 
 .item .item-user-quote {
 	position: relative;
-	min-height: 64px;
-}
-
-.item .user-quote {
+	max-width: 250px;
 	font-style: italic;
 	font-size: 0.8em;
-	margin-right: 70px;
 }
 
 .item .user-image-frame {
-	position: absolute;
-	top: 0px;
-	right: 0px;
+	float: right;
+	display: none;
 }
 
 .book {

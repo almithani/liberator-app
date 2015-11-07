@@ -33,20 +33,28 @@ window.Item = React.createClass({
 		var bgStyle = { backgroundImage: "url(/img/avatar.jpg)" }
 		var quote = '';
 		if( this.props.item.quote ) {
-			quote = <div className="item-user-quote">
-						<div className="user-quote">"{this.props.item.quote}"</div>
-						<div className="user-image-frame" style={bgStyle}></div>
-					</div>;
+			quote = <tr>
+						<td className="item-user-quote">
+							"{this.props.item.quote}"
+							<div className="user-image-frame" style={bgStyle}></div>
+						</td>
+					</tr>;
 		}
 
 		return (
-			<li className="item">
-				<h4 className="item-title">{this.props.item.title}</h4>
-				<h5 className="item-author">{this.props.item.author}</h5>
-				<img className="item-cover" src={this.props.item.img} alt="" onClick={this.setAsActiveItem} />
-				{quote}
-				{lightbox}
-			</li>
+			<table className="item">
+				<tbody>
+					<tr>
+						<td className="item-cover"><img src={this.props.item.img} alt="" onClick={this.setAsActiveItem} /></td>
+					</tr>
+					<tr>
+						<td className="item-info">
+							<div className="item-title">{this.props.item.title}</div>
+							<div className="item-author">{this.props.item.author}</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		);
 	}
 });
@@ -62,14 +70,22 @@ window.Shelf = React.createClass({
             				key={item.title} />
             			);
         }, this);
+
+        var bgStyle = { backgroundImage: "url("+this.props.user.avatar+")" }
+
 		return (
 			<div className="shelf">
-				<h3 className="shelf-title">{this.props.title}</h3>
+				<h2 className="shelf-info">
+					<div className="shelf-title">{this.props.title}</div>
+					<div className="user-image-frame" style={bgStyle}></div>
+					<span className="shelf-username">by {this.props.user.name}</span>
+				</h2>
 				<div className="shelf-scroll-pane">
-					<ul className="shelf-items">
+					<div className="shelf-items">
 						{itemRows}
-					</ul>
+					</div>
 				</div>
+				<div className="shelf-visual-bottom"></div>
 			</div>
 		);
 	}
@@ -82,6 +98,7 @@ window.Shelves = React.createClass({
 			shelves.push(<Shelf 
 							title={shelf.title} 
 							items={shelf.items} 
+							user={shelf.user}
 							activeItem={this.props.activeItem} 
 							setActiveItem={this.props.setActiveItem} 
 							key={shelf.title} />
@@ -101,15 +118,8 @@ window.Board = React.createClass({
 
 	render: function() {
 
-		var bgStyle = { backgroundImage: "url("+this.props.board.avatar+")" }
-
 		return (
 			<div className="board-main-content">
-				<div className="board-header">
-					<div className="user-image-frame" style={bgStyle}></div>
-					<h2 className="board-name">{this.props.board.name}</h2>
-				</div>
-
 				<Shelves 
 					shelves={this.props.board.shelves} 
 					activeItem={this.props.activeItem} 
