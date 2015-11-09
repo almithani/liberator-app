@@ -22,9 +22,10 @@ var Page = React.createClass({
 			this.setState({
 				activeItem: null 
 			});
-			window.location.hash = '';
+			history.pushState(null, null, '#');
 		} else {
-			window.location.hash = 'book/'+item.id;
+			history.pushState(null, null, '#book/'+item.id);
+			router.run();
 		}
 	},
 
@@ -79,9 +80,5 @@ router.add('book/{id}', function(params){
 	);	
 	pageObject.setActiveItemById(params.id);
 });
-
-window.onhashchange = function() {
-	router.run();
-}
 
 router.run();

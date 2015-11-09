@@ -24,11 +24,21 @@ window.Lightbox = React.createClass({
 
 window.BookSummaryLightbox = React.createClass({
 
-	closeLightbox: function() {
+	closeLightbox: function(event) {
 		this.props.setActiveItem(null);
+		event.preventDefault();
+		event.stopPropagation();
 	},	
 
 	render: function() {
+		var description = '';
+		if( this.props.item.desc ) {
+			var paragraphs = this.props.item.desc.split("\n");
+			_.each(paragraphs, function(para) {
+				description = <div>{description}<p>{para}</p></div>;
+			});
+		}
+
 		var bgStyle = { backgroundImage: "url(/img/avatar.jpg)" }
 		var quote = '';
 		if( this.props.item.quote ) {
@@ -52,13 +62,7 @@ window.BookSummaryLightbox = React.createClass({
 								<img src={this.props.item.img} alt={this.props.item.title} />
 							</div>
 
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam fringilla libero eros, eget malesuada erat feugiat vitae. Fusce id lacus rhoncus, aliquet quam ut, faucibus tortor. Fusce maximus sodales ultrices. 
-							</p>
-							<p>
-								Donec rutrum, libero vel maximus vehicula, dui nulla auctor magna, id ullamcorper diam nisl non tellus. Sed ut dapibus risus. Nulla faucibus tristique leo, vitae faucibus lectus molestie id. Suspendisse convallis dui eget nibh congue, et auctor magna fringilla. Suspendisse potenti. Mauris vitae faucibus nunc.
-							</p>
-
+							{description}
 
 							<div className="book-quotes">
 								{quote}
@@ -147,6 +151,7 @@ window.BookLightbox = React.createClass({
 	closeLightbox: function() {
 		this.props.setCfi(this.Book.getCurrentLocationCfi());
 		this.props.setActiveItem(null);
+		return false;
 	},
 
 	componentDidMount: function() {

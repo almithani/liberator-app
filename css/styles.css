@@ -498,6 +498,7 @@ lightbox styles
   	-webkit-transform: translateY(-50%);
  	-ms-transform: translateY(-50%);
   	transform: translateY(-50%);
+  	max-height: 100%;
 }
 
 .lightbox-btn-close {
@@ -523,10 +524,6 @@ lightbox styles
 
 .lightbox-summary .lightbox-content {
 	width: 500px;
-}
-
-.lightbox-summary .book {
-
 }
 
 @media (max-width: 600px) {
