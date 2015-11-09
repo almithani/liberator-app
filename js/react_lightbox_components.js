@@ -3,14 +3,19 @@ window.Lightbox = React.createClass({
 		This is a barebones lightbox.  Uses props.children (aka DOM children) as content.
 		Use property closeLightbox to bind to the close event.
 	*/
+	scrollHandler: function(event) {
+		event.preventDefault();
+	},
 
 	render: function(){
 		return (
 			<div>
 				<div className='lightbox-overlay' onClick={this.props.closeLightbox} />
-				<div className='lightbox-content'>
-					<a className='lightbox-btn-close' onClick={this.props.closeLightbox}>x</a>
-					{this.props.children}
+				<div className='lightbox-container' onClick={this.props.closeLightbox} onScroll={this.scrollHandler} onWheel={this.scrollHandler}>
+					<div className='lightbox-content'>
+						<a className='lightbox-btn-close' onClick={this.props.closeLightbox}>x</a>
+						{this.props.children}
+					</div>
 				</div>
 			</div>
 		);
@@ -36,7 +41,7 @@ window.BookSummaryLightbox = React.createClass({
 		return (
 			<div className="lightbox-summary">
 				<Lightbox closeLightbox={this.closeLightbox}>
-					<div className="book" onScroll={this.scrollHandler} onWheel={this.scrollHandler}>
+					<div className="book">
 						<h4 className="book-title">
 							{this.props.item.title} 
 							<span className="book-author"> - {this.props.item.author}</span>
@@ -60,7 +65,7 @@ window.BookSummaryLightbox = React.createClass({
 							</div>
 						</div>
 
-						<div class="book-ctas">
+						<div className="book-ctas">
 							<a className="btn-read" href={this.props.item.readLink} target="_blank">read online now</a>
 							<a className="btn-download" href={this.props.item.downloadLink} target="_blank">download from project gutenberg</a>
 						</div>
