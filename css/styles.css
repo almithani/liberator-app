@@ -181,7 +181,6 @@ p {
 }
 
 .shelf .shelf-info {
-	height: 48px;
 	margin-bottom: 15px;
 	overflow: hidden;
 	white-space: nowrap;
@@ -216,16 +215,6 @@ p {
 	padding: 0px 10px;
 }
 
-.shelf .shelf-visual-bottom {
-	height: 15px;
-	position: absolute;
-	top: 361px; /* shelf info height + cover height */
-	left: 0;
-	width: 100%;
-	background: #2e1f00 url('/img/wood-pattern.png') repeat-x;
-	background-size: 5%;
-}
-
 .shelf .shelf-scroll-pane {
 	overflow-y: hidden;
 	overflow-x: scroll;
@@ -253,6 +242,22 @@ p {
 	color: #8c8c8c;
 }
 
+/* iPhone 5 Portrait */
+@media (max-width: 600px) {
+	.shelf .shelf-info .shelf-title {
+		white-space: normal;
+		font-size: 1.2em;
+	}
+
+	.shelf .shelf-info .shelf-username,
+	.shelf .shelf-info .user-image-frame,
+	.shelf .shelf-visual-bottom {
+		display: none;
+
+	}
+
+}
+
 .item {
 	margin-right: 6px;
 	padding: 0px 5px 8px 5px;
@@ -270,13 +275,14 @@ table.item td {
 }
 
 .item .item-info {
-	padding-top: 20px;
+	padding-top: 5px;
 }
 
 .item .item-title {
 	margin: 0px;
 	font-weight: bold;
 	vertical-align: bottom;
+	text-align: left;
 }
 
 .item .item-author {
@@ -442,19 +448,6 @@ table.item td {
   	.book .reader .reader-nav {
   		bottom: 4%;
   	}
-
-  	.lightbox-content {
-  		top: auto;
-  		transform: none;
-
-  	}
-
-  	.lightbox-summary .lightbox-content {
-  		width: 50%;
-  		height: 100%;
-  		overflow: scroll;
-  	}
-
 }
 
 

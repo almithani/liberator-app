@@ -26,8 +26,6 @@ window.BookSummaryLightbox = React.createClass({
 
 	closeLightbox: function(event) {
 		this.props.setActiveItem(null);
-		event.preventDefault();
-		event.stopPropagation();
 	},	
 
 	render: function() {

@@ -70,7 +70,6 @@ window.Shelf = React.createClass({
 						{itemRows}
 					</div>
 				</div>
-				<div className="shelf-visual-bottom"></div>
 			</div>
 		);
 	}
