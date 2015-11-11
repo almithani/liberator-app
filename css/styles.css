@@ -29,6 +29,7 @@ h2 {
 
 p {
 	margin-bottom: 1em;
+	line-height: 1.25em;
 }
 
 /*
@@ -60,6 +61,7 @@ p {
 	color: #444;
 	font-weight: bold;
 	text-decoration: none;
+	text-align: center;
 }
 
 .btn-read {
@@ -119,6 +121,19 @@ p {
 
 #header .header-brand:hover {
 	opacity: 0.75;
+}
+
+#header .header-info {
+	width: 30px;
+	height: 30px;
+	position: fixed;
+	right: 10px;
+	top: 5px;
+}
+
+#header .header-info path {
+	color: #fff;
+	fill: #fff;
 }
 
 #content {
@@ -357,6 +372,20 @@ table.item td {
 	right: 0px;
 }
 
+.quote-noimage {
+	margin: 20px 10%;
+}
+
+.quote-noimage .quote-text {
+	font-style: italic;
+	color: #666;
+	margin-bottom: 10px;
+}
+
+.quote-noimage .quote-author {
+	text-align: right;
+}
+
 .book .reader {
 	width: 100%;
 	height: 95%;
@@ -494,6 +523,12 @@ lightbox styles
   	max-height: 100%;
 }
 
+.lightbox-content h4 {
+	color: #000;
+	font-size: 1.25em;
+	padding-right: 30px;
+}
+
 .lightbox-btn-close {
 	position: absolute;
 	top: 5px;
@@ -511,13 +546,23 @@ lightbox styles
 	text-decoration: none;
 }
 
-.lightbox-summary .lightbox-overlay {
+.lightbox-summary .lightbox-overlay,
+.lightbox-about .lightbox-overlay {
 	display: block;	
 }
 
-.lightbox-summary .lightbox-content {
+.lightbox-summary .lightbox-content,
+.lightbox-about .lightbox-content {
 	width: 500px;
 }
+
+.lightbox-about .form-submit-email input {
+	width: 100%;
+	padding: 10px;
+	font-size: 1.25em;
+}
+
+
 
 @media (max-width: 600px) {
 
@@ -526,7 +571,8 @@ lightbox styles
   		transform: none;
   	}
 
-  	.lightbox-summary .lightbox-content {
+  	.lightbox-summary .lightbox-content,
+  	.lightbox-about .lightbox-content {
   		width: 100%;
   		height: 100%;
   		overflow: scroll;

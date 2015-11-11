@@ -7,12 +7,17 @@ window.Lightbox = React.createClass({
 		event.preventDefault();
 	},
 
+	contentClick: function(event) {
+		//this is to prevent lightbox closing on click
+		event.stopPropagation();
+	},
+
 	render: function(){
 		return (
 			<div>
 				<div className='lightbox-overlay' onClick={this.props.closeLightbox} />
 				<div className='lightbox-container' onClick={this.props.closeLightbox} onScroll={this.scrollHandler} onWheel={this.scrollHandler}>
-					<div className='lightbox-content'>
+					<div className='lightbox-content' onClick={this.contentClick}>
 						<a className='lightbox-btn-close' onClick={this.props.closeLightbox}>x</a>
 						{this.props.children}
 					</div>
@@ -20,6 +25,81 @@ window.Lightbox = React.createClass({
 			</div>
 		);
 	}  
+});
+
+
+window.AboutLightbox = React.createClass({
+	getInitialState: function() {
+		return {
+			emailValue: ""
+		};
+	},
+
+	handleChange: function(event) {
+		this.setState({
+			emailValue: event.target.value
+		});
+	},
+
+	closeLightbox: function(event) {
+		this.props.closeWindow();
+	},
+
+	submitEmail: function() {
+		console.log(this.state.emailValue);
+		nanoajax.ajax({
+			url: 'http://api.recoroll.com/users/', 
+			method: 'POST', 
+			body: 'email='+this.state.emailValue+'&username='+this.state.emailValue
+		}, function (code, responseText, request) {
+			console.log(code);
+			console.log(responseText);
+			console.log(request);
+		});
+	},
+
+	render: function() {
+		return (
+			<div className="lightbox-about">
+				<Lightbox closeLightbox={this.closeLightbox}>
+					<h4>Why Liberator?</h4>
+
+					<div className="quote-noimage">
+						<div className="quote-text">
+							“A man is known by the books he reads.” 
+						</div>
+						<div className="quote-author">
+							- Ralph Waldo Emerson
+						</div>
+					</div>
+
+					<p>
+						Books are the best way to learn and improve.  
+						The right book at the right time can inspire you to change your life.
+						Today, it&#8217;s never been easier to acquire and read books - but many still find it
+						difficult to find the time to read. 
+					</p>
+
+					<p>
+						I created Liberator to help people read more; to make the process of finding and sharing books 
+						fun and easy.  I&#8217;ve used sites like Amazon and GoodReads extensively - for me, they never 
+						captured the excitement of that conversation when you find someone who has read an appreciated
+						a book as much as you do.
+					</p>
+
+					<p>
+						This site is a work in progress.  If you&#8217;d like to keep informed of progress, please sign up below:
+					</p>
+
+					<form className="form-submit-email">
+						<input type="text" name="email" value={this.state.emailValue} onChange={this.handleChange} placeholder="enter your email" />
+						<a onClick={this.submitEmail} className="btn-read">submit</a>
+					</form>
+
+				</Lightbox>
+			</div>
+		);
+	}
 });
 
 window.BookSummaryLightbox = React.createClass({
