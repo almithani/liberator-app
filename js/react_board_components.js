@@ -101,16 +101,16 @@ window.Shelves = React.createClass({
 window.UserBanner = React.createClass({
 
 	render: function() {
-		var bgStyle = { backgroundImage: "url(img/avatar.jpg)" }
+		var bgStyle = { backgroundImage: "url("+this.props.user.avatar+")" }
 
 		return (
 			<div className="user-banner">
 				<div className="user-image-frame" style={bgStyle}></div>
 				<div className="user-vitals">
-					<h3 className="user-name">Al Mithani</h3>
-					<h4 className="user-tagline">entrepreneur, software engineer</h4>
+					<h3 className="user-name">{this.props.user.name}</h3>
+					<h4 className="user-tagline">{this.props.user.tagline}</h4>
 					<p className="user-desc">
-					   I usually read classic fiction and startup-related non-fiction.  Books that depict adventure inspire me to take action in my everyday life.  
+						{this.props.user.description}   
 					</p>
 				</div>
 			</div>
@@ -124,7 +124,8 @@ window.Board = React.createClass({
 
 		return (
 			<div className="board-main-content">
-				<UserBanner />
+				<UserBanner 
+					user={this.props.board.user} />
 				<Shelves 
 					shelves={this.props.board.shelves} 
 					activeItem={this.props.activeItem} 

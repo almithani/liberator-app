@@ -1,6 +1,11 @@
 var board = {
 	name: "Al's Favourite Gutenberg Books",
-	avatar: "img/avatar.jpg",
+	user: {
+		name: "Al Mithani",
+		avatar: "img/avatar.jpg",
+		tagline: "entrepreneur, software engineer",
+		description: "I usually read classic fiction and startup-related non-fiction. Books that depict adventure inspire me to take action in my everyday life."
+	},
 	shelves: [
 		{
 			title: "Classic Adventures",
