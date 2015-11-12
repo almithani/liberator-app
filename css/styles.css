@@ -32,6 +32,10 @@ p {
 	line-height: 1.25em;
 }
 
+strong {
+	font-weight: bold;
+}
+
 /*
 	re-usable component styles
 */
@@ -560,6 +564,25 @@ lightbox styles
 	width: 100%;
 	padding: 10px;
 	font-size: 1.25em;
+}
+
+.lightbox-about .form-submit-email.error input {
+	border: solid 1px #ff5772;
+}
+
+.lightbox-about  .form-submit-email.error .error {
+	color: #ff5772;
+	font-size: 0.9em;
+	margin-bottom: 5px;
+}
+
+.lightbox-about .form-submit-email.success {
+	display: none;
+}
+
+.lightbox-about .success {
+	color: #14c507;
+	text-align: center;
 }
 
 

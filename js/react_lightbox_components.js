@@ -31,7 +31,9 @@ window.Lightbox = React.createClass({
 window.AboutLightbox = React.createClass({
 	getInitialState: function() {
 		return {
-			emailValue: ""
+			emailValue: "",
+			error: null,
+			success: null,
 		};
 	},
 
@@ -41,24 +43,69 @@ window.AboutLightbox = React.createClass({
 		});
 	},
 
+	setError: function(errorMsg) {
+		this.setState({
+			error: errorMsg
+		});		
+	},
+
+	setSuccess: function() {
+		this.setState({
+			success: true
+		});
+	},
+
 	closeLightbox: function(event) {
 		this.props.closeWindow();
 	},
 
 	submitEmail: function() {
-		console.log(this.state.emailValue);
+
+		var setError = this.setError;
+		var setSuccess = this.setSuccess;
+
 		nanoajax.ajax({
 			url: 'http://api.recoroll.com/users/', 
 			method: 'POST', 
 			body: 'email='+this.state.emailValue+'&username='+this.state.emailValue
-		}, function (code, responseText, request) {
-			console.log(code);
-			console.log(responseText);
-			console.log(request);
+		}, function (code, responseText, response) {
+			if( code==400 ) {
+				var responseJson = JSON.parse(responseText);
+				var msg = '';
+				_.each(responseJson, function(value) {
+					msg += value;
+				});
+				setError(msg);
+			} else if( code==201 ) {
+				setSuccess();
+			}
 		});
 	},
 
+	formSubmit: function(event) {
+		event.preventDefault();
+		this.submitEmail();
+	},
+
 	render: function() {
+
+		var error = '';
+		var formClass = 'form-submit-email ';
+		if( !_.isNull(this.state.error) ){
+			formClass += ' error';
+			error = <div className="error">
+						{this.state.error}
+					</div>;
+		}
+
+		var success = '';
+		if( !_.isNull(this.state.success) ){
+			formClass += ' success';
+			success = <div className="success">
+						Thanks for signing up!
+					</div>;
+		}	
+
 		return (
 			<div className="lightbox-about">
 				<Lightbox closeLightbox={this.closeLightbox}>
@@ -76,22 +123,19 @@ window.AboutLightbox = React.createClass({
 					<p>
 						Books are the best way to learn and improve.  
 						The right book at the right time can inspire you to change your life.
-						Today, it&#8217;s never been easier to acquire and read books - but many still find it
-						difficult to find the time to read. 
 					</p>
 
 					<p>
-						I created Liberator to help people read more; to make the process of finding and sharing books 
-						fun and easy.  I&#8217;ve used sites like Amazon and GoodReads extensively - for me, they never 
-						captured the excitement of that conversation when you find someone who has read an appreciated
-						a book as much as you do.
+						<strong>Liberator is meant to inspire people through books.</strong>
 					</p>
 
 					<p>
-						This site is a work in progress.  If you&#8217;d like to keep informed of progress, please sign up below:
+						This site is a work in progress.  Sign up for updates on new features:
 					</p>
 
-					<form className="form-submit-email">
+					{success}
+					<form className={formClass} onSubmit={this.formSubmit}>
+						{error}
 						<input type="text" name="email" value={this.state.emailValue} onChange={this.handleChange} placeholder="enter your email" />
 						<a onClick={this.submitEmail} className="btn-read">submit</a>
 					</form>
