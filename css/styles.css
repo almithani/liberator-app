@@ -222,6 +222,7 @@ strong {
 .shelf .shelf-info .user-image-frame {
 	margin: 4px 10px 0px 0px;
 	float: right;
+	display: none;
 }
 
 .shelf .shelf-info .shelf-username {
@@ -232,6 +233,7 @@ strong {
 	float: right;
 	line-height: 48px;
 	padding: 0px 10px;
+	display: none;
 }
 
 .shelf .shelf-scroll-pane {
@@ -481,6 +483,52 @@ table.item td {
   	.book .reader .reader-nav {
   		bottom: 4%;
   	}
+}
+
+.user-banner {
+	padding: 20px;
+	text-align: center;
+}
+
+.user-banner .user-image-frame {
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
+	display: inline-block;
+}
+
+.user-banner .user-vitals {
+	display: inline-block;
+	width: 500px;
+	margin-left: 50px;
+	text-align: left;
+	vertical-align: top;
+}
+
+.user-banner .user-vitals .user-name {
+	font-size: 1.25em;
+	margin-bottom: 0.25em;
+	font-weight: bold;
+}
+
+.user-banner .user-vitals .user-tagline {
+	color: #666;
+	font-style: italic;
+	margin-bottom: 0.75em;
+}
+
+.user-banner .user-vitals .user-desc {
+	font-size: 0.9em;
+	line-height: 1.35em;
+}
+
+/* iPhone 5 Portrait */
+@media (max-width: 600px) {
+	.user-banner .user-vitals {
+		display: inline-block;
+		width: 100%;
+		margin: 20px 0px 0px 0px;
+	}
 }
 
 

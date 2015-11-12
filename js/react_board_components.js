@@ -98,12 +98,33 @@ window.Shelves = React.createClass({
 	}
 });
 
+window.UserBanner = React.createClass({
+
+	render: function() {
+		var bgStyle = { backgroundImage: "url(img/avatar.jpg)" }
+
+		return (
+			<div className="user-banner">
+				<div className="user-image-frame" style={bgStyle}></div>
+				<div className="user-vitals">
+					<h3 className="user-name">Al Mithani</h3>
+					<h4 className="user-tagline">entrepreneur, software engineer</h4>
+					<p className="user-desc">
+					   I usually read classic fiction and startup-related non-fiction.  Books that depict adventure inspire me to take action in my everyday life.  
+					</p>
+				</div>
+			</div>
+		);
+	}
+});
+
 window.Board = React.createClass({
 
 	render: function() {
 
 		return (
 			<div className="board-main-content">
+				<UserBanner />
 				<Shelves 
 					shelves={this.props.board.shelves} 
 					activeItem={this.props.activeItem} 
@@ -112,3 +133,5 @@ window.Board = React.createClass({
 		);
 	}
 });
+
+
