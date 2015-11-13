@@ -112,6 +112,7 @@ window.UserBanner = React.createClass({
 					<p className="user-desc">
 						{this.props.user.description}   
 					</p>
+					<a onClick={this.props.saveBoard}>save board</a>
 				</div>
 			</div>
 		);
@@ -120,12 +121,25 @@ window.UserBanner = React.createClass({
 
 window.Board = React.createClass({
 
+	saveBoard: function() {
+		var bodyJson = JSON.stringify(this.props.board);
+
+		nanoajax.ajax({
+			url: 'http://api.recoroll.com/boards/1/', 
+			method: 'PUT',
+			body: "user=http://api.recoroll.com/users/1/&jsonCache="+bodyJson,
+		}, function (code, responseText, response) {
+			console.log(response);
+		});		
+	},
+
 	render: function() {
 
 		return (
 			<div className="board-main-content">
 				<UserBanner 
-					user={this.props.board.user} />
+					user={this.props.board.user} 
+					saveBoard={this.saveBoard} />
 				<Shelves 
 					shelves={this.props.board.shelves} 
 					activeItem={this.props.activeItem} 

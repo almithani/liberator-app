@@ -28,4 +28,23 @@ router.add('book/{id}', function(params){
 	pageObject.setActiveItemById(params.id);
 });
 
+/* user shelf route */
+router.add('user/{id}', function(params){
+
+	//get user's page from the api
+	nanoajax.ajax({
+		url: 'http://api.recoroll.com/boards/'+params.id+'?format=json', 
+		method: 'GET',
+	}, function (code, responseText, response) {
+		if( code==200 ) {
+			var responseJson = JSON.parse(responseText);
+			var boardJson = JSON.parse(responseJson.jsonCache);
+			pageObject = ReactDOM.render(
+	    		<Page board={boardJson} router={router} />,
+	    		document.getElementById('content')
+			);
+		}
+	});
+});
+
 router.run();
