@@ -24,10 +24,22 @@ window.Nav = React.createClass({
 							closeWindow={this.closeInfoWindow} />;
 		}
 
+		var bgStyle = { backgroundImage: "url(img/entypo/add-user.svg)" };
+		var username = '';
+		if( !_.isNull(this.props.user) ) {
+			bgStyle = { backgroundImage: "url(img/entypo/user.svg)" };
+			username = this.props.user.username;
+		}
+		var userDOM = 	<div className="header-user">
+							<div className="header-user-username">{username}</div>
+							<div className="user-image-frame" style={bgStyle}></div>
+						</div>;
+
 		return(
 			<div>
 				<div id="header">
 					<a href="#" className="header-brand">Liberator</a>
+					{userDOM}
 					<a href="#" className="header-info" onClick={this.openInfoWindow}>
 						<img src="img/entypo/info-with-circle.svg" className="svg-inject" alt="about liberator" />
 					</a>
@@ -45,7 +57,14 @@ window.Page = React.createClass({
 	getInitialState: function(){
 		return { 
 			activeItem: null,
+			loggedInUser: null,
 		};
+	},
+
+	setActiveUser: function(user) {
+		this.setState({
+			loggedInUser: user
+		});
 	},
 
 	setActiveItem: function(item) {
@@ -81,6 +100,29 @@ window.Page = React.createClass({
 		SVGInjector(mySVGsToInject);		
 	},
 
+	componentWillMount: function() {
+		//search for a logged in user
+		var sessionid = Cookies.get('sessionid');
+		var setUser = this.setActiveUser;
+		nanoajax.ajax({
+			url: 'http://api.recoroll.com/currentUser/'+'?format=json', 
+			method: 'GET',
+			withCredentials: true,
+		}, function (code, responseText, response) {
+
+			var userJson = JSON.parse(responseText);
+			if( code==200 ) {
+				console.log(userJson);
+				if( !_.isNull(userJson.id) ) {
+					//user is logged in
+					setUser(userJson);
+				} else {
+					//user is not logged in
+				}
+			}
+		});		
+	},
+
 	renderItem: function(item) {
 		this.setState({
 			activeItem: item 
@@ -90,7 +132,7 @@ window.Page = React.createClass({
 	render: function() {
 		return(
 			<div>
-				<Nav />
+				<Nav user={this.state.loggedInUser} />
 				<Board 
 					board={this.props.board}
 					activeItem={this.state.activeItem} 

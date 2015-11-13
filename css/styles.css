@@ -111,6 +111,7 @@ strong {
 	width: 100%;
 	z-index: 2;
 	white-space: nowrap;
+	text-align: center;
 }
 
 #header .header-brand {
@@ -118,7 +119,7 @@ strong {
 	opacity: 0.5;
 	text-decoration: none;
 	line-height: 30px;
-	display: block;
+	display: inline-block;
 	text-align: center;
 	font-size: 1.25em;
 }
@@ -131,13 +132,36 @@ strong {
 	width: 30px;
 	height: 30px;
 	position: fixed;
-	right: 10px;
+	left: 10px;
 	top: 5px;
 }
 
 #header .header-info path {
 	color: #fff;
 	fill: #fff;
+}
+
+#header .header-user {
+	position: fixed;
+	right: 10px;
+	top: 5px;
+	height: 30px;
+} 
+
+#header .header-user .header-user-username {
+	line-height: 30px;
+	color: #fff;
+	display: inline-block;
+	padding-right: 10px;
+	vertical-align: top;
+}
+
+#header .header-user .user-image-frame {
+	height: 30px;
+	width: 30px;
+	border-radius: 15px;
+	background-color: #fff;
+	display: inline-block;
 }
 
 #content {

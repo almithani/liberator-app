@@ -135,17 +135,22 @@ window.Board = React.createClass({
 
 	render: function() {
 
-		return (
-			<div className="board-main-content">
-				<UserBanner 
-					user={this.props.board.user} 
-					saveBoard={this.saveBoard} />
-				<Shelves 
-					shelves={this.props.board.shelves} 
-					activeItem={this.props.activeItem} 
-					setActiveItem={this.props.setActiveItem} />
-			</div>
-		);
+		if( !_.isNull(this.props.board) ){
+			return (
+				<div className="board-main-content">
+					<UserBanner 
+						user={this.props.board.user} 
+						saveBoard={this.saveBoard} />
+					<Shelves 
+						shelves={this.props.board.shelves} 
+						activeItem={this.props.activeItem} 
+						setActiveItem={this.props.setActiveItem} />
+				</div>
+			);			
+		} else {
+			return(<div>no active board</div>);
+		}
+
 	}
 });
 

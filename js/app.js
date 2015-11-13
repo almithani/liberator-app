@@ -9,6 +9,7 @@
 
 var router = new LightRouter({type: 'hash'});
 var pageObject = null;
+var board = null;
 
 /*  home route */
 router.add('', function() {
@@ -39,6 +40,7 @@ router.add('user/{id}', function(params){
 		if( code==200 ) {
 			var responseJson = JSON.parse(responseText);
 			var boardJson = JSON.parse(responseJson.jsonCache);
+			boardJson.id = responseJson.id;
 			pageObject = ReactDOM.render(
 	    		<Page board={boardJson} router={router} />,
 	    		document.getElementById('content')
