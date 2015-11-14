@@ -25,15 +25,19 @@ window.Nav = React.createClass({
 		}
 
 		var bgStyle = { backgroundImage: "url(img/entypo/add-user.svg)" };
-		var username = '';
-		if( !_.isNull(this.props.user) ) {
-			bgStyle = { backgroundImage: "url(img/entypo/user.svg)" };
-			username = this.props.user.username;
-		}
 		var userDOM = 	<div className="header-user">
-							<div className="header-user-username">{username}</div>
 							<div className="user-image-frame" style={bgStyle}></div>
 						</div>;
+
+		if( !_.isNull(this.props.user) ) {
+			bgStyle = { backgroundImage: "url(img/entypo/user.svg)" };
+			var href = "#user/"+this.props.user.id;
+			userDOM = 	<a className="header-user" href={href} >
+							<div className="header-user-username">{this.props.user.username}</div>
+							<div className="user-image-frame" style={bgStyle}></div>
+						</a>;
+		}
+
 
 		return(
 			<div>
@@ -58,13 +62,21 @@ window.Page = React.createClass({
 		return { 
 			activeItem: null,
 			loggedInUser: null,
+			board: null,
+			prevUrl: '#'
 		};
 	},
 
-	setActiveUser: function(user) {
+	setLoggedInUser: function(user) {
 		this.setState({
 			loggedInUser: user
 		});
+	},
+
+	setActiveBoard: function(board) {
+		this.setState({
+			board: board
+		});		
 	},
 
 	setActiveItem: function(item) {
@@ -72,10 +84,10 @@ window.Page = React.createClass({
 			this.setState({
 				activeItem: null 
 			});
-			history.pushState(null, null, '#');
 		} else {
-			history.pushState(null, null, '#book/'+item.id);
-			this.props.router.run();
+			this.setState({
+				activeItem: item
+			});			
 		}
 	},
 
@@ -94,6 +106,22 @@ window.Page = React.createClass({
 		});
 	},	
 
+	getUserBoard: function(user_id) {
+		//get user's page from the api
+		var setBoard = this.setActiveBoard;
+		nanoajax.ajax({
+			url: 'http://api.recoroll.com/boards/'+user_id+'?format=json', 
+			method: 'GET',
+		}, function (code, responseText, response) {
+			if( code==200 ) {
+				var responseJson = JSON.parse(responseText);
+				var boardJson = JSON.parse(responseJson.jsonCache);
+				boardJson.id = responseJson.id;
+				setBoard(boardJson);
+			}
+		});		
+	},
+
 	componentDidMount: function() {
 		//inject svg
 		var mySVGsToInject = document.querySelectorAll('img.svg-inject');
@@ -103,7 +131,7 @@ window.Page = React.createClass({
 	componentWillMount: function() {
 		//search for a logged in user
 		var sessionid = Cookies.get('sessionid');
-		var setUser = this.setActiveUser;
+		var setUser = this.setLoggedInUser;
 		nanoajax.ajax({
 			url: 'http://api.recoroll.com/currentUser/'+'?format=json', 
 			method: 'GET',
@@ -112,7 +140,6 @@ window.Page = React.createClass({
 
 			var userJson = JSON.parse(responseText);
 			if( code==200 ) {
-				console.log(userJson);
 				if( !_.isNull(userJson.id) ) {
 					//user is logged in
 					setUser(userJson);
@@ -120,7 +147,21 @@ window.Page = React.createClass({
 					//user is not logged in
 				}
 			}
-		});		
+		});
+
+		//if we have a user id, grab the user's board
+		if( this.props.initialUserId ) {
+			this.getUserBoard(this.props.initialUserId);
+		}		
+	},
+
+	componentWillReceiveProps: function(nextProps) {
+		//if we have a user id, grab the user's board
+		if( nextProps.initialUserId ) {
+			this.getUserBoard(nextProps.initialUserId);
+		} else {
+			this.setActiveBoard(null);			
+		}	
 	},
 
 	renderItem: function(item) {
@@ -134,7 +175,7 @@ window.Page = React.createClass({
 			<div>
 				<Nav user={this.state.loggedInUser} />
 				<Board 
-					board={this.props.board}
+					board={this.state.board}
 					activeItem={this.state.activeItem} 
 					setActiveItem={this.setActiveItem} />
 			</div>

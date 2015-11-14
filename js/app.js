@@ -14,39 +14,23 @@ var board = null;
 /*  home route */
 router.add('', function() {
 	pageObject = ReactDOM.render(
-	    <Page board={board} router={router} />,
+	    <Page router={router} />,
 	    document.getElementById('content')
 	);
 	pageObject.setActiveItem(null);
 });
 
-/* book reader route */
-router.add('book/{id}', function(params){
-	pageObject = ReactDOM.render(
-	    <Page board={board} router={router} />,
-	    document.getElementById('content')
-	);	
-	pageObject.setActiveItemById(params.id);
-});
-
 /* user shelf route */
 router.add('user/{id}', function(params){
-
-	//get user's page from the api
-	nanoajax.ajax({
-		url: 'http://api.recoroll.com/boards/'+params.id+'?format=json', 
-		method: 'GET',
-	}, function (code, responseText, response) {
-		if( code==200 ) {
-			var responseJson = JSON.parse(responseText);
-			var boardJson = JSON.parse(responseJson.jsonCache);
-			boardJson.id = responseJson.id;
-			pageObject = ReactDOM.render(
-	    		<Page board={boardJson} router={router} />,
-	    		document.getElementById('content')
-			);
-		}
-	});
+	pageObject = ReactDOM.render(
+		<Page initialUserId={params.id} router={router} />,
+		document.getElementById('content')
+	);
 });
 
 router.run();
+
+window.onhashchange = function(e) {
+   //this is for links - if you don't want to trigger a repaint, use history.pushState
+   router.run();
+};
