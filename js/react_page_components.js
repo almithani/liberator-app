@@ -30,10 +30,10 @@ window.Nav = React.createClass({
 						</div>;
 
 		if( !_.isNull(this.props.user) ) {
-			bgStyle = { backgroundImage: "url(img/entypo/user.svg)" };
-			var href = "#user/"+this.props.user.id;
+			bgStyle = { backgroundImage: "url("+this.props.user.avatar+")" };
+			var href = "#user/"+this.props.user.user.id;
 			userDOM = 	<a className="header-user" href={href} >
-							<div className="header-user-username">{this.props.user.username}</div>
+							<div className="header-user-username">{this.props.user.displayName}</div>
 							<div className="user-image-frame" style={bgStyle}></div>
 						</a>;
 		}
@@ -118,6 +118,8 @@ window.Page = React.createClass({
 				var boardJson = JSON.parse(responseJson.jsonCache);
 				boardJson.id = responseJson.id;
 				setBoard(boardJson);
+			} else {
+				console.log('no user board');
 			}
 		});		
 	},
