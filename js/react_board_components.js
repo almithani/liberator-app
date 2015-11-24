@@ -44,6 +44,20 @@ window.Item = React.createClass({
 	}
 });
 
+window.UserItem = React.createClass({
+	render: function() {
+		var bgStyle = { backgroundImage: "url("+this.props.user.avatar+")" }
+
+		return (
+			<div className="item user-item">
+				<div className="user-image-frame" style={bgStyle}></div>
+				by <h3 className="user-name">{this.props.user.name}</h3>
+				<h4 className="user-tagline">{this.props.user.tagline}</h4>
+			</div>
+		)
+	}
+});
+
 window.Shelf = React.createClass({
 	render: function() {
 		var itemRows = [];
@@ -58,6 +72,11 @@ window.Shelf = React.createClass({
 
         var bgStyle = { backgroundImage: "url("+this.props.user.avatar+")" }
 
+        var userItem = "";
+        if( this.props.showUser==true ) {
+        	userItem = <UserItem user={this.props.user} />;
+        }
+
 		return (
 			<div className="shelf">
 				<h2 className="shelf-info">
@@ -67,6 +86,7 @@ window.Shelf = React.createClass({
 				</h2>
 				<div className="shelf-scroll-pane">
 					<div className="shelf-items">
+						{userItem}
 						{itemRows}
 					</div>
 				</div>
@@ -77,6 +97,11 @@ window.Shelf = React.createClass({
 
 window.Shelves = React.createClass({
 	render: function() {
+		var showTheUser = false;
+		if( this.props.showUser ) {
+			showTheUser = this.props.showUser;
+		}
+
 		var shelves = [];
 		if( this.props.shelves ){
 			this.props.shelves.forEach(function(shelf) {
@@ -84,6 +109,7 @@ window.Shelves = React.createClass({
 								title={shelf.title} 
 								items={shelf.items} 
 								user={shelf.user}
+								showUser={showTheUser}
 								activeItem={this.props.activeItem} 
 								setActiveItem={this.props.setActiveItem} 
 								key={shelf.title} />
@@ -176,7 +202,12 @@ window.Listing = React.createClass({
 				Even better - get recommendations from people you trust.
 				</p>
 
-				
+				<h2>Check out these shelves from our users:</h2>
+				<Shelves 
+					shelves={this.props.listing.shelves} 
+					showUser={true}
+					activeItem={this.props.activeItem} 
+					setActiveItem={this.props.setActiveItem} />				
 			</div>
 		);
 	}

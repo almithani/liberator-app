@@ -109,7 +109,7 @@ strong {
 	top: 0px;
 	left: 0px;
 	width: 100%;
-	z-index: 2;
+	z-index: 3;
 	white-space: nowrap;
 	text-align: center;
 }
@@ -207,21 +207,23 @@ strong {
 
 .shelf {
 	max-width: 100%;
+	width: 100%;
 	background: #fff;
 	vertical-align: top;
 	overflow: hidden;
 	display: inline-block;
 	position: relative;
+	padding-bottom: 30px;
 }
 
 .shelf:first-child {
 	margin-top: 20px;
 }
 
-.shelf:after {
+/*.shelf:after {
 	content: '\A';
 	white-space: pre;
-}
+}*/
 
 .shelf .shelf-info {
 	margin-bottom: 15px;
@@ -258,6 +260,23 @@ strong {
 	line-height: 48px;
 	padding: 0px 10px;
 	display: none;
+}
+
+.shelf .user-item {
+	width: 200px;
+}
+
+.shelf .user-item .user-image-frame {
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
+	margin: auto;
+	margin-bottom: 10px;
+}
+
+.shelf .user-item .user-name {
+	display: inline-block;
+	margin-bottom: 0.5em;
 }
 
 .shelf .shelf-scroll-pane {
@@ -514,6 +533,15 @@ table.item td {
 	text-align: center;
 }
 
+.user-name {
+	font-weight: bold;
+}
+
+.user-tagline {
+	color: #666;
+	font-style: italic;
+}
+
 .user-banner .user-image-frame {
 	width: 200px;
 	height: 200px;
@@ -532,12 +560,9 @@ table.item td {
 .user-banner .user-vitals .user-name {
 	font-size: 1.25em;
 	margin-bottom: 0.25em;
-	font-weight: bold;
 }
 
 .user-banner .user-vitals .user-tagline {
-	color: #666;
-	font-style: italic;
 	margin-bottom: 0.75em;
 }
 

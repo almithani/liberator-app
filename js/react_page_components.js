@@ -220,13 +220,21 @@ window.Page = React.createClass({
 						setActiveItem={this.setActiveItem} />
 				</div>
 			);
-		} else {
+		} else if( !_.isUndefined(this.props.listing) ) {
 			return (
 				<div>
 					<Nav user={this.state.loggedInUser} />
 					<Listing
+						listing={this.props.listing}
 						activeItem={this.state.activeItem} 
 						setActiveItem={this.setActiveItem} />
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					<Nav user={this.state.loggedInUser} />
+					<div>loading page</div>
 				</div>
 			);
 		}
