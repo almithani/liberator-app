@@ -78,16 +78,19 @@ window.Shelf = React.createClass({
 window.Shelves = React.createClass({
 	render: function() {
 		var shelves = [];
-		this.props.shelves.forEach(function(shelf) {
-			shelves.push(<Shelf 
-							title={shelf.title} 
-							items={shelf.items} 
-							user={shelf.user}
-							activeItem={this.props.activeItem} 
-							setActiveItem={this.props.setActiveItem} 
-							key={shelf.title} />
-						);
-		}, this);
+		if( this.props.shelves ){
+			this.props.shelves.forEach(function(shelf) {
+				shelves.push(<Shelf 
+								title={shelf.title} 
+								items={shelf.items} 
+								user={shelf.user}
+								activeItem={this.props.activeItem} 
+								setActiveItem={this.props.setActiveItem} 
+								key={shelf.title} />
+							);
+			}, this);			
+		}
+
 		return (
 			<div className="board-canvas">
 				<div className="board">
@@ -112,13 +115,16 @@ window.UserBanner = React.createClass({
 					<p className="user-desc">
 						{this.props.user.description}   
 					</p>
-					<a onClick={this.props.saveBoard}>save board</a>
 				</div>
 			</div>
 		);
 	}
 });
 
+
+/*
+	A user's "bookcase" aka a board
+*/
 window.Board = React.createClass({
 
 	saveBoard: function() {
@@ -152,6 +158,29 @@ window.Board = React.createClass({
 		}
 
 	}
+});
+
+/*
+	shows multiple user shelves
+*/
+window.Listing = React.createClass({
+
+	render: function() {
+		return (
+			<div className="listing">
+				<h2>Read authors not genres</h2>
+				<p>
+				Just because a book is popular, doesn&#8217;t mean that you&#8217;ll like it.  
+				Books are way to personal to let your friends or an algorithm decide what you&#8217;ll read next.  
+				Instead, why not get recommendations from people reading the same things as you?  
+				Even better - get recommendations from people you trust.
+				</p>
+
+				
+			</div>
+		);
+	}
+
 });
 
 

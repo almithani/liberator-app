@@ -29,7 +29,7 @@ window.Nav = React.createClass({
 							<div className="user-image-frame" style={bgStyle}></div>
 						</div>;
 
-		if( !_.isNull(this.props.user) ) {
+		if( !_.isEmpty(this.props.user) ) {
 			bgStyle = { backgroundImage: "url("+this.props.user.avatar+")" };
 			var href = "#user/"+this.props.user.user.id;
 			userDOM = 	<a className="header-user" href={href} >
@@ -104,11 +104,45 @@ window.Page = React.createClass({
 				return false;		
 			}
 		});
-	},	
+	},
+
+	getUser: function(user_id, callback) {
+		nanoajax.ajax({
+			url: 'http://api.recoroll.com/users/'+user_id+'?format=json', 
+			method: 'GET',
+			withCredentials: true,
+		}, function (code, responseText, response) {
+
+			var userJson = JSON.parse(responseText);
+			if( code==200 ) {
+				if( !_.isEmpty(userJson) && !_.isNull(userJson.id) ) {
+					callback(userJson);
+				} else {
+					//user is not logged in
+				}
+			}
+		});		
+	},
 
 	getUserBoard: function(user_id) {
 		//get user's page from the api
 		var setBoard = this.setActiveBoard;
+		var board = {
+			'name': 'fakeboard'
+		};
+
+		//get user info
+		this.getUser(user_id, function(user) {
+			board.user = {
+				"name": user.displayName,
+				"avatar": user.avatar,
+				"tagline": user.tagline,
+				"description": user.description
+			}
+			setBoard(board);
+		})
+
+		//get board info
 		nanoajax.ajax({
 			url: 'http://api.recoroll.com/boards/'+user_id+'?format=json', 
 			method: 'GET',
@@ -116,8 +150,11 @@ window.Page = React.createClass({
 			if( code==200 ) {
 				var responseJson = JSON.parse(responseText);
 				var boardJson = JSON.parse(responseJson.jsonCache);
-				boardJson.id = responseJson.id;
-				setBoard(boardJson);
+
+				board.id = responseJson.id;
+				board.name = boardJson.name;
+				board.shelves = boardJson.shelves;
+				setBoard(board);
 			} else {
 				console.log('no user board');
 			}
@@ -173,14 +210,25 @@ window.Page = React.createClass({
 	},
 
 	render: function() {
-		return(
-			<div>
-				<Nav user={this.state.loggedInUser} />
-				<Board 
-					board={this.state.board}
-					activeItem={this.state.activeItem} 
-					setActiveItem={this.setActiveItem} />
-			</div>
-		);
+		if( !_.isNull(this.state.board) ){
+			return(
+				<div>
+					<Nav user={this.state.loggedInUser} />
+					<Board 
+						board={this.state.board}
+						activeItem={this.state.activeItem} 
+						setActiveItem={this.setActiveItem} />
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					<Nav user={this.state.loggedInUser} />
+					<Listing
+						activeItem={this.state.activeItem} 
+						setActiveItem={this.setActiveItem} />
+				</div>
+			);
+		}
 	}
 });
