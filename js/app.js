@@ -14,7 +14,7 @@ var board = null;
 /*  home route */
 router.add('', function() {
 	pageObject = ReactDOM.render(
-	    <Page router={router} listing={listing} />,
+	    <Page router={router} />,
 	    document.getElementById('content')
 	);
 	pageObject.setActiveItem(null);

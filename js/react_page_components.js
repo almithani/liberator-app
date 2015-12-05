@@ -63,6 +63,7 @@ window.Page = React.createClass({
 			activeItem: null,
 			loggedInUser: null,
 			board: null,
+			listing: null,
 			prevUrl: '#'
 		};
 	},
@@ -77,6 +78,12 @@ window.Page = React.createClass({
 		this.setState({
 			board: board
 		});		
+	},
+
+	setListing: function(listing) {
+		this.setState({
+			listing: listing
+		});
 	},
 
 	setActiveItem: function(item) {
@@ -161,6 +168,23 @@ window.Page = React.createClass({
 		});		
 	},
 
+	getListing: function() {
+
+		var setListing = this.setListing;
+		//get the listing (aka front page) from the api
+		nanoajax.ajax({
+			url: 'http://api.recoroll.com/shelfs/?format=json', 
+			method: 'GET',
+		}, function (code, responseText, response) {
+			if( code==200 ) {
+				var responseJson = JSON.parse(responseText);
+				setListing(responseJson.results);
+			} else {
+				console.log('error getting listing');
+			}
+		});			
+	},
+
 	componentDidMount: function() {
 		//inject svg
 		var mySVGsToInject = document.querySelectorAll('img.svg-inject');
@@ -188,9 +212,12 @@ window.Page = React.createClass({
 			}
 		});
 
-		//if we have a user id, grab the user's board
 		if( this.props.initialUserId ) {
+			//if we have a user id, grab the user's board
 			this.getUserBoard(this.props.initialUserId);
+		} else {
+			//no user?  Get the listing
+			this.getListing();
 		}		
 	},
 
@@ -220,12 +247,12 @@ window.Page = React.createClass({
 						setActiveItem={this.setActiveItem} />
 				</div>
 			);
-		} else if( !_.isUndefined(this.props.listing) ) {
+		} else if( !_.isNull(this.state.listing) ) {
 			return (
 				<div>
 					<Nav user={this.state.loggedInUser} />
 					<Listing
-						listing={this.props.listing}
+						shelves={this.state.listing}
 						activeItem={this.state.activeItem} 
 						setActiveItem={this.setActiveItem} />
 				</div>

@@ -29,7 +29,7 @@ window.Item = React.createClass({
 				<table className="item">
 					<tbody>
 						<tr>
-							<td className="item-cover"><img src={this.props.item.img} alt="" onClick={this.setAsActiveItem} /></td>
+							<td className="item-cover"><img src={this.props.item.cover} alt="" onClick={this.setAsActiveItem} /></td>
 						</tr>
 						<tr>
 							<td className="item-info">
@@ -51,7 +51,7 @@ window.UserItem = React.createClass({
 		return (
 			<div className="item user-item">
 				<div className="user-image-frame" style={bgStyle}></div>
-				by <h3 className="user-name">{this.props.user.name}</h3>
+				by <h3 className="user-name">{this.props.user.displayName}</h3>
 				<h4 className="user-tagline">{this.props.user.tagline}</h4>
 			</div>
 		)
@@ -108,7 +108,7 @@ window.Shelves = React.createClass({
 				shelves.push(<Shelf 
 								title={shelf.title} 
 								items={shelf.items} 
-								user={shelf.user}
+								user={shelf.creator}
 								showUser={showTheUser}
 								activeItem={this.props.activeItem} 
 								setActiveItem={this.props.setActiveItem} 
@@ -204,7 +204,7 @@ window.Listing = React.createClass({
 
 				<h2>Check out these shelves from our users:</h2>
 				<Shelves 
-					shelves={this.props.listing.shelves} 
+					shelves={this.props.shelves} 
 					showUser={true}
 					activeItem={this.props.activeItem} 
 					setActiveItem={this.props.setActiveItem} />				
