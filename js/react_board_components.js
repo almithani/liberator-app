@@ -15,6 +15,7 @@ window.Item = React.createClass({
 
 	setAsActiveItem: function() {
 		this.props.setActiveItem(this.props.item);
+		console.log(this.props.item);
 	},
 
 	render: function() {
@@ -70,7 +71,6 @@ window.Shelf = React.createClass({
             			);
         }, this);
 
-        var bgStyle = { backgroundImage: "url("+this.props.user.avatar+")" }
 
         var userItem = "";
         if( this.props.showUser==true ) {
@@ -81,8 +81,6 @@ window.Shelf = React.createClass({
 			<div className="shelf">
 				<h2 className="shelf-info">
 					<div className="shelf-title">{this.props.title}</div>
-					<div className="user-image-frame" style={bgStyle}></div>
-					<span className="shelf-username">by {this.props.user.name}</span>
 				</h2>
 				<div className="shelf-scroll-pane">
 					<div className="shelf-items">
@@ -96,6 +94,25 @@ window.Shelf = React.createClass({
 });
 
 window.Shelves = React.createClass({
+
+	getInitialState: function(){
+		return { 
+			activeItem: null
+		};
+	},
+
+	setActiveItem: function(item) {
+		if( _.isEmpty(item) ) {
+			this.setState({
+				activeItem: null 
+			});
+		} else {
+			this.setState({
+				activeItem: item
+			});			
+		}
+	},
+
 	render: function() {
 		var showTheUser = false;
 		if( this.props.showUser ) {
@@ -110,8 +127,8 @@ window.Shelves = React.createClass({
 								items={shelf.items} 
 								user={shelf.creator}
 								showUser={showTheUser}
-								activeItem={this.props.activeItem} 
-								setActiveItem={this.props.setActiveItem} 
+								activeItem={this.state.activeItem} 
+								setActiveItem={this.setActiveItem} 
 								key={shelf.title} />
 							);
 			}, this);			
@@ -174,9 +191,7 @@ window.Board = React.createClass({
 						user={this.props.board.user} 
 						saveBoard={this.saveBoard} />
 					<Shelves 
-						shelves={this.props.board.shelves} 
-						activeItem={this.props.activeItem} 
-						setActiveItem={this.props.setActiveItem} />
+						shelves={this.props.board.shelves} />
 				</div>
 			);			
 		} else {
@@ -205,9 +220,7 @@ window.Listing = React.createClass({
 				<h2>Check out these shelves from our users:</h2>
 				<Shelves 
 					shelves={this.props.shelves} 
-					showUser={true}
-					activeItem={this.props.activeItem} 
-					setActiveItem={this.props.setActiveItem} />				
+					showUser={true} />				
 			</div>
 		);
 	}

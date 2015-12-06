@@ -154,8 +154,8 @@ window.BookSummaryLightbox = React.createClass({
 
 	render: function() {
 		var description = '';
-		if( this.props.item.desc ) {
-			var paragraphs = this.props.item.desc.split("\n");
+		if( this.props.item.description ) {
+			var paragraphs = this.props.item.description.split("\n");
 			_.each(paragraphs, function(para) {
 				description = <div>{description}<p>{para}</p></div>;
 			});
@@ -181,7 +181,7 @@ window.BookSummaryLightbox = React.createClass({
 
 						<div className="book-more-info">
 							<div className='book-cover'>
-								<img src={this.props.item.img} alt={this.props.item.title} />
+								<img src={this.props.item.cover} alt={this.props.item.title} />
 							</div>
 
 							{description}
