@@ -281,7 +281,6 @@ window.ShelfPage = React.createClass({
 			var shelfJson = JSON.parse(responseText);
 
 			if( code==200 ) {
-				console.log(shelfJson);
 				setShelf(shelfJson);
 			}
 		});	

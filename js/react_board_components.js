@@ -3,6 +3,7 @@ window.Item = React.createClass({
 
 	getInitialState: function(){
 		return { 
+			isActive: false,
 			currentCfi: null,	//cfi is ebook internal index/url/page
 		};
 	},
@@ -13,24 +14,31 @@ window.Item = React.createClass({
 		});		
 	},
 
-	setAsActiveItem: function() {
-		this.props.setActiveItem(this.props.item);
-		console.log(this.props.item);
+	deactivateItem: function() {
+		this.setState({
+			isActive: false
+		});
+	},
+
+	activateItem: function() {
+		this.setState({
+			isActive: true
+		});
 	},
 
 	render: function() {
 		var lightbox = '';
-		if( this.props.activeItem==this.props.item ) {
+		if( this.state.isActive ) {
 			lightbox = <BookSummaryLightbox
 							item={this.props.item} 
-							setActiveItem={this.props.setActiveItem} />;
+							closeLightbox={this.deactivateItem} />;
 		}
 
 		return (
 				<table className="item">
 					<tbody>
 						<tr>
-							<td className="item-cover"><img src={this.props.item.cover} alt="" onClick={this.setAsActiveItem} /></td>
+							<td className="item-cover"><img src={this.props.item.cover} alt="" onClick={this.activateItem} /></td>
 						</tr>
 						<tr>
 							<td className="item-info">
@@ -66,8 +74,6 @@ window.Shelf = React.createClass({
 		this.props.items.forEach(function(item) {
             itemRows.push(<Item 
             				item={item} 
-            				activeItem={this.props.activeItem} 
-            				setActiveItem={this.props.setActiveItem} 
             				key={item.title} />
             			);
         }, this);
@@ -98,24 +104,6 @@ window.Shelf = React.createClass({
 
 window.Shelves = React.createClass({
 
-	getInitialState: function(){
-		return { 
-			activeItem: null
-		};
-	},
-
-	setActiveItem: function(item) {
-		if( _.isEmpty(item) ) {
-			this.setState({
-				activeItem: null 
-			});
-		} else {
-			this.setState({
-				activeItem: item
-			});			
-		}
-	},
-
 	render: function() {
 		var showTheUser = false;
 		if( this.props.showUser ) {
@@ -131,8 +119,6 @@ window.Shelves = React.createClass({
 								items={shelf.items} 
 								user={shelf.creator}
 								showUser={showTheUser}
-								activeItem={this.state.activeItem} 
-								setActiveItem={this.setActiveItem} 
 								key={shelf.title} />
 							);
 			}, this);			
@@ -235,15 +221,21 @@ window.Listing = React.createClass({
 	render: function() {
 		return (
 			<div className="listing">
-				<h2>Read authors not genres</h2>
-				<p>
-				Just because a book is popular, doesn&#8217;t mean that you&#8217;ll like it.  
-				Books are way to personal to let your friends or an algorithm decide what you&#8217;ll read next.  
-				Instead, why not get recommendations from people reading the same things as you?  
-				Even better - get recommendations from people you trust.
-				</p>
+				<div className="landing-promo">
+					<h2>Read authors not genres</h2>
+					<p>
+					Just because a book is popular, doesn&#8217;t mean that you&#8217;ll like it.  
+					Books are personal - don&#8217;t let an algorithm decide what you&#8217;ll read next.  
+					</p>
 
-				<h2>Check out these shelves from our users:</h2>
+					<p>
+					Liberator has recommendations from artists, experts and enthusiasts.  Browse the shelves
+					below to find your next inspiration.
+					</p>
+
+					<h3>Here&#8217;s what our users are reading:</h3>
+				</div>
+
 				<Shelves 
 					shelves={this.props.shelves} 
 					showUser={true} />				

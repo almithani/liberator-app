@@ -149,7 +149,7 @@ window.AboutLightbox = React.createClass({
 window.BookSummaryLightbox = React.createClass({
 
 	closeLightbox: function(event) {
-		this.props.setActiveItem(null);
+		this.props.closeLightbox();
 	},	
 
 	render: function() {
