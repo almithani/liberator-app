@@ -13,16 +13,24 @@ var board = null;
 /*  home route */
 router.add('', function() {
 	pageObject = ReactDOM.render(
-	    <ListingPage router={router} />,
+	    <ListingPage />,
 	    document.getElementById('content')
 	);
 	//pageObject.setActiveItem(null);
 });
 
-/* user shelf route */
+/* shelf page route */
+router.add('shelf/{id}', function(params){
+	pageObject = ReactDOM.render(
+		<ShelfPage shelfId={params.id} />,
+		document.getElementById('content')
+	);
+});
+
+/* user page route */
 router.add('user/{id}', function(params){
 	pageObject = ReactDOM.render(
-		<UserPage initialUserId={params.id} router={router} />,
+		<UserPage initialUserId={params.id} />,
 		document.getElementById('content')
 	);
 });
@@ -31,6 +39,5 @@ router.run();
 
 window.onhashchange = function(e) {
    //this is for links - if you don't want to trigger a repaint, use history.pushState
-   console.log('run router');
    router.run();
 };

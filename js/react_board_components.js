@@ -60,6 +60,7 @@ window.UserItem = React.createClass({
 });
 
 window.Shelf = React.createClass({
+
 	render: function() {
 		var itemRows = [];
 		this.props.items.forEach(function(item) {
@@ -77,10 +78,12 @@ window.Shelf = React.createClass({
         	userItem = <UserItem user={this.props.user} />;
         }
 
+        var shelfUrl = "#shelf/"+this.props.id;
+
 		return (
 			<div className="shelf">
 				<h2 className="shelf-info">
-					<div className="shelf-title">{this.props.title}</div>
+					<div className="shelf-title"><a href={shelfUrl}>{this.props.title}</a></div>
 				</h2>
 				<div className="shelf-scroll-pane">
 					<div className="shelf-items">
@@ -123,6 +126,7 @@ window.Shelves = React.createClass({
 		if( this.props.shelves ){
 			this.props.shelves.forEach(function(shelf) {
 				shelves.push(<Shelf 
+								id={shelf.id}
 								title={shelf.title} 
 								items={shelf.items} 
 								user={shelf.creator}
@@ -150,13 +154,35 @@ window.UserBanner = React.createClass({
 		var bgStyle = { backgroundImage: "url("+this.props.user.avatar+")" }
 
 		return (
-			<div className="user-banner">
+			<div className="banner user-banner">
 				<div className="user-image-frame" style={bgStyle}></div>
-				<div className="user-vitals">
+				<div className="vitals">
 					<h3 className="user-name">{this.props.user.name}</h3>
 					<h4 className="user-tagline">{this.props.user.tagline}</h4>
-					<p className="user-desc">
+					<p className="desc">
 						{this.props.user.description}   
+					</p>
+				</div>
+			</div>
+		);
+	}
+});
+
+
+window.ShelfBanner = React.createClass({
+
+	render: function() {
+		var bgStyle = { backgroundImage: "url("+this.props.user.avatar+")" }
+
+		return (
+			<div className="banner shelf-banner">
+				<div className="user-image-frame" style={bgStyle}></div>
+				<div className="vitals">
+					<h2 className="shelf-title">{this.props.title}</h2>
+					<h3 className="user-name">by {this.props.user.displayName}</h3>
+					<h4 className="user-tagline">{this.props.user.tagline}</h4>
+					<p className="desc">
+						{this.props.description}   
 					</p>
 				</div>
 			</div>
@@ -224,7 +250,33 @@ window.Listing = React.createClass({
 			</div>
 		);
 	}
+});
 
+
+window.MasonryShelf = React.createClass({
+
+	render: function() {
+		var itemEls = [];
+		_.each( this.props.items, function(item){
+			itemEls.push(<Item 
+            				item={item} 
+            				key={item.title} />
+            			);
+		});
+
+		return (
+			<div className="masonry-container">
+				<ShelfBanner 
+					user={this.props.creator}
+					title={this.props.title}
+					description={this.props.description} />
+
+				<ul className="masonry">
+					{itemEls}
+				</ul>
+			</div>
+		);
+	}
 });
 
 

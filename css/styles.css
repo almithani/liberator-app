@@ -237,12 +237,20 @@ strong {
 	display: inline-block;
 }
 
-.shelf .shelf-info .shelf-title {
+.shelf-title {
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 	font-size: 1.5em;
 	font-weight: normal;
 	color: #4d4d4d;
+}
+
+.shelf .shelf-info .shelf-title {
 	padding: 8px 10px 8px 10px;
+}
+
+.shelf .shelf-info .shelf-title a {
+	text-decoration: none;
+	color: inherit;
 }
 
 .shelf .shelf-info .user-image-frame {
@@ -528,7 +536,7 @@ table.item td {
   	}
 }
 
-.user-banner {
+.banner {
 	padding: 20px;
 	text-align: center;
 }
@@ -542,14 +550,14 @@ table.item td {
 	font-style: italic;
 }
 
-.user-banner .user-image-frame {
-	width: 200px;
-	height: 200px;
-	border-radius: 100px;
+.banner .user-image-frame {
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
 	display: inline-block;
 }
 
-.user-banner .user-vitals {
+.banner .vitals {
 	display: inline-block;
 	width: 500px;
 	margin-left: 50px;
@@ -557,27 +565,44 @@ table.item td {
 	vertical-align: top;
 }
 
-.user-banner .user-vitals .user-name {
+.banner .vitals .shelf-title {
+	font-size: 2em;
+	padding-bottom: 10px;
+}
+
+.banner .vitals .user-name {
 	font-size: 1.25em;
 	margin-bottom: 0.25em;
 }
 
-.user-banner .user-vitals .user-tagline {
+.banner .vitals .user-tagline {
 	margin-bottom: 0.75em;
 }
 
-.user-banner .user-vitals .user-desc {
+.banner .vitals .desc {
 	font-size: 0.9em;
 	line-height: 1.35em;
 }
 
 /* iPhone 5 Portrait */
 @media (max-width: 600px) {
-	.user-banner .user-vitals {
+	.banner .vitals {
 		display: inline-block;
 		width: 100%;
 		margin: 20px 0px 0px 0px;
 	}
+}
+
+
+/*
+	masonry layout
+*/
+
+.masonry {
+	width: 100%;
+	padding: 20px;
+	padding-top: 0px;
+	text-align: center;
 }
 
 
