@@ -192,8 +192,7 @@ window.BookSummaryLightbox = React.createClass({
 						</div>
 
 						<div className="book-ctas">
-							<a className="btn-read" href={this.props.item.readLink} target="_blank">read online now</a>
-							<a className="btn-download" href={this.props.item.downloadLink} target="_blank">download from project gutenberg</a>
+							<a className="btn-read" href={this.props.item.amazon_link} target="_blank">get it from amazon.com</a>
 						</div>
 					</div>
 				</Lightbox>
