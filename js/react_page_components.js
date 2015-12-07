@@ -99,12 +99,23 @@ window.Page = React.createClass({
 	},
 
 	render: function() {
-		return(
-			<div>
-				<Nav user={this.state.loggedInUser} />
-				{this.props.children}
-			</div>
-		);
+		if( this.props.children ) {
+			return (
+				<div>
+					<Nav user={this.state.loggedInUser} />
+					{this.props.children}
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					<Nav user={this.state.loggedInUser} />
+					<div className="loading-gif">
+						<img src='img/loading_spinner.gif' alt='loading page' />
+					</div>
+				</div>
+			);
+		}
 		
 	}
 });
@@ -154,9 +165,7 @@ window.ListingPage = React.createClass({
 			);
 		} else {
 			return (
-				<Page>
-					<div>loading page</div>
-				</Page>
+				<Page />
 			);
 		}
 	}	
@@ -249,9 +258,7 @@ window.UserPage = React.createClass({
 			);
 		} else {
 			return (
-				<Page>
-					<div>loading page</div>
-				</Page>
+				<Page />
 			);
 		}
 	}
@@ -303,9 +310,7 @@ window.ShelfPage = React.createClass({
 			);
 		} else {
 			return (
-				<Page>
-					<div>loading page</div>
-				</Page>
+				<Page />
 			);
 		}
 	}

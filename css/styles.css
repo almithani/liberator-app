@@ -51,6 +51,11 @@ strong {
 	display:none;
 }
 
+.loading-gif {
+	text-align: center;
+	padding-top: 30px;
+}
+
 .user-image-frame {
 	border-radius: 20px;
 	width: 40px;
