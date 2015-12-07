@@ -366,13 +366,12 @@ table.item td {
 }
 
 .item .item-author {
-	margin: 5px 0px;
+	margin: 5px 5px 0px 0px;
 	text-align: right;
 	font-style: italic;
 	font-size: 0.9em;
 	color: #666;
 	vertical-align: bottom;
-	height: 1.2em;
 }
 
 .item .item-cover {
