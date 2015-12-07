@@ -44,7 +44,7 @@ window.Nav = React.createClass({
 				<div id="header">
 					<a href="#" className="header-brand">Liberator</a>
 					{userDOM}
-					<a href="#" className="header-info" onClick={this.openInfoWindow}>
+					<a className="header-info" onClick={this.openInfoWindow}>
 						<img src="img/entypo/info-with-circle.svg" className="svg-inject" alt="about liberator" />
 					</a>
 				</div>

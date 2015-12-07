@@ -146,6 +146,7 @@ strong {
 	position: fixed;
 	left: 10px;
 	top: 5px;
+	cursor: pointer;
 }
 
 #header .header-info path {

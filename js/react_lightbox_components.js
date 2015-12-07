@@ -65,7 +65,7 @@ window.AboutLightbox = React.createClass({
 		var setSuccess = this.setSuccess;
 
 		nanoajax.ajax({
-			url: 'http://api.recoroll.com/users/', 
+			url: 'http://api.recoroll.com/emails/', 
 			method: 'POST', 
 			body: 'email='+this.state.emailValue+'&username='+this.state.emailValue
 		}, function (code, responseText, response) {
