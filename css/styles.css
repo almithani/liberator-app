@@ -428,18 +428,59 @@ table.item td {
 	padding-top: 10px;
 	font-size: 0.85em;
 	clear: both;
-	min-height: 50px;
+	min-height: 80px;
 }
 
 .quote {
 	position: relative;
-	padding-right: 50px;
+	padding-right: 80px;
 }
 
 .quote .user-image-frame {
 	position: absolute;
 	top: 0px;
 	right: 0px;
+	width: 70px;
+	height: 70px;
+	border-radius: 35px;
+}
+
+.quote .quote-frame {
+	margin-right: 5px;
+	border: solid 3px #ccc;
+	border-radius: 5px;
+	position: relative;
+	padding: 10px;
+}
+
+.quote .quote-frame:before {
+	top: 5px;
+	bottom: auto;
+	left: auto;
+	right: -15px;
+	border-width: 10px 0 10px 15px;
+	border-color: transparent #ccc;
+
+	content: "";
+    position: absolute;
+    border-style: solid;
+    display: block;
+    width: 0;
+}
+
+.quote .quote-frame:after {
+	top: 8px;
+    bottom: auto;
+    left: auto;
+    right: -10px;
+    border-width: 7px 0 7px 12px;
+    border-color: transparent #fff;
+
+    content: "";
+    position: absolute;
+    border-style: solid;
+    display: block;
+    width: 0;
 }
 
 .quote-noimage {

@@ -161,12 +161,14 @@ window.BookSummaryLightbox = React.createClass({
 			});
 		}
 
-		var bgStyle = { backgroundImage: "url(/img/avatar.jpg)" }
+		var bgStyle = { backgroundImage: "url("+this.props.avatar+")" }
 		var quote = '';
 		if( this.props.item.quote ) {
 			quote = <div className="quote">
 						<div className="user-image-frame" style={bgStyle}></div>
-						"{this.props.item.quote}"
+						<div className="quote-frame">
+							"{this.props.item.quote}"
+						</div>
 					</div>;
 		}
 

@@ -31,6 +31,7 @@ window.Item = React.createClass({
 		if( this.state.isActive ) {
 			lightbox = <BookSummaryLightbox
 							item={this.props.item} 
+							avatar={this.props.avatar}
 							closeLightbox={this.deactivateItem} />;
 		}
 
@@ -60,7 +61,7 @@ window.UserItem = React.createClass({
 		return (
 			<div className="item user-item">
 				<div className="user-image-frame" style={bgStyle}></div>
-				by <h3 className="user-name">{this.props.user.displayName}</h3>
+				<h3 className="user-name">from {this.props.user.displayName}</h3>
 				<h4 className="user-tagline">{this.props.user.tagline}</h4>
 			</div>
 		)
@@ -74,6 +75,7 @@ window.Shelf = React.createClass({
 		this.props.items.forEach(function(item) {
             itemRows.push(<Item 
             				item={item} 
+            				avatar={this.props.user.avatar}
             				key={item.title} />
             			);
         }, this);
@@ -248,10 +250,12 @@ window.Listing = React.createClass({
 window.MasonryShelf = React.createClass({
 
 	render: function() {
+		var avatar = this.props.creator.avatar;
 		var itemEls = [];
 		_.each( this.props.items, function(item){
 			itemEls.push(<Item 
             				item={item} 
+            				avatar={avatar}
             				key={item.title} />
             			);
 		});
