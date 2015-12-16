@@ -224,7 +224,7 @@ window.Listing = React.createClass({
 		return (
 			<div className="listing">
 				<div className="landing-promo">
-					<h2>Read authors not genres</h2>
+					<h2>You are what you read...</h2>
 					<p>
 					Just because a book is popular, doesn&#8217;t mean that you&#8217;ll like it.  
 					Books are personal - don&#8217;t let an algorithm decide what you&#8217;ll read next.  
@@ -235,7 +235,6 @@ window.Listing = React.createClass({
 					below to find your next inspiration.
 					</p>
 
-					<h3>Here&#8217;s what our users are reading:</h3>
 				</div>
 
 				<Shelves 
