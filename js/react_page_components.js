@@ -81,7 +81,7 @@ window.Page = React.createClass({
 		var sessionid = Cookies.get('sessionid');
 		var setUser = this.setLoggedInUser;
 		nanoajax.ajax({
-			url: 'http://api.recoroll.com/currentUser/'+'?format=json', 
+			url: 'http://api.liberator.me/currentUser/'+'?format=json', 
 			method: 'GET',
 			withCredentials: true,
 		}, function (code, responseText, response) {
@@ -139,7 +139,7 @@ window.ListingPage = React.createClass({
 		var setListing = this.setListing;
 		//get the listing (aka front page) from the api
 		nanoajax.ajax({
-			url: 'http://api.recoroll.com/shelfs/?format=json', 
+			url: 'http://api.liberator.me/shelfs/?format=json', 
 			method: 'GET',
 		}, function (code, responseText, response) {
 			if( code==200 ) {
@@ -187,7 +187,7 @@ window.UserPage = React.createClass({
 
 	getUser: function(user_id, callback) {
 		nanoajax.ajax({
-			url: 'http://api.recoroll.com/users/'+user_id+'?format=json', 
+			url: 'http://api.liberator.me/users/'+user_id+'?format=json', 
 			method: 'GET',
 			withCredentials: true,
 		}, function (code, responseText, response) {
@@ -223,7 +223,7 @@ window.UserPage = React.createClass({
 
 		//get board info
 		nanoajax.ajax({
-			url: 'http://api.recoroll.com/boards/'+user_id+'?format=json', 
+			url: 'http://api.liberator.me/boards/'+user_id+'?format=json', 
 			method: 'GET',
 		}, function (code, responseText, response) {
 			if( code==200 ) {
@@ -281,7 +281,7 @@ window.ShelfPage = React.createClass({
 	getShelf: function(shelf_id) {
 		var setShelf = this.setShelf;
 		nanoajax.ajax({
-			url: 'http://api.recoroll.com/shelfs/'+shelf_id+'?format=json', 
+			url: 'http://api.liberator.me/shelfs/'+shelf_id+'?format=json', 
 			method: 'GET',
 			withCredentials: true,
 		}, function (code, responseText, response) {
