@@ -108,6 +108,20 @@ strong {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fd6eb', endColorstr='#57afc9',GradientType=0 ); /* IE6-9 */
 }
 
+.action-icon {
+	display: block;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	background: #57afc9;
+	cursor: pointer;
+}
+
+.action-icon path {
+	color: #fff;
+	fill: #fff;
+}
+
 /*
 	
 */
@@ -383,12 +397,22 @@ table.item td {
 .item .item-cover {
 	height: 300px;
 	vertical-align: bottom;
+	position: relative;
 }
 
-.item .item-cover img {
+.item .item-cover .item-cover-img {
 	max-height: 300px;
 	max-width: 200px;
 	cursor: pointer;
+}
+
+.item .item-cover .action-icon {
+	position: absolute;
+	bottom: 10px;
+}
+
+.item .item-cover .action-icon.more-info {
+	right: 10px;
 }
 
 .book {

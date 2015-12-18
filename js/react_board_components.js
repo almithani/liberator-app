@@ -39,7 +39,12 @@ window.Item = React.createClass({
 				<table className="item">
 					<tbody>
 						<tr>
-							<td className="item-cover"><img src={this.props.item.cover} alt="" onClick={this.activateItem} /></td>
+							<td className="item-cover">
+								<img className="item-cover-img" src={this.props.item.cover} alt="" onClick={this.activateItem} />
+								<a className="more-info action-icon" onClick={this.activateItem}>
+									<img src="img/entypo/plus.svg" className="svg-inject" alt="more info" />
+								</a>
+							</td>
 						</tr>
 						<tr>
 							<td className="item-info">

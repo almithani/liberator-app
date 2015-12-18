@@ -76,6 +76,12 @@ window.Page = React.createClass({
 		SVGInjector(mySVGsToInject);		
 	},
 
+	componentDidUpdate: function() {
+		//inject svg
+		var mySVGsToInject = document.querySelectorAll('img.svg-inject');
+		SVGInjector(mySVGsToInject);
+	},
+
 	componentWillMount: function() {
 		//search for a logged in user
 		var sessionid = Cookies.get('sessionid');
