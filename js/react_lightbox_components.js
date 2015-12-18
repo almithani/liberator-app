@@ -182,15 +182,15 @@ window.BookSummaryLightbox = React.createClass({
 						</h4>
 
 						<div className="book-more-info">
+							<div className="book-quotes">
+								{quote}
+							</div>
+
 							<div className='book-cover'>
 								<img src={this.props.item.cover} alt={this.props.item.title} />
 							</div>
 
 							{description}
-
-							<div className="book-quotes">
-								{quote}
-							</div>
 						</div>
 
 						<div className="book-ctas">

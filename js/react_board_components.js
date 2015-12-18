@@ -1,4 +1,52 @@
 
+window.ItemQuote = React.createClass({
+
+	getInitialState: function() {
+		return {
+			isActive: false
+		}
+	},
+
+	setActive: function() {
+		this.setState({
+			isActive: true
+		})
+	},
+
+	setInactive: function() {
+		this.setState({
+			isActive: false
+		})
+	},
+
+	render: function() {
+		var visibleQuote = "";
+		if( this.state.isActive ) {
+			visibleQuote = 	<div className="item-quote-content">
+								<div className="item-quote-quote">"{this.props.quote}"</div>
+								<div className="item-quote-quoted">-{this.props.quoted}</div>
+							</div>;
+		}
+
+		return(
+			<div className="item-quote">
+				{visibleQuote}
+				<a className="author-quote action-icon"
+						onMouseDown={this.setActive}
+						onTouchStart={this.setActive} 
+						onMouseUp={this.setInactive}
+						onMouseOut={this.setInactive} 
+						onTouchCancel={this.setInactive}
+						onTouchEnd={this.setInactive} >
+
+					<img src="img/entypo/message.svg" className="svg-inject" alt="why?" />
+				</a>
+			</div>
+		);
+	}
+
+});
+
 window.Item = React.createClass({
 
 	getInitialState: function(){
@@ -31,8 +79,15 @@ window.Item = React.createClass({
 		if( this.state.isActive ) {
 			lightbox = <BookSummaryLightbox
 							item={this.props.item} 
-							avatar={this.props.avatar}
+							avatar={this.props.recommender.avatar}
 							closeLightbox={this.deactivateItem} />;
+		}
+
+		var quoteButton = '';
+		if( this.props.item.quote ) {
+			quoteButton = <ItemQuote
+								quote={this.props.item.quote}
+								quoted={this.props.recommender.displayName} />;
 		}
 
 		return (
@@ -41,7 +96,8 @@ window.Item = React.createClass({
 						<tr>
 							<td className="item-cover">
 								<img className="item-cover-img" src={this.props.item.cover} alt="" onClick={this.activateItem} />
-								<a className="more-info action-icon" onClick={this.activateItem}>
+								{quoteButton}
+								<a className="more-info action-icon" onClick={this.activateItem} onTouchStart={this.activateItem} >
 									<img src="img/entypo/plus.svg" className="svg-inject" alt="more info" />
 								</a>
 							</td>
@@ -66,7 +122,7 @@ window.UserItem = React.createClass({
 		return (
 			<div className="item user-item">
 				<div className="user-image-frame" style={bgStyle}></div>
-				<h3 className="user-name">from {this.props.user.displayName}</h3>
+				recommended by <h3 className="user-name">{this.props.user.displayName}</h3>
 				<h4 className="user-tagline">{this.props.user.tagline}</h4>
 			</div>
 		)
@@ -79,8 +135,8 @@ window.Shelf = React.createClass({
 		var itemRows = [];
 		this.props.items.forEach(function(item) {
             itemRows.push(<Item 
-            				item={item} 
-            				avatar={this.props.user.avatar}
+            				item={item}
+            				recommender={this.props.user}
             				key={item.title} />
             			);
         }, this);
