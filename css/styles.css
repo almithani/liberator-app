@@ -115,6 +115,7 @@ strong {
 	border-radius: 20px;
 	background: #57afc9;
 	cursor: pointer;
+	padding: 5px;
 }
 
 .action-icon path {
@@ -417,7 +418,6 @@ table.item td {
 
 .item .item-cover .action-icon.author-quote {
 	left: 10px;
-	padding: 5px;
 }
 
 .item .item-cover .item-quote-content {

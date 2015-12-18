@@ -98,7 +98,7 @@ window.Item = React.createClass({
 								<img className="item-cover-img" src={this.props.item.cover} alt="" onClick={this.activateItem} />
 								{quoteButton}
 								<a className="more-info action-icon" onClick={this.activateItem} onTouchStart={this.activateItem} >
-									<img src="img/entypo/plus.svg" className="svg-inject" alt="more info" />
+									<img src="img/entypo/dots-three-horizontal.svg" className="svg-inject" alt="more info" />
 								</a>
 							</td>
 						</tr>
