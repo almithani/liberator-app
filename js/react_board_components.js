@@ -21,17 +21,19 @@ window.ItemQuote = React.createClass({
 
 	render: function() {
 		var visibleQuote = "";
+		var buttonClass = "author-quote action-icon ";
 		if( this.state.isActive ) {
 			visibleQuote = 	<div className="item-quote-content">
 								<div className="item-quote-quote">"{this.props.quote}"</div>
 								<div className="item-quote-quoted">-{this.props.quoted}</div>
 							</div>;
+			buttonClass = buttonClass+" active";
 		}
 
 		return(
 			<div className="item-quote">
 				{visibleQuote}
-				<a className="author-quote action-icon"
+				<a className={buttonClass}
 						onMouseDown={this.setActive}
 						onTouchStart={this.setActive} 
 						onMouseUp={this.setInactive}
