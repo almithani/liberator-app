@@ -34,10 +34,9 @@ window.ItemQuote = React.createClass({
 			<div className="item-quote">
 				{visibleQuote}
 				<a className={buttonClass}
-						onMouseDown={this.setActive}
+						onMouseEnter={this.setActive}
+						onMouseLeave={this.setInactive} 
 						onTouchStart={this.setActive} 
-						onMouseUp={this.setInactive}
-						onMouseOut={this.setInactive} 
 						onTouchCancel={this.setInactive}
 						onTouchEnd={this.setInactive} >
 
