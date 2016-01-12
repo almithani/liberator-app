@@ -3,6 +3,7 @@ window.Lightbox = React.createClass({
 		This is a barebones lightbox.  Uses props.children (aka DOM children) as content.
 		Use property closeLightbox to bind to the close event.
 	*/
+
 	scrollHandler: function(event) {
 		event.preventDefault();
 	},
@@ -10,6 +11,7 @@ window.Lightbox = React.createClass({
 	contentClick: function(event) {
 		//this is to prevent lightbox closing on click
 		event.stopPropagation();
+		event.nativeEvent.stopImmediatePropagation();
 	},
 
 	render: function(){
@@ -153,11 +155,11 @@ window.BookSummaryLightbox = React.createClass({
 	},	
 
 	render: function() {
-		var description = '';
+		var descriptions = [];
 		if( this.props.item.description ) {
 			var paragraphs = this.props.item.description.split("\n");
-			_.each(paragraphs, function(para) {
-				description = <div>{description}<p>{para}</p></div>;
+			_.each(paragraphs, function(para, i) {
+				descriptions.push(<p key={i}>{para}</p>);
 			});
 		}
 
@@ -190,7 +192,13 @@ window.BookSummaryLightbox = React.createClass({
 								<img src={this.props.item.cover} alt={this.props.item.title} />
 							</div>
 
-							{description}
+							<div className='book-desc'>
+								{descriptions}
+							</div>
+
+							<div className='book-more-info-cta'>
+								<a href={this.props.item.amazon_link} target="_blank">...more info</a>
+							</div>
 						</div>
 
 						<div className="book-ctas">

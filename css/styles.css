@@ -489,6 +489,20 @@ table.item td {
 	width: 100%;
 }
 
+.book .book-desc {
+	max-height: 210px;
+	overflow: hidden;
+}
+
+.book .book-more-info-cta {
+	text-align: right;
+	padding-top: 10px;
+}
+
+.book .book-more-info-cta a {
+	color: #444;
+}
+
 .book .book-quotes {
 	padding-top: 10px;
 	font-size: 0.85em;
