@@ -311,12 +311,12 @@ window.Listing = React.createClass({
 window.MasonryShelf = React.createClass({
 
 	render: function() {
-		var avatar = this.props.creator.avatar;
+		var creator = this.props.creator;
 		var itemEls = [];
 		_.each( this.props.items, function(item){
 			itemEls.push(<Item 
             				item={item} 
-            				avatar={avatar}
+            				recommender={creator}
             				key={item.title} />
             			);
 		});
