@@ -66,7 +66,8 @@ strong {
 }
 
 .btn-read,
-.btn-download {
+.btn-download,
+.btn-next {
 	display: block;
 	margin: 5px auto 0px auto;
 	padding: 10px 0px;
@@ -94,7 +95,8 @@ strong {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); /* IE6-9 */
 }
 
-.btn-download {
+.btn-download,
+.btn-next {
 	border: solid 1px #57afc9;
 
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#8fd6eb+0,57afc9+100 */
@@ -106,6 +108,13 @@ strong {
 	background: -ms-linear-gradient(top, #8fd6eb 0%,#57afc9 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #8fd6eb 0%,#57afc9 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fd6eb', endColorstr='#57afc9',GradientType=0 ); /* IE6-9 */
+}
+
+.btn-next {
+	padding: 20px;
+	font-size: 2em;
+	width: 300px;
+	margin-bottom: 50px;
 }
 
 .action-icon {

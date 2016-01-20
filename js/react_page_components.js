@@ -128,21 +128,26 @@ window.Page = React.createClass({
 
 
 window.ListingPage = React.createClass({
+
+	nextPage: "",
+
 	getInitialState: function(){
 		return { 
 			listing: null
 		};
 	},
 
-	setListing: function(listing) {
+	setListing: function(jsonResponse) {
+		this.nextPage = jsonResponse.next;
 		this.setState({
-			listing: listing
+			listing: jsonResponse.results
 		});
 	},
 
 	getListing: function() {
 
 		var setListing = this.setListing;
+
 		//get the listing (aka front page) from the api
 		nanoajax.ajax({
 			url: 'http://api.liberator.me/shelfs/?format=json', 
@@ -150,11 +155,33 @@ window.ListingPage = React.createClass({
 		}, function (code, responseText, response) {
 			if( code==200 ) {
 				var responseJson = JSON.parse(responseText);
-				setListing(responseJson.results);
+				setListing(responseJson);
 			} else {
 				console.log('error getting listing');
 			}
 		});			
+	},
+
+	getNextPage: function() {
+
+		var setListing = this.setListing;
+		var curListing = this.state.listing;
+
+		//get the listing (aka front page) from the api
+		nanoajax.ajax({
+			url: this.nextPage, 
+			method: 'GET',
+		}, function (code, responseText, response) {
+			if( code==200 ) {
+				var responseJson = JSON.parse(responseText);
+				var newListing = curListing.concat(responseJson.results);
+				responseJson.results = newListing;
+
+				setListing(responseJson);
+			} else {
+				console.log('error getting listing');
+			}
+		});	
 	},
 
 	componentWillMount: function() {
@@ -163,10 +190,17 @@ window.ListingPage = React.createClass({
 
 	render: function() {
 		if( !_.isNull(this.state.listing) ) {
+			
+			var nextBtn = "";
+			if( !_.isNull(this.nextPage) ) {
+				nextBtn = <a className="btn-next" onClick={this.getNextPage}>Load More</a>;
+			}
+
 			return (
 				<Page>
 					<Listing
 						shelves={this.state.listing} />
+					{nextBtn}
 				</Page>
 			);
 		} else {
