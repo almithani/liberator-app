@@ -75,6 +75,15 @@ window.Item = React.createClass({
 		});
 	},
 
+	addItemToList: function() {
+		/* if the user is logged in... */
+		if( this.props.CurrentUser.isLoggedIn ) {
+			this.props.CurrentUser.addItemToUsersList(this.props.item);
+		} else {
+			console.log('ask person to sign up')
+		}
+	},
+
 	render: function() {
 		var lightbox = '';
 		if( this.state.isActive ) {
@@ -98,7 +107,7 @@ window.Item = React.createClass({
 							<td className="item-cover">
 								<img className="item-cover-img" src={this.props.item.cover} alt="" onClick={this.activateItem} />
 								{quoteButton}
-								<a className="add-to-list action-icon" onClick={this.activateItem} onTouchStart={this.activateItem} >
+								<a className="add-to-list action-icon" onClick={this.addItemToList} onTouchStart={this.addItemToList} >
 									<img src="img/entypo/plus.svg" className="svg-inject" alt="add to your reading list" />
 								</a>
 								<a className="more-info action-icon" onClick={this.activateItem} onTouchStart={this.activateItem} >
@@ -141,6 +150,7 @@ window.Shelf = React.createClass({
             itemRows.push(<Item 
             				item={item}
             				recommender={this.props.user}
+            				CurrentUser={this.props.CurrentUser}
             				key={item.title} />
             			);
         }, this);
@@ -186,6 +196,7 @@ window.Shelves = React.createClass({
 								items={shelf.items} 
 								user={shelf.creator}
 								showUser={showTheUser}
+								CurrentUser={this.props.CurrentUser}
 								key={shelf.title} />
 							);
 			}, this);			
@@ -286,6 +297,7 @@ window.Board = React.createClass({
 window.Listing = React.createClass({
 
 	render: function() {
+
 		return (
 			<div className="listing">
 				<div className="landing-promo">
@@ -304,7 +316,8 @@ window.Listing = React.createClass({
 
 				<Shelves 
 					shelves={this.props.shelves} 
-					showUser={true} />				
+					showUser={true}
+					CurrentUser={this.props.CurrentUser} />				
 			</div>
 		);
 	}

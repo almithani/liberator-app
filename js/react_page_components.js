@@ -29,7 +29,7 @@ window.Nav = React.createClass({
 							<div className="user-image-frame" style={bgStyle}></div>
 						</div>;
 
-		if( !_.isEmpty(this.props.user) ) {
+		if( this.props.user.isLoggedIn ) {
 			bgStyle = { backgroundImage: "url("+this.props.user.avatar+")" };
 			var href = "#user/"+this.props.user.user.id;
 			userDOM = 	<a className="header-user" href={href} >
@@ -60,7 +60,7 @@ window.Nav = React.createClass({
 window.Page = React.createClass({
 	getInitialState: function(){
 		return {
-			loggedInUser: null
+			loggedInUser: UserFunctions	/* global singleton */
 		};
 	},
 
@@ -84,32 +84,24 @@ window.Page = React.createClass({
 
 	componentWillMount: function() {
 		//search for a logged in user
-		var sessionid = Cookies.get('sessionid');
-		var setUser = this.setLoggedInUser;
-		nanoajax.ajax({
-			url: 'http://api.liberator.me/currentUser/'+'?format=json', 
-			method: 'GET',
-			withCredentials: true,
-		}, function (code, responseText, response) {
-
-			var userJson = JSON.parse(responseText);
-			if( code==200 ) {
-				if( !_.isNull(userJson.id) ) {
-					//user is logged in
-					setUser(userJson);
-				} else {
-					//user is not logged in
-				}
-			}
-		});
+		this.state.loggedInUser.getCurrentlyLoggedInUser(this.setLoggedInUser);
 	},
 
 	render: function() {
 		if( this.props.children ) {
+
+			/* add the user to each of the child props */
+			var loggedInUser = this.state.loggedInUser;
+			var children = React.Children.map( this.props.children, function(child, thisArg){
+				return React.addons.cloneWithProps(child, {
+                	CurrentUser: loggedInUser
+            	});
+			});
+
 			return (
 				<div>
 					<Nav user={this.state.loggedInUser} />
-					{this.props.children}
+					{children}
 				</div>
 			);
 		} else {
@@ -189,6 +181,7 @@ window.ListingPage = React.createClass({
 	},
 
 	render: function() {
+
 		if( !_.isNull(this.state.listing) ) {
 			
 			var nextBtn = "";
@@ -196,6 +189,9 @@ window.ListingPage = React.createClass({
 				nextBtn = <a className="btn-next" onClick={this.getNextPage}>Load More</a>;
 			}
 
+			/*
+				the CurrentUser prop for the Listing class is provided by Page
+			*/
 			return (
 				<Page>
 					<Listing
