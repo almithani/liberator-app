@@ -16,7 +16,7 @@ window.UserFunctions = {
 
 			var userJson = JSON.parse(responseText);
 			if( code==200 ) {
-				if( !_.isNull(userJson.id) ) {
+				if( !_.isEmpty(userJson) ) {
 					//user is logged in
 					//add the userful functions
 					_.merge(userJson, userFunctions);
@@ -24,13 +24,27 @@ window.UserFunctions = {
 					setUserCallback(userJson);
 				} else {
 					//user is not logged in
+					setUserCallback(userFunctions);
 				}
 			}
 		});		
 	},
 
 	addItemToUsersList: function(item) {
-		console.log(item);
-		console.log(this);
+
+		nanoajax.ajax({
+			url: 'http://api.liberator.me/currentUser/'+this.id+'/addItemTolist/', 
+			method: 'POST',
+			body: 'book_id='+item.id,
+			withCredentials: true
+		}, function (code, responseText, response) {
+
+			console.log(responseText)
+
+			var userJson = JSON.parse(responseText);
+			if( code==200 ) {
+
+			}
+		});	
 	},
 }
