@@ -92,10 +92,10 @@ window.Page = React.createClass({
 
 			/* add the user to each of the child props */
 			var loggedInUser = this.state.loggedInUser;
-			var children = React.Children.map( this.props.children, function(child, thisArg){
-				return React.addons.cloneWithProps(child, {
-                	CurrentUser: loggedInUser
-            	});
+			var children = React.Children.map(this.props.children, function(child) {
+				if(child.props) {
+					return React.cloneElement(child, { CurrentUser: true })
+				}
 			});
 
 			return (
