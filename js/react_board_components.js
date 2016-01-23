@@ -86,7 +86,7 @@ window.Item = React.createClass({
 		}
 
 		var quoteButton = '';
-		if( this.props.item.quote ) {
+		if( this.props.item.quote && this.props.recommender ) {
 			quoteButton = <ItemQuote
 								quote={this.props.item.quote}
 								quoted={this.props.recommender.displayName} />;
@@ -273,7 +273,8 @@ window.Board = React.createClass({
 						user={this.props.board.user} 
 						saveBoard={this.saveBoard} />
 					<Shelves 
-						shelves={this.props.board.shelves} />
+						shelves={this.props.board.shelves} 
+						CurrentUser={this.props.CurrentUser} />
 				</div>
 			);			
 		} else {
@@ -321,10 +322,12 @@ window.MasonryShelf = React.createClass({
 	render: function() {
 		var creator = this.props.creator;
 		var itemEls = [];
+		var currentUser = this.props.CurrentUser;
 		_.each( this.props.items, function(item){
 			itemEls.push(<Item 
             				item={item} 
             				recommender={creator}
+            				CurrentUser={currentUser}
             				key={item.title} />
             			);
 		});

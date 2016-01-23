@@ -31,7 +31,7 @@ window.Nav = React.createClass({
 
 		if( this.props.user.isLoggedIn ) {
 			bgStyle = { backgroundImage: "url("+this.props.user.avatar+")" };
-			var href = "#user/"+this.props.user.user.id;
+			var href = "#readingList/";
 			userDOM = 	<a className="header-user" href={href} >
 							<div className="header-user-username">{this.props.user.displayName}</div>
 							<div className="user-image-frame" style={bgStyle}></div>
@@ -259,16 +259,16 @@ window.UserPage = React.createClass({
 
 		//get board info
 		nanoajax.ajax({
-			url: 'http://api.liberator.me/boards/'+user_id+'?format=json', 
+			url: 'http://api.liberator.me/currentUser/readingList?format=json', 
 			method: 'GET',
+			withCredentials: true,
 		}, function (code, responseText, response) {
 			if( code==200 ) {
 				var responseJson = JSON.parse(responseText);
-				var boardJson = JSON.parse(responseJson.jsonCache);
 
 				board.id = responseJson.id;
-				board.name = boardJson.name;
-				board.shelves = boardJson.shelves;
+				board.name = responseJson.title;
+				board.shelves = responseJson.items;
 				setBoard(board);
 			} else {
 				console.log('no user board');
@@ -331,6 +331,57 @@ window.ShelfPage = React.createClass({
 
 	componentWillMount: function() {
 		this.getShelf(this.props.shelfId);
+	},
+
+	render: function() {
+		if( !_.isNull(this.state.shelf) ) {
+			return (
+				<Page>
+					<MasonryShelf 
+						title={this.state.shelf.title}
+						creator={this.state.shelf.creator} 
+						description={this.state.shelf.description}
+						items={this.state.shelf.items} />
+				</Page>
+			);
+		} else {
+			return (
+				<Page />
+			);
+		}
+	}
+});
+
+window.ReadingListPage = React.createClass({
+	getInitialState: function() {
+		return {
+			shelf: null
+		}
+	},
+
+	setShelf: function(shelf) {
+		this.setState({
+			shelf: shelf
+		});
+	},
+
+	getShelf: function() {
+		var setShelf = this.setShelf;
+		nanoajax.ajax({
+			url: 'http://api.liberator.me/currentUser/readingList?format=json', 
+			method: 'GET',
+			withCredentials: true,
+		}, function (code, responseText, response) {
+			var shelfJson = JSON.parse(responseText);
+
+			if( code==200 ) {
+				setShelf(shelfJson.results[0]);
+			}
+		});	
+	},
+
+	componentWillMount: function() {
+		this.getShelf();
 	},
 
 	render: function() {

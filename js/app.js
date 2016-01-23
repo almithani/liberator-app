@@ -27,6 +27,14 @@ router.add('shelf/{id}', function(params){
 	);
 });
 
+/* reading list page */
+router.add('readingList/', function(params){
+	pageObject = ReactDOM.render(
+		<ReadingListPage />,
+		document.getElementById('content')
+	);
+});
+
 /* user page route */
 router.add('user/{id}', function(params){
 	pageObject = ReactDOM.render(
