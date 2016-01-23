@@ -65,13 +65,12 @@ strong {
 	background-position: center top;
 }
 
-.btn-read,
-.btn-download,
-.btn-next {
-	display: block;
+.btn-primary,
+.btn-secondary {
+	display: inline-block;
 	margin: 5px auto 0px auto;
 	padding: 10px 0px;
-	width: 100%;
+	width: 48%;
 	text-transform: uppercase;
 	cursor: pointer;
 	border-radius: 3px;
@@ -81,7 +80,12 @@ strong {
 	text-align: center;
 }
 
-.btn-read {
+.btn-primary:nth-child(2),
+.btn-secondary:nth-child(2) {
+	margin-left: 3%;
+}
+
+.btn-secondary {
 	border: solid 1px #a5c956;
 
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cdeb8e+0,a5c956+100;Green+3D+%232 */
@@ -95,8 +99,7 @@ strong {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); /* IE6-9 */
 }
 
-.btn-download,
-.btn-next {
+.btn-primary {
 	border: solid 1px #57afc9;
 
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#8fd6eb+0,57afc9+100 */
@@ -440,6 +443,7 @@ table.item td {
 	border-radius: 25px;
 	left: 50%;
 	margin-left: -25px; /*center based on icon width */
+	display: none;
 }
 
 .item .item-cover .item-quote {

@@ -75,21 +75,13 @@ window.Item = React.createClass({
 		});
 	},
 
-	addItemToList: function() {
-		/* if the user is logged in... */
-		if( this.props.CurrentUser.isLoggedIn ) {
-			this.props.CurrentUser.addItemToUsersList(this.props.item);
-		} else {
-			console.log('ask person to sign up')
-		}
-	},
-
 	render: function() {
 		var lightbox = '';
 		if( this.state.isActive ) {
 			lightbox = <BookSummaryLightbox
 							item={this.props.item} 
 							avatar={this.props.recommender.avatar}
+							CurrentUser={this.props.CurrentUser}
 							closeLightbox={this.deactivateItem} />;
 		}
 
@@ -107,7 +99,7 @@ window.Item = React.createClass({
 							<td className="item-cover">
 								<img className="item-cover-img" src={this.props.item.cover} alt="" onClick={this.activateItem} />
 								{quoteButton}
-								<a className="add-to-list action-icon" onClick={this.addItemToList} onTouchStart={this.addItemToList} >
+								<a className="add-to-list action-icon" onClick={this.props.CurrentUser.addItemToList.bind(this.props.CurrentUser, this.props.item)} onTouchStart={this.addItemToList} >
 									<img src="img/entypo/plus.svg" className="svg-inject" alt="add to your reading list" />
 								</a>
 								<a className="more-info action-icon" onClick={this.activateItem} onTouchStart={this.activateItem} >

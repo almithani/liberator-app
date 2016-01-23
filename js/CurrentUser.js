@@ -30,7 +30,17 @@ window.UserFunctions = {
 		});		
 	},
 
-	addItemToUsersList: function(item) {
+	addItemToList: function(item, event, source) {
+		/* if the user is logged in... */
+		if( this.isLoggedIn ) {
+			this.apiAddItemToList(item);
+		} else {
+			console.log('ask person to sign up')
+		}
+	},
+
+	/* this should only be consumed within this class */
+	apiAddItemToList: function(item) {
 
 		nanoajax.ajax({
 			url: 'http://api.liberator.me/currentUser/'+this.id+'/addItemTolist/', 

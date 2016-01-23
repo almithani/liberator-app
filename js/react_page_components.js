@@ -186,7 +186,7 @@ window.ListingPage = React.createClass({
 			
 			var nextBtn = "";
 			if( !_.isNull(this.nextPage) ) {
-				nextBtn = <a className="btn-next" onClick={this.getNextPage}>Load More</a>;
+				nextBtn = <a className="btn-secondary btn-next" onClick={this.getNextPage}>Load More</a>;
 			}
 
 			/*

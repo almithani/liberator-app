@@ -139,7 +139,7 @@ window.AboutLightbox = React.createClass({
 					<form className={formClass} onSubmit={this.formSubmit}>
 						{error}
 						<input type="text" name="email" value={this.state.emailValue} onChange={this.handleChange} placeholder="enter your email" />
-						<a onClick={this.submitEmail} className="btn-read">submit</a>
+						<a onClick={this.submitEmail} className="btn-primary">submit</a>
 					</form>
 
 				</Lightbox>
@@ -202,7 +202,8 @@ window.BookSummaryLightbox = React.createClass({
 						</div>
 
 						<div className="book-ctas">
-							<a className="btn-read" href={this.props.item.amazon_link} target="_blank">get it from amazon.com</a>
+							<a className="btn-secondary" href={this.props.item.amazon_link} target="_blank">get it from amazon.com</a>
+							<a className="btn-primary" onClick={this.props.CurrentUser.addItemToList.bind(this.props.CurrentUser, this.props.item)} >add to reading list</a>
 						</div>
 					</div>
 				</Lightbox>
