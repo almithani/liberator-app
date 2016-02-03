@@ -321,7 +321,7 @@ window.ShelfPage = React.createClass({
 	getShelf: function(shelf_id) {
 		var setShelf = this.setShelf;
 		nanoajax.ajax({
-			url: 'http://api.liberator.me/shelfs/'+shelf_id+'?format=json', 
+			url: 'http://api.liberator.me/shelfs/'+shelf_id+'/?format=json', 
 			method: 'GET',
 			withCredentials: true,
 		}, function (code, responseText, response) {
