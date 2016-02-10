@@ -35,6 +35,14 @@ router.add('user/{id}', function(params){
 	);
 });
 
+/* sign up page route */
+router.add('signup/', function(params){
+	pageObject = ReactDOM.render(
+		<SignUpPage />,
+		document.getElementById('content')
+	);
+});
+
 router.run();
 
 window.onhashchange = function(e) {

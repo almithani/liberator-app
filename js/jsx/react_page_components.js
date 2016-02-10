@@ -44,6 +44,7 @@ window.Nav = React.createClass({
 				<div id="header">
 					<a href="#" className="header-brand">Liberator</a>
 					{userDOM}
+					<a className="header-cta" href="#signup/">Become Inspired</a>
 					<a className="header-info" onClick={this.openInfoWindow}>
 						<img src="img/entypo/info-with-circle.svg" className="svg-inject" alt="about liberator" />
 					</a>
@@ -353,6 +354,39 @@ window.ShelfPage = React.createClass({
 				<Page />
 			);
 		}
+	}
+});
+
+
+window.SignUpPage = React.createClass({
+
+	render: function() {
+		return (
+			<Page>
+				<div className="email-signup-page">
+					<div className="email-signup-promo">
+						<img className="email-signup-promo-image" src='img/weekly-email.png' alt="Preview of our email updates" />
+						<div className="shadow"></div>
+					</div>
+
+					<div className="email-signup-benefits">
+
+						<h1>Inspiration.<br/>Directly from inspiring people</h1>
+						
+						<p>Artists and leaders live their lives seeking inspiration.</p>
+
+						<p>In our email, we share the books that motivate people to achieve extraordinary things.  Sign up now to find your muse.</p>
+
+						<EmailSignupForm />
+					</div>
+
+					<div className="email-signup-promo email-signup-promo-mobile">
+						<img className="email-signup-promo-image" src='img/weekly-email.png' alt="Preview of our email updates" />
+						<div className="shadow"></div>
+					</div>
+				</div>
+			</Page>
+		);
 	}
 });
 

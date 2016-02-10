@@ -179,6 +179,15 @@ strong {
 	fill: #fff;
 }
 
+#header .header-cta {
+	position: fixed;
+	right: 10px;
+	top: 5px;
+	display: inline-block;
+	color: #fff;
+	line-height: 30px;
+}
+
 #header .header-user {
 	position: fixed;
 	right: 10px;
@@ -768,6 +777,74 @@ table.item td {
 
 
 /*
+	email signup styles
+*/
+
+.email-signup-page {
+	text-align: center;
+	margin-top: 30px;
+}
+
+
+.email-signup-page .email-signup-promo {
+	width: 30%;
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+}
+
+.email-signup-page .email-signup-promo.email-signup-promo-mobile {
+	display: none;
+}
+
+.email-signup-page .email-signup-promo .shadow {
+	width: 100%;
+	height: 100%;
+	box-shadow: inset 0 0 100px #ccc;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.email-signup-page .email-signup-promo-image {
+	width: 100%;
+}
+
+.email-signup-page .email-signup-benefits {
+	width: 45%;
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 5%;
+	text-align: left;
+}
+
+.email-signup-page .email-signup-benefits h1 {
+	font-size: 2em;
+	margin-bottom: 0.5em;
+	text-align: center;
+}
+
+/* iPhone 5 Portrait */
+@media (max-width: 600px) {
+	.email-signup-page .email-signup-benefits {
+		width: 100%;
+		margin: 0px;
+		padding: 20px;
+	}
+
+	.email-signup-page .email-signup-promo { 
+		display: none;
+	}	
+
+	.email-signup-page .email-signup-promo.email-signup-promo-mobile {
+		display: block;
+		width: 100%;
+	}
+}
+
+
+/*
 lightbox styles
 */
 
@@ -843,7 +920,7 @@ lightbox styles
 	width: 500px;
 }
 
-.lightbox-about .form-submit-email input {
+.form-submit-email input {
 	width: 100%;
 	padding: 10px;
 	font-size: 1.25em;

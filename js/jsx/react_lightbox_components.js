@@ -132,7 +132,7 @@ window.AboutLightbox = React.createClass({
 					</p>
 
 					<p>
-						This site is a work in progress.  Sign up for updates on new features:
+						This site is a work in progress.  Sign up for updates:
 					</p>
 
 					{success}
