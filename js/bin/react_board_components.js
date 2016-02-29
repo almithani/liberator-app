@@ -315,7 +315,7 @@ window.ShelfBanner = React.createClass({
 				React.createElement(
 					"h3",
 					{ className: "user-name" },
-					"by ",
+					"recommended by ",
 					this.props.user.displayName
 				),
 				React.createElement(

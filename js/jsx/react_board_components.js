@@ -229,7 +229,7 @@ window.ShelfBanner = React.createClass({
 				<div className="user-image-frame" style={bgStyle}></div>
 				<div className="vitals">
 					<h2 className="shelf-title">{this.props.title}</h2>
-					<h3 className="user-name">by {this.props.user.displayName}</h3>
+					<h3 className="user-name">recommended by {this.props.user.displayName}</h3>
 					<h4 className="user-tagline">{this.props.user.tagline}</h4>
 					<p className="desc">
 						{this.props.description}   

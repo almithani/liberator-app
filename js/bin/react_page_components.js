@@ -65,7 +65,7 @@ window.Nav = React.createClass({
 				React.createElement(
 					"a",
 					{ className: "header-cta", href: "#signup/" },
-					"Become Inspired"
+					"Be Inspired"
 				),
 				React.createElement(
 					"a",
