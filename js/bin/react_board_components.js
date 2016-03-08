@@ -387,19 +387,19 @@ window.Listing = React.createClass({
 				"div",
 				{ className: "landing-promo" },
 				React.createElement(
-					"h2",
+					"h1",
 					null,
-					"You are what you read..."
+					"Book Recommendations from Inspiring People"
 				),
 				React.createElement(
 					"p",
 					null,
-					"Just because a book is popular, doesn’t mean that you’ll like it. Books are personal - don’t let an algorithm decide what you’ll read next."
+					"The most inspiring people all have one thing in common: they read."
 				),
 				React.createElement(
 					"p",
 					null,
-					"Liberator has recommendations from artists, experts and enthusiasts.  Browse the shelves below to find your next inspiration."
+					"Do you want to make an impact?  Learn from the best.  Liberator has recommendations from artists, experts and leaders.  Don’t let an algorithm decide what you’ll read next - browse the shelves below to find your next inspiration."
 				)
 			),
 			React.createElement(Shelves, {

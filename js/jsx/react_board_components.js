@@ -286,15 +286,15 @@ window.Listing = React.createClass({
 		return (
 			<div className="listing">
 				<div className="landing-promo">
-					<h2>You are what you read...</h2>
+					<h1>Book Recommendations from Inspiring People</h1>
 					<p>
-					Just because a book is popular, doesn&#8217;t mean that you&#8217;ll like it.  
-					Books are personal - don&#8217;t let an algorithm decide what you&#8217;ll read next.  
+					The most inspiring people all have one thing in common: they read.
 					</p>
 
 					<p>
-					Liberator has recommendations from artists, experts and enthusiasts.  Browse the shelves
-					below to find your next inspiration.
+					Do you want to make an impact?  Learn from the best.  Liberator has recommendations from artists, experts
+					and leaders.  Don&#8217;t let an algorithm decide what you&#8217;ll 
+					read next - browse the shelves below to find your next inspiration.
 					</p>
 
 				</div>
