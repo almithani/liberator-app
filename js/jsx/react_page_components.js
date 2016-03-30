@@ -107,10 +107,14 @@ window.Page = React.createClass({
 
 	render: function() {
 		if( this.props.children ) {
+			var childrenWithProps = React.Children.map(this.props.children, (child) => {
+				return React.cloneElement(child, { loggedInUser: this.state.loggedInUser });
+			});
+
 			return (
 				<div>
 					<Nav user={this.state.loggedInUser} />
-					{this.props.children}
+					{childrenWithProps}
 				</div>
 			);
 		} else {
@@ -216,13 +220,13 @@ window.ListingPage = React.createClass({
 window.UserPage = React.createClass({
 	getInitialState: function(){
 		return { 
-			board: null
+			listing: null
 		};
 	},
 
-	setActiveBoard: function(board) {
+	setActiveListing: function(listing) {
 		this.setState({
-			board: board
+			listing: listing
 		});		
 	},
 
@@ -244,26 +248,26 @@ window.UserPage = React.createClass({
 		});		
 	},
 
-	getUserBoard: function(user_id) {
+	getUserListing: function(user_id) {
 		//get user's page from the api
-		var setBoard = this.setActiveBoard;
-		var board = {
-			'name': 'fakeboard'
+		var setActiveListing = this.setActiveListing;
+		var listing = {
+			'name': 'nothing'
 		};
 
 		//get user info
 		this.getUser(user_id, function(user) {
-			board.user = {
+			listing.user = {
 				"name": user.displayName,
 				"avatar": user.avatar,
 				"tagline": user.tagline,
 				"description": user.description
 			}
-			setBoard(board);
+			setActiveListing(listing);
 		})
 
 		//get board info
-		nanoajax.ajax({
+		/*nanoajax.ajax({
 			url: 'http://api.liberator.me/boards/'+user_id+'?format=json', 
 			method: 'GET',
 		}, function (code, responseText, response) {
@@ -278,23 +282,23 @@ window.UserPage = React.createClass({
 			} else {
 				console.log('no user board');
 			}
-		});		
+		});*/		
 	},
 
 	componentWillMount: function() {
 
 		if( this.props.initialUserId ) {
 			//if we have a user id, grab the user's board
-			this.getUserBoard(this.props.initialUserId);
+			this.getUserListing(this.props.initialUserId);
 		}		
 	},
 
 	render: function() {
-		if( !_.isNull(this.state.board) ) {
+		if( !_.isNull(this.state.listing) ) {
 			return (
 				<Page>
-					<Board 
-						board={this.state.board} />
+					<UserListing 
+						listing={this.state.listing} />
 				</Page>
 			);
 		} else {

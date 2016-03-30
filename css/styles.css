@@ -12,6 +12,7 @@ html {
   font-size: 16px;
   font-family: Helvetica, Arial, 'Sans Serif';
   color: #333;
+  height: 100%;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -20,6 +21,7 @@ html {
 body {
 	background: #FFF;
 	padding-top: 40px;	/*this is for the 40px fixed header*/
+	height: 100%;
 }
 
 h1 {
@@ -75,7 +77,8 @@ strong {
 
 .btn-read,
 .btn-download,
-.btn-next {
+.btn-next,
+.btn-prev {
 	display: block;
 	margin: 5px auto 0px auto;
 	padding: 10px 0px;
@@ -104,7 +107,8 @@ strong {
 }
 
 .btn-download,
-.btn-next {
+.btn-next,
+.btn-prev {
 	border: solid 1px #57afc9;
 
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#8fd6eb+0,57afc9+100 */
@@ -118,7 +122,8 @@ strong {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fd6eb', endColorstr='#57afc9',GradientType=0 ); /* IE6-9 */
 }
 
-.btn-next {
+.btn-next,
+.btn-prev {
 	padding: 20px;
 	font-size: 2em;
 	width: 300px;
@@ -481,6 +486,26 @@ table.item td {
 /*.item .item-cover .action-icon.author-quote svg {
 	width: 80%;
 }*/
+
+.btn-add-item {
+	width: 200px;
+	height: 300px;
+}
+
+.btn-add-item .btn-add-item-cta {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	color: #999;
+	background: #eee;
+	border: dashed 3px #bbb;
+}
+
+.btn-add-item .big-plus {
+	color: #bbb;
+	font-size: 5em;
+	padding-top: 70px;
+}
 
 .book {
 	/*height: 100%;*/
@@ -919,12 +944,14 @@ lightbox styles
 }
 
 .lightbox-summary .lightbox-overlay,
-.lightbox-about .lightbox-overlay {
+.lightbox-about .lightbox-overlay,
+.lightbox-add .lightbox-overlay {
 	display: block;	
 }
 
 .lightbox-summary .lightbox-content,
-.lightbox-about .lightbox-content {
+.lightbox-about .lightbox-content,
+.lightbox-add .lightbox-content {
 	width: 500px;
 }
 
@@ -932,6 +959,54 @@ lightbox styles
 	width: 100%;
 	padding: 10px;
 	font-size: 1.25em;
+}
+
+.lightbox-add .form-add-book input[type=text] {
+	width: 70%;
+	padding: 8px;
+	margin-right: 1%;
+	font-size: 1em;
+}
+
+.lightbox-add .form-add-book a.btn-read {
+	width: 29%;
+	display: inline-block;
+}
+
+.lightbox-add .search-results {
+	padding: 15px 45px 0px 45px;
+	position: relative;
+	max-height: 515px;
+	overflow: hidden;
+}
+
+.lightbox-add .search-results .btn-prev,
+.lightbox-add .search-results .btn-next {
+	position: absolute;
+	height: 100%;
+	width: 45px;
+	top: 15px;
+	left: 0px;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 49%;
+}
+
+.lightbox-add .search-results .btn-next {
+	right: 0px;
+	left: auto;
+}
+
+.lightbox-add .search-results .search-results-container {
+	text-align: left;
+	position: relative;
+	left: 0px;
+}
+
+.lightbox-add .search-results .item {
+    width: 390px;
+    padding-left: 85px;
+    margin-right: 0px;
 }
 
 .lightbox-about .form-submit-email.error input {
@@ -963,7 +1038,8 @@ lightbox styles
   	}
 
   	.lightbox-summary .lightbox-content,
-  	.lightbox-about .lightbox-content {
+  	.lightbox-about .lightbox-content,
+  	.lightbox-add .lightbox-content {
   		width: 100%;
   		height: 100%;
   		overflow: scroll;

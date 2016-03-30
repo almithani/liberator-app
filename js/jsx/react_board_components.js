@@ -130,6 +130,44 @@ window.UserItem = React.createClass({
 	}
 });
 
+window.AddItemButton = React.createClass({
+
+	getInitialState: function(){
+		return { 
+			isActive: false,
+		};
+	},
+
+	deactivateItem: function() {
+		this.setState({
+			isActive: false
+		});
+	},
+
+	openAddItemLightbox: function() {
+		this.setState({
+			isActive: true
+		});
+	},
+
+	render: function() {
+		var lightbox = '';
+		if( this.state.isActive ) {
+			lightbox = <AddBookLightbox closeLightbox={this.deactivateItem} />;
+		}
+
+		return (
+			<div className="item btn-add-item">
+				<div className="btn-add-item-cta" onClick={this.openAddItemLightbox}>
+					<div className="big-plus">+</div>
+					<br />click here to add a new item
+				</div>
+				{lightbox}
+			</div>
+		);
+	}
+});
+
 window.Shelf = React.createClass({
 
 	render: function() {
@@ -242,36 +280,23 @@ window.ShelfBanner = React.createClass({
 
 
 /*
-	A user's "bookcase" aka a board
+	A user's "bookcase" 
 */
-window.Board = React.createClass({
-
-	saveBoard: function() {
-		var bodyJson = JSON.stringify(this.props.board);
-
-		nanoajax.ajax({
-			url: 'http://api.liberator.me/boards/1/', 
-			method: 'PUT',
-			body: "user=http://api.liberator.me/users/1/&jsonCache="+bodyJson,
-		}, function (code, responseText, response) {
-			console.log(response);
-		});		
-	},
+window.UserListing = React.createClass({
 
 	render: function() {
 
-		if( !_.isNull(this.props.board) ){
+		if( !_.isNull(this.props.listing) ){
 			return (
 				<div className="board-main-content">
 					<UserBanner 
-						user={this.props.board.user} 
-						saveBoard={this.saveBoard} />
+						user={this.props.listing.user} />
 					<Shelves 
-						shelves={this.props.board.shelves} />
+						shelves={this.props.listing.shelves} />
 				</div>
 			);			
 		} else {
-			return(<div>no active board</div>);
+			return(<div>no active listing</div>);
 		}
 
 	}
@@ -321,6 +346,11 @@ window.MasonryShelf = React.createClass({
             			);
 		});
 
+		var addItemButton = "";
+		if( this.props.loggedInUser && this.props.creator.id == this.props.loggedInUser.id ) {
+			addItemButton = <AddItemButton />;
+		}
+
 		return (
 			<div className="masonry-container">
 				<ShelfBanner 
@@ -330,6 +360,7 @@ window.MasonryShelf = React.createClass({
 
 				<ul className="masonry">
 					{itemEls}
+					{addItemButton}
 				</ul>
 			</div>
 		);
