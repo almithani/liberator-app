@@ -88,7 +88,7 @@ window.Page = React.createClass({
 		var sessionid = Cookies.get('sessionid');
 		var setUser = this.setLoggedInUser;
 		nanoajax.ajax({
-			url: 'http://api.liberator.me/currentUser/'+'?format=json', 
+			url: 'https://api.liberator.me/currentUser/'+'?format=json', 
 			method: 'GET',
 			withCredentials: true,
 		}, function (code, responseText, response) {
@@ -107,14 +107,10 @@ window.Page = React.createClass({
 
 	render: function() {
 		if( this.props.children ) {
-			var childrenWithProps = React.Children.map(this.props.children, (child) => {
-				return React.cloneElement(child, { loggedInUser: this.state.loggedInUser });
-			});
-
 			return (
 				<div>
 					<Nav user={this.state.loggedInUser} />
-					{childrenWithProps}
+					{this.props.children}
 				</div>
 			);
 		} else {
@@ -155,7 +151,7 @@ window.ListingPage = React.createClass({
 
 		//get the listing (aka front page) from the api
 		nanoajax.ajax({
-			url: 'http://api.liberator.me/shelfs/?format=json', 
+			url: 'https://api.liberator.me/shelfs/?format=json', 
 			method: 'GET',
 		}, function (code, responseText, response) {
 			if( code==200 ) {
@@ -220,19 +216,19 @@ window.ListingPage = React.createClass({
 window.UserPage = React.createClass({
 	getInitialState: function(){
 		return { 
-			listing: null
+			board: null
 		};
 	},
 
-	setActiveListing: function(listing) {
+	setActiveBoard: function(board) {
 		this.setState({
-			listing: listing
+			board: board
 		});		
 	},
 
 	getUser: function(user_id, callback) {
 		nanoajax.ajax({
-			url: 'http://api.liberator.me/users/'+user_id+'?format=json', 
+			url: 'https://api.liberator.me/users/'+user_id+'?format=json', 
 			method: 'GET',
 			withCredentials: true,
 		}, function (code, responseText, response) {
@@ -248,27 +244,27 @@ window.UserPage = React.createClass({
 		});		
 	},
 
-	getUserListing: function(user_id) {
+	getUserBoard: function(user_id) {
 		//get user's page from the api
-		var setActiveListing = this.setActiveListing;
-		var listing = {
-			'name': 'nothing'
+		var setBoard = this.setActiveBoard;
+		var board = {
+			'name': 'fakeboard'
 		};
 
 		//get user info
 		this.getUser(user_id, function(user) {
-			listing.user = {
+			board.user = {
 				"name": user.displayName,
 				"avatar": user.avatar,
 				"tagline": user.tagline,
 				"description": user.description
 			}
-			setActiveListing(listing);
+			setBoard(board);
 		})
 
 		//get board info
-		/*nanoajax.ajax({
-			url: 'http://api.liberator.me/boards/'+user_id+'?format=json', 
+		nanoajax.ajax({
+			url: 'https://api.liberator.me/boards/'+user_id+'?format=json', 
 			method: 'GET',
 		}, function (code, responseText, response) {
 			if( code==200 ) {
@@ -282,23 +278,23 @@ window.UserPage = React.createClass({
 			} else {
 				console.log('no user board');
 			}
-		});*/		
+		});		
 	},
 
 	componentWillMount: function() {
 
 		if( this.props.initialUserId ) {
 			//if we have a user id, grab the user's board
-			this.getUserListing(this.props.initialUserId);
+			this.getUserBoard(this.props.initialUserId);
 		}		
 	},
 
 	render: function() {
-		if( !_.isNull(this.state.listing) ) {
+		if( !_.isNull(this.state.board) ) {
 			return (
 				<Page>
-					<UserListing 
-						listing={this.state.listing} />
+					<Board 
+						board={this.state.board} />
 				</Page>
 			);
 		} else {
@@ -326,7 +322,7 @@ window.ShelfPage = React.createClass({
 	getShelf: function(shelf_id) {
 		var setShelf = this.setShelf;
 		nanoajax.ajax({
-			url: 'http://api.liberator.me/shelfs/'+shelf_id+'/?format=json', 
+			url: 'https://api.liberator.me/shelfs/'+shelf_id+'/?format=json', 
 			method: 'GET',
 			withCredentials: true,
 		}, function (code, responseText, response) {

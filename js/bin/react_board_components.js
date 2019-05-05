@@ -343,9 +343,9 @@ window.Board = React.createClass({
 		var bodyJson = JSON.stringify(this.props.board);
 
 		nanoajax.ajax({
-			url: 'http://api.liberator.me/boards/1/',
+			url: 'https://api.liberator.me/boards/1/',
 			method: 'PUT',
-			body: "user=http://api.liberator.me/users/1/&jsonCache=" + bodyJson
+			body: "user=https://api.liberator.me/users/1/&jsonCache=" + bodyJson
 		}, function (code, responseText, response) {
 			console.log(response);
 		});
@@ -387,19 +387,19 @@ window.Listing = React.createClass({
 				"div",
 				{ className: "landing-promo" },
 				React.createElement(
-					"h1",
+					"h2",
 					null,
-					"Book Recommendations from Inspiring People"
+					"You are what you read..."
 				),
 				React.createElement(
 					"p",
 					null,
-					"The most inspiring people all have one thing in common: they read."
+					"Just because a book is popular, doesn’t mean that you’ll like it. Books are personal - don’t let an algorithm decide what you’ll read next."
 				),
 				React.createElement(
 					"p",
 					null,
-					"Do you want to make an impact?  Learn from the best.  Liberator has recommendations from artists, experts and leaders.  Don’t let an algorithm decide what you’ll read next - browse the shelves below to find your next inspiration."
+					"Liberator has recommendations from artists, experts and enthusiasts.  Browse the shelves below to find your next inspiration."
 				)
 			),
 			React.createElement(Shelves, {

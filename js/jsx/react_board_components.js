@@ -130,44 +130,6 @@ window.UserItem = React.createClass({
 	}
 });
 
-window.AddItemButton = React.createClass({
-
-	getInitialState: function(){
-		return { 
-			isActive: false,
-		};
-	},
-
-	deactivateItem: function() {
-		this.setState({
-			isActive: false
-		});
-	},
-
-	openAddItemLightbox: function() {
-		this.setState({
-			isActive: true
-		});
-	},
-
-	render: function() {
-		var lightbox = '';
-		if( this.state.isActive ) {
-			lightbox = <AddBookLightbox closeLightbox={this.deactivateItem} />;
-		}
-
-		return (
-			<div className="item btn-add-item">
-				<div className="btn-add-item-cta" onClick={this.openAddItemLightbox}>
-					<div className="big-plus">+</div>
-					<br />click here to add a new item
-				</div>
-				{lightbox}
-			</div>
-		);
-	}
-});
-
 window.Shelf = React.createClass({
 
 	render: function() {
@@ -280,23 +242,36 @@ window.ShelfBanner = React.createClass({
 
 
 /*
-	A user's "bookcase" 
+	A user's "bookcase" aka a board
 */
-window.UserListing = React.createClass({
+window.Board = React.createClass({
+
+	saveBoard: function() {
+		var bodyJson = JSON.stringify(this.props.board);
+
+		nanoajax.ajax({
+			url: 'https://api.liberator.me/boards/1/', 
+			method: 'PUT',
+			body: "user=https://api.liberator.me/users/1/&jsonCache="+bodyJson,
+		}, function (code, responseText, response) {
+			console.log(response);
+		});		
+	},
 
 	render: function() {
 
-		if( !_.isNull(this.props.listing) ){
+		if( !_.isNull(this.props.board) ){
 			return (
 				<div className="board-main-content">
 					<UserBanner 
-						user={this.props.listing.user} />
+						user={this.props.board.user} 
+						saveBoard={this.saveBoard} />
 					<Shelves 
-						shelves={this.props.listing.shelves} />
+						shelves={this.props.board.shelves} />
 				</div>
 			);			
 		} else {
-			return(<div>no active listing</div>);
+			return(<div>no active board</div>);
 		}
 
 	}
@@ -311,15 +286,15 @@ window.Listing = React.createClass({
 		return (
 			<div className="listing">
 				<div className="landing-promo">
-					<h1>Book Recommendations from Inspiring People</h1>
+					<h2>You are what you read...</h2>
 					<p>
-					The most inspiring people all have one thing in common: they read.
+					Just because a book is popular, doesn&#8217;t mean that you&#8217;ll like it.  
+					Books are personal - don&#8217;t let an algorithm decide what you&#8217;ll read next.  
 					</p>
 
 					<p>
-					Do you want to make an impact?  Learn from the best.  Liberator has recommendations from artists, experts
-					and leaders.  Don&#8217;t let an algorithm decide what you&#8217;ll 
-					read next - browse the shelves below to find your next inspiration.
+					Liberator has recommendations from artists, experts and enthusiasts.  Browse the shelves
+					below to find your next inspiration.
 					</p>
 
 				</div>
@@ -346,11 +321,6 @@ window.MasonryShelf = React.createClass({
             			);
 		});
 
-		var addItemButton = "";
-		if( this.props.loggedInUser && this.props.creator.id == this.props.loggedInUser.id ) {
-			addItemButton = <AddItemButton />;
-		}
-
 		return (
 			<div className="masonry-container">
 				<ShelfBanner 
@@ -360,7 +330,6 @@ window.MasonryShelf = React.createClass({
 
 				<ul className="masonry">
 					{itemEls}
-					{addItemButton}
 				</ul>
 			</div>
 		);

@@ -17,8 +17,8 @@ window.Lightbox = React.createClass({
 	render: function(){
 		return (
 			<div>
-				<div className='lightbox-overlay' onClick={this.props.closeLightbox}></div>
-				<div className='lightbox-container' onClick={this.props.closeLightbox} onScroll={this.scrollHandler} onWheel={this.scrollHandler} >
+				<div className='lightbox-overlay' onClick={this.props.closeLightbox} />
+				<div className='lightbox-container' onClick={this.props.closeLightbox} onScroll={this.scrollHandler} onWheel={this.scrollHandler}>
 					<div className='lightbox-content' onClick={this.contentClick}>
 						<a className='lightbox-btn-close' onClick={this.props.closeLightbox}>x</a>
 						{this.props.children}
@@ -27,7 +27,7 @@ window.Lightbox = React.createClass({
 			</div>
 		);
 	}  
-}); /* */
+});
 
 
 window.AboutLightbox = React.createClass({
@@ -67,7 +67,7 @@ window.AboutLightbox = React.createClass({
 		var setSuccess = this.setSuccess;
 
 		nanoajax.ajax({
-			url: 'http://api.liberator.me/emails/', 
+			url: 'https://api.liberator.me/emails/', 
 			method: 'POST', 
 			body: 'email='+this.state.emailValue+'&username='+this.state.emailValue
 		}, function (code, responseText, response) {
@@ -210,164 +210,6 @@ window.BookSummaryLightbox = React.createClass({
 		);
 	}
 });
-
-
-window.SearchResultItem = React.createClass({
-
-	render: function() {
-
-		return(
-			<table className="item">
-				<tbody>
-					<tr>
-						<td className="item-cover">
-							<img className="item-cover-img" src={this.props.item.image} alt="" />
-						</td>
-					</tr>
-					<tr>
-						<td className="item-info">
-							<div className="item-title">{this.props.item.title}</div>
-							<div className="item-author">{this.props.item.author}</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		);
-	}
-});
-
-
-window.AddBookLightbox = React.createClass({
-
-	itemElWidth: 390,
-
-	getInitialState: function() {
-		return {
-			searchString: "",
-			results: null,
-			searchResultsContainer: null,
-			activeResult: null,
-		};
-	},
-
-	closeLightbox: function() {
-		this.props.closeLightbox();
-	},
-
-	handleChange: function(event) {
-		this.setState({
-			searchString: event.target.value
-		});
-	},
-
-	displayResults: function(searchResults) {
-		this.setState({
-			results: searchResults,
-			activeResult: 0
-		});
-	},
-
-	submitSearch: function() {
-
-		var display = this.displayResults;
-
-		nanoajax.ajax({
-			url: 'http://api.liberator.me/search/', 
-			method: 'POST', 
-			body: 'book='+this.state.searchString
-		}, function (code, responseText, response) {
-			
-			var json = JSON.parse(responseText);
-
-			if( code==400 ) {
-				console.log('search error');
-			} else if( code==200 ) {
-				display(json.results);
-			}
-		});
-
-	},
-
-	formSubmit: function(event) {
-		event.preventDefault();
-		this.submitSearch();
-	},
-
-	prevItem: function() {
-		console.log("prev");
-		var newIndex = this.state.activeResult - 1;
-		if( newIndex < 0 ) {
-			newIndex = this.state.results.length-1;
-		}	
-
-		this.setState({
-			activeResult: newIndex
-		});
-	},
-
-	nextItem: function() {
-		var newIndex = this.state.activeResult + 1;
-		if( newIndex > this.state.results.length-1 ) {
-			newIndex = 0;
-		}	
-
-		this.setState({
-			activeResult: newIndex
-		});
-	},
-
-	render: function() {
-
-		
-
-		var itemEls = [];
-		_.each( this.state.results, function(item){
-			itemEls.push(<SearchResultItem 
-            				item={item}
-            				key={item.url} />
-            			);
-		});
-
-		var prevBtn = "";
-		var nextBtn = "";
-		var itemElContainerWidth = 0;
-		var itemElContainerLeft = 0;
-		if( this.state.results && this.state.results.length > 0 ) {
-			prevBtn = <div className="btn-prev" onClick={this.prevItem} key="btn-prev">&lt;</div>;
-			nextBtn = <div className="btn-next" onClick={this.nextItem} key="btn-next">&gt;</div>;
-
-			itemElContainerWidth = this.state.results.length * this.itemElWidth;
-			itemElContainerLeft = this.state.activeResult * this.itemElWidth * -1;
-		}
-
-		var itemElContainerStyle = {
-			width: itemElContainerWidth+"px",
-			left: itemElContainerLeft+"px"
-		}
-		this.searchResultsContainer = <div className="search-results-container" style={itemElContainerStyle}>{itemEls}</div>;
-
-
-		return(
-			<div className="lightbox-add">
-				<Lightbox closeLightbox={this.closeLightbox}>
-					<h4>Add a book to your shelf</h4>
-
-					<form className="form-add-book" onSubmit={this.formSubmit}>
-						<input type="text" name="book" value={this.state.searchString} onChange={this.handleChange} placeholder="search by author or title" />
-						<a onClick={this.submitSearch} className="btn-read">search</a>
-					</form>
-
-					<div className="search-results">
-						{this.searchResultsContainer}
-						{prevBtn}
-						{nextBtn}
-					</div>
-				</Lightbox>
-			</div>
-		);
-	}
-});
-
 
 /*
 	created once per book

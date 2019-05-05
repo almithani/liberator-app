@@ -31,7 +31,7 @@ getInitialState: function() {
 		var setSuccess = this.setSuccess;
 
 		nanoajax.ajax({
-			url: 'http://api.liberator.me/emails/', 
+			url: 'https://api.liberator.me/emails/', 
 			method: 'POST', 
 			body: 'email='+this.state.emailValue+'&username='+this.state.emailValue
 		}, function (code, responseText, response) {
