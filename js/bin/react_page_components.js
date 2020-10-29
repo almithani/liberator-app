@@ -156,6 +156,7 @@ window.Page = React.createClass({
 window.ListingPage = React.createClass({
 	displayName: "ListingPage",
 
+
 	nextPage: "",
 
 	getInitialState: function getInitialState() {
@@ -385,6 +386,7 @@ window.ShelfPage = React.createClass({
 
 window.SignUpPage = React.createClass({
 	displayName: "SignUpPage",
+
 
 	render: function render() {
 		return React.createElement(

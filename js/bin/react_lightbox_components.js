@@ -142,7 +142,7 @@ window.AboutLightbox = React.createClass({
 					React.createElement(
 						'div',
 						{ className: 'quote-text' },
-						'“A man is known by the books he reads.”'
+						'\u201CA man is known by the books he reads.\u201D'
 					),
 					React.createElement(
 						'div',
@@ -188,6 +188,7 @@ window.AboutLightbox = React.createClass({
 
 window.BookSummaryLightbox = React.createClass({
 	displayName: 'BookSummaryLightbox',
+
 
 	closeLightbox: function closeLightbox(event) {
 		this.props.closeLightbox();
@@ -291,6 +292,7 @@ window.BookSummaryLightbox = React.createClass({
 */
 window.BookLightbox = React.createClass({
 	displayName: 'BookLightbox',
+
 
 	/* 'private', immutable properties for external ebook lib */
 	Book: null,
@@ -428,7 +430,7 @@ window.BookLightbox = React.createClass({
 							{ className: 'pageNum curPage' },
 							this.state.currentPage
 						),
-						' of ',
+						'\xA0of ',
 						React.createElement(
 							'div',
 							{ className: 'pageNum totPage' },

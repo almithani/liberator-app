@@ -3,6 +3,7 @@
 window.ItemQuote = React.createClass({
 	displayName: "ItemQuote",
 
+
 	getInitialState: function getInitialState() {
 		return {
 			isActive: false
@@ -67,13 +68,14 @@ window.ItemQuote = React.createClass({
 window.Item = React.createClass({
 	displayName: "Item",
 
+
 	getInitialState: function getInitialState() {
 		return {
 			isActive: false,
-			currentCfi: null };
+			currentCfi: null //cfi is ebook internal index/url/page
+		};
 	},
 
-	//cfi is ebook internal index/url/page
 	setCfi: function setCfi(newCfi) {
 		this.setState({
 			currentCfi: newCfi
@@ -181,6 +183,7 @@ window.UserItem = React.createClass({
 window.Shelf = React.createClass({
 	displayName: "Shelf",
 
+
 	render: function render() {
 		var itemRows = [];
 		this.props.items.forEach(function (item) {
@@ -230,6 +233,7 @@ window.Shelf = React.createClass({
 window.Shelves = React.createClass({
 	displayName: "Shelves",
 
+
 	render: function render() {
 		var showTheUser = false;
 		if (this.props.showUser) {
@@ -264,6 +268,7 @@ window.Shelves = React.createClass({
 window.UserBanner = React.createClass({
 	displayName: "UserBanner",
 
+
 	render: function render() {
 		var bgStyle = { backgroundImage: "url(" + this.props.user.avatar + ")" };
 
@@ -296,6 +301,7 @@ window.UserBanner = React.createClass({
 
 window.ShelfBanner = React.createClass({
 	displayName: "ShelfBanner",
+
 
 	render: function render() {
 		var bgStyle = { backgroundImage: "url(" + this.props.user.avatar + ")" };
@@ -339,6 +345,7 @@ window.ShelfBanner = React.createClass({
 window.Board = React.createClass({
 	displayName: "Board",
 
+
 	saveBoard: function saveBoard() {
 		var bodyJson = JSON.stringify(this.props.board);
 
@@ -379,6 +386,7 @@ window.Board = React.createClass({
 window.Listing = React.createClass({
 	displayName: "Listing",
 
+
 	render: function render() {
 		return React.createElement(
 			"div",
@@ -394,7 +402,7 @@ window.Listing = React.createClass({
 				React.createElement(
 					"p",
 					null,
-					"Just because a book is popular, doesn’t mean that you’ll like it. Books are personal - don’t let an algorithm decide what you’ll read next."
+					"Just because a book is popular, doesn\u2019t mean that you\u2019ll like it. Books are personal - don\u2019t let an algorithm decide what you\u2019ll read next."
 				),
 				React.createElement(
 					"p",
@@ -411,6 +419,7 @@ window.Listing = React.createClass({
 
 window.MasonryShelf = React.createClass({
 	displayName: "MasonryShelf",
+
 
 	render: function render() {
 		var creator = this.props.creator;
