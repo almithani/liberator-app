@@ -250,9 +250,9 @@ window.Board = React.createClass({
 		var bodyJson = JSON.stringify(this.props.board);
 
 		nanoajax.ajax({
-			url: 'http://api.liberator.me/boards/1/', 
+			url: 'https://api.liberator.me/boards/1/', 
 			method: 'PUT',
-			body: "user=http://api.liberator.me/users/1/&jsonCache="+bodyJson,
+			body: "user=https://api.liberator.me/users/1/&jsonCache="+bodyJson,
 		}, function (code, responseText, response) {
 			console.log(response);
 		});		
