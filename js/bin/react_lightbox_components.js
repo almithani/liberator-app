@@ -278,7 +278,7 @@ window.BookSummaryLightbox = React.createClass({
 						React.createElement(
 							'a',
 							{ className: 'btn-read', href: this.props.item.amazon_link, target: '_blank' },
-							'get it from amazon.com'
+							'read it now!'
 						)
 					)
 				)
